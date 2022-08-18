@@ -1,0 +1,19 @@
+.nav {
+    background: #AFCDE7;
+    padding: 20px;
+}
+
+a {
+    padding: 20px;
+    text-decoration: none;
+}
+
+.inactiveLink {
+    text-decoration: none;
+    color: #0f73ab;
+}
+
+.activeLink {
+    text-decoration: none;
+    color: #000000;
+}

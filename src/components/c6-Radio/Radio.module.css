@@ -1,0 +1,18 @@
+.radio {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius:  50%;
+    background: #d9ebff;
+}
+
+.radio:hover {
+    border:  2px solid #fb8332;
+}
+
+.radio:checked {
+    background: #335eff;
+}
+.radio:focus {
+    border: 2px solid #fb8332;
+}

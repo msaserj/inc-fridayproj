@@ -1,0 +1,27 @@
+.select {
+    width: 100px;
+    padding: 5px;
+    padding-right: 30px;
+    background-image: url('https://sitehere.ru/examples/14.01.2015/images/select-arrow-open.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right;
+    background-size: 20%;
+    appearance: none;
+    cursor: pointer;
+    border: 2px inset rgb(0, 110, 255);
+    border-radius: 8px;
+    color: #414241;
+}
+.select:focus {
+    outline: none;
+    border: #ff5959 solid 2px;
+}
+.option {
+    color: #6f8cff;
+    background: #b4ccff;
+}
+
+.option:checked {
+    background: #6f8cff;
+    color: #b4ccff;
+}

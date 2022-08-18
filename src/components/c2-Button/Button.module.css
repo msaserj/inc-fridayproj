@@ -1,0 +1,88 @@
+
+.button {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #8095ff;
+    border: 1px solid transparent;
+    border-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 4px;
+    min-height: 2rem;
+    padding: 5px 20px;
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    /*user-select: none;*/
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+.red {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #ff5353;
+    border: 1px solid transparent;
+    border-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 5px;
+    min-height: 2rem;
+    padding: 5px 20px;
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    /*user-select: none;*/
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+.button:hover,
+.button:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+}
+.red:hover,
+.red:focus {
+    background-color: #ff2d2d;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.red:hover {
+    transform: translateY(-1px);
+}
+
+.red:active {
+    background-color: #ff1a1a;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+}
+.button:disabled {
+    background-color: #a3c4ff;
+    /*box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;*/
+    transform: translateY(0);
+}
