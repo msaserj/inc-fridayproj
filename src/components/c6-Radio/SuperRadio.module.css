@@ -3,11 +3,11 @@
     width: 15px;
     height: 15px;
     border-radius:  50%;
-    background: #d9ebff;
+    border:  2px solid #fb8332;
 }
 
 .radio:hover {
-    border:  2px solid #fb8332;
+    border:  2px solid #fbd332;
 }
 
 .radio:checked {

@@ -15,7 +15,7 @@ function EditableSpan() {
     return (
         <div>
             <hr/>
-            homeworks 6
+           <h3>Editable Span</h3>
 
             {/*should work (должно работать)*/}
             <div>
@@ -28,10 +28,6 @@ function EditableSpan() {
             <SuperButton onClick={save}>save</SuperButton>
             <SuperButton onClick={restore}>restore</SuperButton>
 
-            <hr/>
-            {/*для личного творчества, могу проверить*/}
-            {/*<AlternativeSuperEditableSpan/>*/}
-            <hr/>
         </div>
     )
 }

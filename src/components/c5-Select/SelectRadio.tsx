@@ -11,7 +11,7 @@ function SelectRadio() {
     return (
         <div>
             <hr/>
-            homeworks 7
+            <h3>Select and Radio</h3>
             {/*should work (должно работать)*/}
             <div>
                 <SuperSelect
@@ -28,6 +28,7 @@ function SelectRadio() {
                     onChangeOption={onChangeOption}
                 />
             </div>
+            <hr/>
         </div>
     )
 }

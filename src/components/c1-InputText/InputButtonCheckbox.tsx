@@ -24,7 +24,7 @@ function InputButtonCheckbox() {
     return (
         <div>
             <hr/>
-            <h3>homeworks 4</h3>
+            <h3>Inputs</h3>
             <div className={css.column}>
                 {/*input with error*/}
                 <SuperInputText
@@ -35,6 +35,8 @@ function InputButtonCheckbox() {
                     // spanClassName={s.testSpanError}
                 />
                 <SuperInputText/>
+                <hr/>
+                <h3>Buttons</h3>
                 <SuperButton>default</SuperButton>
                 <SuperButton
                     red // пропсу с булевым значением не обязательно указывать true
@@ -42,6 +44,8 @@ function InputButtonCheckbox() {
                     delete {/*// название кнопки попадёт в children*/}
                 </SuperButton>
                 <SuperButton disabled>disabled</SuperButton>
+                <hr/>
+                <h3>Checkboxes</h3>
                 <SuperCheckbox
                     checked={checked}
                     onChangeChecked={setChecked}>
@@ -50,7 +54,6 @@ function InputButtonCheckbox() {
                 {/*// onChange тоже должен работать*/}
                 <SuperCheckbox checked={checked} onChange={testOnChange}/>
             </div>
-
         </div>
     )
 }
