@@ -1,5 +1,5 @@
 import React, {SelectHTMLAttributes, DetailedHTMLProps, ChangeEvent} from 'react'
-import css from './Select.module.css'
+import css from './SuperSelect.module.css'
 
 type DefaultSelectPropsType = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>
 
@@ -8,7 +8,7 @@ type SuperSelectPropsType = DefaultSelectPropsType & {
     onChangeOption?: (option: any) => void
 }
 
-const Select: React.FC<SuperSelectPropsType> = (
+const SuperSelect: React.FC<SuperSelectPropsType> = (
     {
         options, className,
         onChange, onChangeOption,
@@ -33,4 +33,4 @@ const Select: React.FC<SuperSelectPropsType> = (
     )
 }
 
-export default Select
+export default SuperSelect

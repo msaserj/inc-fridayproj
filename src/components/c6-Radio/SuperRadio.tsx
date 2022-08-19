@@ -1,5 +1,5 @@
 import React, {ChangeEvent, InputHTMLAttributes, DetailedHTMLProps} from 'react'
-import css from './Radio.module.css'
+import css from './SuperRadio.module.css'
 
 type DefaultRadioPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
@@ -8,7 +8,7 @@ type SuperRadioPropsType = DefaultRadioPropsType & {
     onChangeOption?: (option: any) => void
 }
 
-const Radio: React.FC<SuperRadioPropsType> = (
+const SuperRadio: React.FC<SuperRadioPropsType> = (
     {
         type, name,
         options, value,
@@ -33,7 +33,6 @@ const Radio: React.FC<SuperRadioPropsType> = (
                 onChange={onChangeCallback}
                 className={radioClassName}
                 // name, checked, value, onChange
-
             />
             {o}
         </label>
@@ -46,4 +45,4 @@ const Radio: React.FC<SuperRadioPropsType> = (
     )
 }
 
-export default Radio
+export default SuperRadio

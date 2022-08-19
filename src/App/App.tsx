@@ -25,11 +25,10 @@ const App = () => {
                         <Route path={PATH.LOGIN} element={<Login/>} />
                         <Route path={PATH.REGISTRATION} element={<Registration/>} />
                         <Route path={PATH.PROFILE} element={<Profile/>} />
-                        <Route path={PATH.ERROR404} element={<PageNotFound/>} />
                         <Route path={PATH.RECOVERY_PASS} element={<RecoveryPass/>} />
                         <Route path={PATH.NEW_PASS} element={<NewPass/>} />
+                        <Route path={PATH.ERROR404} element={<PageNotFound/>} />
                         <Route path={PATH.TEST} element={<AllComponents/>} />
-
                     </Routes>
                     {/*<Body titleForBody={"New Body"}/>*/}
                 </div>
