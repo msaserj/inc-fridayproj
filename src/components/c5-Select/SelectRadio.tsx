@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import SuperRadio from "../c6-Radio/SuperRadio";
 import SuperSelect from "./SuperSelect";
 
-
 const arr = ['x', 'y', 'z']
 
 function SelectRadio() {
