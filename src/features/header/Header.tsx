@@ -2,7 +2,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import css from "./Header.module.css"
-import {PATH} from "../../main/constants/Path";
+import {PATH} from "../../common/constants/Path";
 
 type HeaderType = {
     titleForHeader: string

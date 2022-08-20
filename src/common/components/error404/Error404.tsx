@@ -1,4 +1,4 @@
-import Error404 from '../../assets/img/error404.jpg'
+import Error404 from '../../../assets/img/error404.jpg'
 
 export const PageNotFound = () => {
     return<>
