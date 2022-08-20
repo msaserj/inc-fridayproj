@@ -14,6 +14,7 @@ const App = () => {
                 <RoutesComponent/>
                     {/*<Body titleForBody={"New Body"}/>*/}
                 </div>
+                <h2>test h2</h2>
             </BrowserRouter>
         </div>
     );
