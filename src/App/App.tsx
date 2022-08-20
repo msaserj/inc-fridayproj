@@ -13,6 +13,7 @@ const App = () => {
                 <div>
                 <RoutesComponent/>
                     {/*<Body titleForBody={"New Body"}/>*/}
+                    <h1>Тег h1</h1>
                 </div>
             </BrowserRouter>
         </div>
