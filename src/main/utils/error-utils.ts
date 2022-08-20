@@ -1,4 +1,1 @@
-
-export const AppError = () => {
-
-}
+export const AppError = () => {}

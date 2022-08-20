@@ -1,7 +1,7 @@
-
-
 export const RecoveryPass = () => {
-    return<>
-            <h1>Recovery Password</h1>
-        </>
+  return (
+    <>
+      <h1>Recovery Password</h1>
+    </>
+  )
 }

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios'
 
 // const settings = {
 //     withCredentials: true,
@@ -25,7 +25,6 @@ import axios from "axios";
 //         return instance.post<Type<Type>>('auth/login' , params);
 //     }
 // }
-
 
 // types API
 // type Type = {

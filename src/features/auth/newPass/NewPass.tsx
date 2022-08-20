@@ -1,5 +1,7 @@
 export const NewPass = () => {
-    return<>
-        <h1>newPassword</h1>
+  return (
+    <>
+      <h1>newPassword</h1>
     </>
+  )
 }

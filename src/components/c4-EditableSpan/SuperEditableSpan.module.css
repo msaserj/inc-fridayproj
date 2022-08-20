@@ -1,5 +1,6 @@
 .span {
-    display: inline-block;
-    margin: 10px;
-    height: 36px;
+  display: inline-block;
+
+  height: 36px;
+  margin: 10px;
 }

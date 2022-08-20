@@ -1,19 +1,21 @@
 .nav {
-    background: #AFCDE7;
-    padding: 20px;
+  padding: 20px;
+
+  background: #afcde7;
 }
 
 a {
-    padding: 20px;
-    text-decoration: none;
+  padding: 20px;
+
+  text-decoration: none;
 }
 
 .inactiveLink {
-    text-decoration: none;
-    color: #0f73ab;
+  color: #0f73ab;
+  text-decoration: none;
 }
 
 .activeLink {
-    text-decoration: none;
-    color: #000000;
+  color: #000000;
+  text-decoration: none;
 }

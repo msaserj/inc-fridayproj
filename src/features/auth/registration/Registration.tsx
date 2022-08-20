@@ -1,5 +1,7 @@
 export const Registration = () => {
-    return<>
-        <h1>Registration</h1>
+  return (
+    <>
+      <h1>Registration</h1>
     </>
+  )
 }
