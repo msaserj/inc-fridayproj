@@ -74,5 +74,4 @@ export type LoginActionsType =
 type InitialStateType = {
     value: boolean
 }
-
 type ThunkDispatchType = Dispatch<LoginActionsType>
