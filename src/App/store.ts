@@ -1,19 +1,23 @@
-
-import { combineReducers } from 'redux';
-
-export const rootReducer = combineReducers({
-
-});
-
-//export const store = createStore(rootRedcer, applyMiddleware(thunk));
-
-//export type RootState = ReturnType<typeof store.getState>
-//export type AppDispatch = ThunkDispatch<RootState, unknown, AppActionsType>
-//export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AppActionsType>
-//type AppActionsType = FirstActionsType | SecondActionsType
+import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
+import thunkMiddleware, {ThunkAction, ThunkDispatch } from "redux-thunk";
 
 
 
-// а это, чтобы можно было в консоли браузера обращаться к store в любой момент
+const rootReducer = combineReducers({
+
+})
+
+const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware))
+export type AppStateType = ReturnType<typeof rootReducer>
+
+//export type AppReducersTypes = AppReducerType | AuthReducerType | PacksReducerType | CardsReducerType
+type RootStateType = ReturnType<typeof store.getState>
+type AppDispatchType = ThunkDispatch<RootStateType, unknown,any/* AppReducersTypes*/>
+
+
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown,any/* AppReducersTypes*/>
+
+export default store;
+
 // @ts-ignore
-window.store = store
+window.store
