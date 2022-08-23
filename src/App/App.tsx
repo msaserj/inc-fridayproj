@@ -3,6 +3,7 @@ import './App.css';
 import {Header} from "../features/header/Header";
 import {BrowserRouter} from "react-router-dom";
 import {RoutesComponent} from "../common/routes/RoutesComponent";
+import {SnackbarTSX} from "../features/auth/login/SnackbarTSX";
 
 
 const App = () => {
@@ -11,10 +12,10 @@ const App = () => {
             <BrowserRouter>
                 <Header titleForHeader={"Header"}/>
                 <div>
-                <RoutesComponent/>
+                    <RoutesComponent/>
                     {/*<Body titleForBody={"New Body"}/>*/}
-                    <h1>Тег h1</h1>
                 </div>
+                <SnackbarTSX/>
             </BrowserRouter>
         </div>
     );
