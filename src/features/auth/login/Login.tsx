@@ -23,6 +23,7 @@ export const Login = () => {
 			 <img src={IT_Incubator} alt="IT_Incubator"/>
 			<h2>Sign In</h2>
 			<LoginForm/>
+
 		</div>
 
 	)
