@@ -29,5 +29,4 @@ export type LoginActionsType = ReturnType<typeof SomeAC>
 type InitialStateType = {
     value: boolean
 }
-
 type ThunkDispatchType = Dispatch<LoginActionsType>
