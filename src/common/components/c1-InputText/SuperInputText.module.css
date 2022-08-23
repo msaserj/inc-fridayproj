@@ -1,34 +1,46 @@
-
+.main {
+    min-height: 52px;
+}
 
 
 .input {
-    box-sizing: border-box;
-    margin:  10px;
     display: block;
-    height: 2.25rem;
-    padding: 0.25rem 0.5rem;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #d7e9ff;
-    background-clip: padding-box;
-    border-radius: 0.5rem;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border: 2px solid #80a6ff;
+    width: 140px;
+    height: 28px;
+    border: 0;
+    border-bottom: 2px solid #D9D9D9;
+    outline: none;
+    /*box-sizing: border-box;*/
+    /*margin:  10px;*/
+    /*display: block;*/
+    /*height: 2.25rem;*/
+    /*padding: 0.25rem 0.5rem;*/
+    /*font-family: inherit;*/
+    /*font-size: 1rem;*/
+    /*font-weight: 400;*/
+    /*line-height: 1.5;*/
+    /*color: #212529;*/
+    /*background-color: #d7e9ff;*/
+    /*background-clip: padding-box;*/
+    /*border-radius: 0.5rem;*/
+    /*transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;*/
+    /*border: 2px solid #80a6ff;*/
 }
 .input:focus {
-    outline: 2px solid #80a6ff;
-    transition: outline 0.3s ease-in-out, outline 0.3s ease-in-out;
+    border: 1px;
+    border-bottom: 2px solid #4786ff;
+    outline: none;
+    transition: border-bottom 0.5s ease-in-out, border-bottom 0.5s ease-in-out;
 }
 .errorInput {
-    border: 2px solid #ff5959;
-    background-color: #ffa6a6;
+    border: 1px;
+    border-bottom: 2px solid #ff4747;
+    outline: none;
+    transition: border-bottom 0.5s ease-in-out, border-bottom 0.5s ease-in-out;
 }
 .error {
     font-family: inherit;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 400;
-    color: #ff5959;
+    color: #ff0000;
 }

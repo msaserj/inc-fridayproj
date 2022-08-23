@@ -2,11 +2,12 @@
 .button {
     align-items: center;
     background-clip: padding-box;
-    background-color: #8095ff;
+    background-color: #366EFF;
     border: 1px solid transparent;
-    border-radius: .5rem;
-    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    border-radius: 1.1rem;
+    /*box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;*/
     box-sizing: border-box;
+    box-shadow: 0 2px 10px rgba(14, 14, 14, 0.25), inset 0 1px 0 rgba(114, 114, 114, 0.3);
     color: #fff;
     cursor: pointer;
     display: inline-flex;
@@ -16,7 +17,7 @@
     justify-content: center;
     line-height: 1.25;
     margin: 4px;
-    min-height: 2rem;
+    height: 36px;
     padding: 5px 20px;
     position: relative;
     text-decoration: none;
@@ -31,10 +32,11 @@
 .red {
     align-items: center;
     background-clip: padding-box;
-    background-color: #ff5353;
+    background-color: #ff0000;
     border: 1px solid transparent;
-    border-radius: .5rem;
-    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    border-radius: 1.1rem;
+    /*box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;*/
+    box-shadow: 0 2px 10px rgba(14, 14, 14, 0.25), inset 0 1px 0 rgba(114, 114, 114, 0.3);
     box-sizing: border-box;
     color: #fff;
     cursor: pointer;
@@ -45,7 +47,7 @@
     justify-content: center;
     line-height: 1.25;
     margin: 5px;
-    min-height: 2rem;
+    height: 36px;
     padding: 5px 20px;
     position: relative;
     text-decoration: none;
@@ -59,7 +61,7 @@
 
 .button:hover,
 .button:focus {
-    background-color: #fb8332;
+    background-color: #ff6400;
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
@@ -68,7 +70,7 @@
 }
 .red:hover,
 .red:focus {
-    background-color: #ff2d2d;
+    background-color: #ff6700;
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
@@ -77,12 +79,12 @@
 }
 
 .red:active {
-    background-color: #ff1a1a;
+    background-color: #ff6800;
     box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
     transform: translateY(0);
 }
 .button:disabled {
     background-color: #a3c4ff;
-    /*box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;*/
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
     transform: translateY(0);
 }
