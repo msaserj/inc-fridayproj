@@ -15,7 +15,6 @@ export const setAuthDataAC = (user: UserType) => ({type: "profile/SET-AUTH-DATA"
 export const loadingStatusAC = (value: boolean) => ({type: "profile/LOADING-STATUS", value} as const);
 
 // Thunk creators
-
 export const profileReducer = (state: InitStateType = initState, action: ProfileActionsType): InitStateType => {
     switch (action.type) {
         case "profile/SET-AUTH-DATA":
