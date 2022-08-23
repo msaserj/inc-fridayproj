@@ -1,34 +1,40 @@
-// import {AppThunkType} from "../../../sc1-main/m2-bll/store";
-// import {ProfileApi, UserType} from "../../../sc1-main/m3-dal/profile-api";
-// import {handleAppRequestError} from "../../../sc3-utils/errorUtils";
+//заглушка редьюсера. Не стал делать для всех такую же
 
-// Types
-import {UserType} from "./profile-api";
+import {Dispatch} from "redux";
+import axios from "axios";
 
-type InitStateType = typeof initState;
-type SetAuthDataActionType = ReturnType<typeof setAuthDataAC> | ReturnType<typeof loadingStatusAC>;
-export type ProfileActionsType = SetAuthDataActionType;
+const instance = axios.create({
+    baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
+    withCredentials: true,
+})
 
-// Initial state
-const initState = {
-	loading: false,
-	user: {} as UserType,
-};
 
-// Action creators
-export const setAuthDataAC = (user: UserType) => ({type: "profile/SET-AUTH-DATA", user} as const);
-export const loadingStatusAC = (value: boolean) => ({type: "profile/LOADING-STATUS", value} as const);
+// ActionCreators
+export const SomeAC = (value: boolean) => ({type: 'TYPE', value} as const)
 
-// Thunk creators
+// reducers
+const initialState: InitialStateType = {
+    value: false
+}
+export const authReducer = (state: InitialStateType = initialState, action: LoginActionsType): InitialStateType => {
+    switch (action.type) {
+        case 'TYPE':
+            return state
+        default:
+            return state
+    }
+}
 
-export const profileReducer = (state: InitStateType = initState, action: ProfileActionsType): InitStateType => {
-	switch (action.type) {
-		case "profile/SET-AUTH-DATA":
-			console.log(27, action.user.name)
-			return {...state, user: action.user};
-		case "profile/LOADING-STATUS":
-			return {...state, loading: action.value}
-		default:
-			return state;
-	}
-};
+// sanki
+export const loginTC = (params: any) => (dispatch: ThunkDispatchType) => {
+
+}
+
+// types
+export type LoginActionsType = ReturnType<typeof SomeAC>
+
+type InitialStateType = {
+    value: boolean
+}
+
+type ThunkDispatchType = Dispatch<LoginActionsType>
