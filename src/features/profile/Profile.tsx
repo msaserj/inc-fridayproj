@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import css from './Profile.module.css'
-import logo from '../../assets/img/logo.svg'
 import arrow from '../../assets/img/arrow.svg'
 import pencil from '../../assets/img/pencil.svg'
 import photoIcon from '../../assets/img/photoIcon.svg'
@@ -13,16 +12,6 @@ export const Profile = () => {
 
     return (
         <div>
-            <div className={css.header}>
-                <img className={css.logo} src={logo} alt="logo"/>
-                <div className={css.profileBlock}>
-                    <p
-                        data-tooltip="Всплывающая подсказка"
-                    >Vasya</p>
-                    <img className={css.profilePhoto} src="https://thispersondoesnotexist.com/image" alt="avatar"/>
-                </div>
-                {/*<h1>Profile</h1>*/}
-            </div>
 
             <div className={css.mainBlock}>
                 {/*Back to packs List*/}
