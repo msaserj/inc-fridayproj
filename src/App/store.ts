@@ -4,19 +4,22 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {LoginActionsType, loginReducer} from "../features/auth/login/login-reducer";
 import {ProfileActionsType, profileReducer} from "../features/profile/profile-reducer";
 import {AppActionsType, appReducer} from "./app-reducer";
+import {RegistrationActionsType, registrationReducer} from "../features/auth/registration/registration-reducer";
 
 export type AppStateType = ReturnType<typeof rootReducer>;
 
 export type RootActionsType =
-	| LoginActionsType
-	| ProfileActionsType
-	| AppActionsType
+    | LoginActionsType
+    | ProfileActionsType
+    | AppActionsType
+    | RegistrationActionsType
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, RootActionsType>;
 
 export const rootReducer = combineReducers({
-	login: loginReducer,
-	profile: profileReducer,
-	app: appReducer,
+    login: loginReducer,
+    profile: profileReducer,
+    app: appReducer,
+    registration: registrationReducer
 });
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
