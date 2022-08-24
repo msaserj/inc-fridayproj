@@ -66,6 +66,8 @@ export const LoginForm = () => {
 				<div className={s.email}>
 					<TextField id="standard-basic" label="Email" variant="standard"
 							   type="email" {...formik.getFieldProps('email')}/>
+
+
 					{formik.errors.email && formik.touched.email &&
                         <div style={{color: "red"}}>{formik.errors.email}</div>}
 
