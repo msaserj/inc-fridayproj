@@ -47,7 +47,30 @@ export const loginThunkTC = (email: string, password: string, remember: boolean)
     dispatch(setAppIsLoadingAC(true))
     authApi.login(email, password, remember)
         .then(res => {
-            console.log(50, res.name)
+            console.log(50, res)
+            dispatch(setAuthDataAC(res));
+        })
+        .catch(e => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console');
+
+            console.log(error)
+
+            dispatch(setAppErrorAC(error));
+        })
+        .finally(() => {
+
+            dispatch(setAppIsLoadingAC(false))
+        })
+};
+
+export const logoutThunkTC = (): AppThunkType => (dispatch) => {
+
+    dispatch(setAppIsLoadingAC(true))
+    authApi.logout()
+        .then(res => {
+            console.log(50, res)
             dispatch(setAuthDataAC(res));
         })
         .catch(e => {

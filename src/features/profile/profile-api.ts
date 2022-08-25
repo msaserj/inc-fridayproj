@@ -31,8 +31,8 @@ export const ProfileApi = {
 		return instance.post<UserType>(`/auth/me`, {})
 			.then(res => res.data)
 	},
-	updateUserData(name: string, avatar: string) {
-		return instance.put<UpdatedUser>(`/auth/me`, {name, avatar})
+	updateUserData(name: string) {
+		return instance.put<UpdatedUser>(`/auth/me`, {name})
 			.then(res => res.data)
 	},
 }

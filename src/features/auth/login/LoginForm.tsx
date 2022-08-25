@@ -6,9 +6,11 @@ import {NavLink} from "react-router-dom";
 import s from './auth.module.css';
 import {useFormik} from "formik";
 import {loginThunkTC} from "./login-reducer";
-import {FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
+import {Checkbox, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
 import {SnackbarTSX} from "./SnackbarTSX";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
+import SuperCheckbox from "../../../common/components/c3-Checkbox/SuperCheckbox";
 
 
 type FormikErrorType = {
@@ -19,7 +21,7 @@ type FormikErrorType = {
 
 export const LoginForm = () => {
 
-	const [values, setValues] = useState({showPassword: false, showSnackBar:false});
+	const [values, setValues] = useState({showPassword: false, showSnackBar: false});
 
 	const dispatch = useAppDispatch();
 	const formik = useFormik({
@@ -47,10 +49,8 @@ export const LoginForm = () => {
 
 		onSubmit: values => {
 			dispatch(loginThunkTC(values.email, values.password, values.rememberMe));
-			setValues({showPassword: false,showSnackBar: true})
 		},
 	});
-	console.log(53, `values.showSnackBar = `, values.showSnackBar)
 
 
 	const handleClickShowPassword = () => {
@@ -64,10 +64,16 @@ export const LoginForm = () => {
 		<>
 			<form onSubmit={formik.handleSubmit}>
 				<div className={s.email}>
-					<TextField id="standard-basic" label="Email" variant="standard"
-							   type="email" {...formik.getFieldProps('email')}/>
 
+					{/*<TextField id="standard-basic" label="Email" variant="standard"*/}
+					{/*		   type="email" {...formik.getFieldProps('email')}/>*/}
 
+					{/*заменил TextField из MaterialUI на SuperInputText:*/}
+					<SuperInputText
+						id="standard-basic"
+						type="email" {...formik.getFieldProps('email')}
+						className={s.superInputText}
+					/>
 					{formik.errors.email && formik.touched.email &&
                         <div style={{color: "red"}}>{formik.errors.email}</div>}
 
@@ -102,6 +108,22 @@ export const LoginForm = () => {
 
 				</div>
 
+
+				<Checkbox
+					{...formik.getFieldProps('rememberMe')}
+				>{' '}</Checkbox>Remember me (from Material UI)
+
+
+				<div className={s.superCheckbox}>
+					<SuperCheckbox
+								   {...formik.getFieldProps('rememberMe')}
+					>
+						Remember me (from SuperCheckbox)
+					</SuperCheckbox>
+				</div>
+
+
+
 				<div className={s.forgot_password}>
 					<NavLink to={PATH.RECOVERY_PASS}>
 						Forgot Password?
@@ -121,10 +143,6 @@ export const LoginForm = () => {
 
 				>Sign Up</NavLink>
 			</div>
-
-			{/*{values.showSnackBar &&<SnackbarTSX/>}*/}
-			{/*<SnackbarTSX/>*/}
-
 
 		</>
 	)

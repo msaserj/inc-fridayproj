@@ -10,23 +10,36 @@
     height: 600px;
 }
 
-.email{
-    width: 300px;
+.email {
     margin: 10px auto;
 }
-.password{
+
+.superInputText {
+    display: flex;
+    margin: 0 auto;
+    min-width: 200px;
+    text-align: center;
+}
+
+.superCheckbox {
+    display: flex;
+    justify-content: center;
+}
+
+.password {
     margin: 20px auto;
 }
 
 .forgot_password {
-padding: 50px 0 10px 200px ;
+    padding: 50px 0 10px 200px;
 }
 
-.submit_button{
+.submit_button {
     width: 266px;
     margin: 100px auto 30px;
 }
-.sign_up{
+
+.sign_up {
     font-weight: bold;
     margin: 20px auto;
 }

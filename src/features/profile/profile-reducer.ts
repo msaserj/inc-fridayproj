@@ -1,4 +1,7 @@
-import {UserType} from "./profile-api";
+import {ProfileApi, UserType} from "./profile-api";
+import {AppThunkType} from "../../App/store";
+import {setAppErrorAC, setAppIsLoadingAC} from "../../App/app-reducer";
+import {authApi} from "../auth/login/login-api";
 
 type InitStateType = typeof initState;
 type SetAuthDataActionType = ReturnType<typeof setAuthDataAC> | ReturnType<typeof loadingStatusAC>;
@@ -25,4 +28,30 @@ export const profileReducer = (state: InitStateType = initState, action: Profile
         default:
             return state;
     }
+};
+
+// sanki
+export const updateUserDataTC = (name: string): AppThunkType => (dispatch) => {
+
+    dispatch(setAppIsLoadingAC(true))
+    ProfileApi.updateUserData(name)
+        .then(res => {
+            console.log(50, res)
+
+            // dispatch(setAuthDataAC(res)); !!!!!!!!!!!!!!
+
+        })
+        .catch(e => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console');
+
+            console.log(error)
+
+            dispatch(setAppErrorAC(error));
+        })
+        .finally(() => {
+
+            dispatch(setAppIsLoadingAC(false))
+        })
 };
