@@ -1,0 +1,63 @@
+.main {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    /*width: 230px;*/
+}
+
+@keyframes scaling{
+    0%, 100%{
+        transform: scale(0.2);
+        background-color: #30FFB7;
+    }
+    40%{
+        transform: scale(1);
+        background-color: #07DEFF;
+    }
+    50%{
+        transform: scale(1);
+        background-color: #0761FF;
+    }
+}
+
+.main div {
+    height: 30px;
+    width: 30px;
+    border-radius:50%;
+    transform: scale(0);
+    background-color:red;
+    animation: scaling 2.5s ease-in-out infinite;
+    display: inline-block;
+    margin:.5rem;
+}
+.large div {
+    height: 60px;
+    width: 60px;
+    margin: .8rem;
+}
+.small div {
+    height: 18px;
+    width: 18px;
+    margin: .2rem;
+
+}
+
+
+.main div:nth-child(0){
+    animation-delay:0s;
+}
+.main div:nth-child(1){
+    animation-delay:0.2s;
+}
+.main div:nth-child(2){
+    animation-delay:0.4s;
+}
+.main div:nth-child(3){
+    animation-delay:0.6s;
+}
+.main div:nth-child(4){
+    animation-delay:0.8s;
+}
+.main div:nth-child(5){
+    animation-delay:1s;
+}
