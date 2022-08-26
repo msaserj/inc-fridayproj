@@ -1,5 +1,8 @@
-import {instanceLocal} from "../../api/api-instance";
+import {instanceExternal, instanceLocal} from "../../api/api-instance";
 
+
+
+// endPoints API
 export const authApi = {
     registration(email: string, password: string) {
         return instanceLocal.post('/auth/register', {email,password})
@@ -13,19 +16,25 @@ export const authApi = {
         return instanceLocal.delete('auth/me')
             .then(res => res.data)
     },
+    forgotPswd(email: string, from: string, message: string) {
+        return instanceExternal.post('auth/forgot', {email, from, message}).then(res => res.data)
+    },
     me() {
         return instanceLocal.post<UserType>(`/auth/me`, {})
             .then(res => res.data)
     },
-    updateUserData(name: string) {
+    newPswd(password: string, resetPasswordToken: string) {
+        return instanceLocal.post('auth/set-new-password', {password, resetPasswordToken}).then(res => res.data)
+    },
+    updateUserName(name: string) {
         return instanceLocal.put<UpdatedUser>(`/auth/me`, {name})
             .then(res => res.data)
     },
-
+    updateUserAvatar(name: string, avatar: string) {
+        return instanceLocal.put<UpdatedUser>(`/auth/me`, {avatar})
+            .then(res => res.data)
+    },
 }
-
-
-
 
 
 export type UserType = {
@@ -41,6 +50,7 @@ export type UserType = {
     rememberMe: boolean;
     error?: string;
 }
+
 export type UpdatedUser = {
     token: string
     tokenDeathTime: Date
