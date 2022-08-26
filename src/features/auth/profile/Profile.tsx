@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import css from './Profile.module.css'
-import arrow from '../../assets/img/arrow.svg'
-import pencil from '../../assets/img/pencil.svg'
-import photoIcon from '../../assets/img/photoIcon.svg'
-import SuperButton from "../../common/components/c2-Button/SuperButton";
-import SuperEditableSpan from "../../common/components/c4-EditableSpan/SuperEditableSpan";
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import arrow from '../../../assets/img/arrow.svg'
+import pencil from '../../../assets/img/pencil.svg'
+import photoIcon from '../../../assets/img/photoIcon.svg'
+import SuperButton from "../../../common/components/c2-Button/SuperButton";
+import SuperEditableSpan from "../../../common/components/c4-EditableSpan/SuperEditableSpan";
+import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {Alert, Snackbar, Stack} from "@mui/material";
-import {logoutThunkTC} from "../auth/login/login-reducer";
-import {updateUserDataTC} from "./profile-reducer";
+import {logoutThunkTC} from "../login/login-reducer";
+import {updateUserDataTC} from "../profile-reducer";
 
 export const Profile = () => {
 

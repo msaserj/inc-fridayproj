@@ -1,6 +1,6 @@
 import {AppThunkType} from "./store";
-import {ProfileApi} from "../features/profile/profile-api";
-import {setAuthDataAC} from "../features/profile/profile-reducer";
+import {ProfileApi} from "../features/auth/profile-api";
+import {setAuthDataAC} from "../features/auth/profile-reducer";
 
 type InitStateType = typeof initState;
 

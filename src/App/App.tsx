@@ -3,7 +3,7 @@ import './App.css';
 import {Header} from "../features/header/Header";
 import {BrowserRouter} from "react-router-dom";
 import {RoutesComponent} from "../common/routes/RoutesComponent";
-import {SnackbarTSX} from "../features/auth/login/SnackbarTSX";
+import {SnackbarTSX} from "../common/components/SnackbarTSX/SnackbarTSX";
 
 
 const App = () => {

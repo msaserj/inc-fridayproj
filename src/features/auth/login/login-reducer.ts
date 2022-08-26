@@ -1,8 +1,8 @@
 //заглушка редьюсера. Не стал делать для всех такую же
 
 import {Dispatch} from "redux";
-import {setAuthDataAC} from "../../profile/profile-reducer";
-import {authApi} from "./login-api";
+import {setAuthDataAC} from "../profile-reducer";
+import {authApi} from "../login-api";
 import {AppThunkType} from "../../../App/store";
 import {setAppErrorAC, setAppIsLoadingAC} from "../../../App/app-reducer";
 

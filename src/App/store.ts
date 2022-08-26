@@ -2,10 +2,10 @@ import {applyMiddleware, combineReducers, compose, createStore, legacy_createSto
 import thunk, {ThunkDispatch, ThunkAction} from "redux-thunk";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {LoginActionsType, loginReducer} from "../features/auth/login/login-reducer";
-import {ProfileActionsType, profileReducer} from "../features/profile/profile-reducer";
+import {ProfileActionsType, profileReducer} from "../features/auth/profile-reducer";
 import {AppActionsType, appReducer} from "./app-reducer";
 import {configureStore} from "@reduxjs/toolkit";
-import {RegistrationActionsType, registrationReducer} from "../features/auth/registration/registration-reducer";
+import {RegistrationActionsType, registrationReducer} from "../features/auth/registration-reducer";
 
 
 // для работы с REDUX_DEVTOOLS: Window c Большой Буквы Window

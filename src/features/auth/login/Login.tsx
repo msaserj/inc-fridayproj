@@ -1,9 +1,8 @@
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";
-import {useSelector} from "react-redux";
 import {useAppSelector} from "../../../common/hooks/hooks";
 import {LoginForm} from "./LoginForm";
-import s from "./auth.module.css";
+import css from "./Login.module.css";
 
 import IT_Incubator from '../../../assets/img/Group 753.svg'
 
@@ -19,7 +18,7 @@ export const Login = () => {
 	}
 
 	return (
-		<div className={s.smallContainer}>
+		<div className={css.smallContainer}>
 			 <img src={IT_Incubator} alt="IT_Incubator"/>
 			<h2>Sign In</h2>
 			<LoginForm/>

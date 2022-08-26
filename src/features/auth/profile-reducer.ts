@@ -1,7 +1,7 @@
 import {ProfileApi, UserType} from "./profile-api";
 import {AppThunkType} from "../../App/store";
 import {setAppErrorAC, setAppIsLoadingAC} from "../../App/app-reducer";
-import {authApi} from "../auth/login/login-api";
+import {authApi} from "./login-api";
 
 type InitStateType = typeof initState;
 type SetAuthDataActionType = ReturnType<typeof setAuthDataAC> | ReturnType<typeof loadingStatusAC>;

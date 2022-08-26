@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import React, {useState} from "react";
-import {registrationThunkTC} from "./registration-reducer";
+import {registrationThunkTC} from "../registration-reducer";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {useNavigate} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";

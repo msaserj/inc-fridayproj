@@ -1,6 +1,6 @@
-import {AppThunkType} from "../../../App/store";
+import {AppThunkType} from "../../App/store";
 import {registrationApi} from "./registration-api";
-import {setAppErrorAC, setAppIsInitializedAC, setAppIsLoadingAC} from "../../../App/app-reducer";
+import {setAppErrorAC, setAppIsInitializedAC, setAppIsLoadingAC} from "../../App/app-reducer";
 
 
 type InitStateType = typeof initState;
