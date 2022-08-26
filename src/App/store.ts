@@ -41,15 +41,17 @@ const saveState = (state: AppStateType) => {
 export type AppStateType = ReturnType<typeof rootReducer>;
 
 export type RootActionsType =
-	| LoginActionsType
-	| ProfileActionsType
-	| AppActionsType
+    | LoginActionsType
+    | ProfileActionsType
+    | AppActionsType
+    | RegistrationActionsType
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, RootActionsType>;
 
 export const rootReducer = combineReducers({
-	login: loginReducer,
-	profile: profileReducer,
-	app: appReducer,
+    login: loginReducer,
+    profile: profileReducer,
+    app: appReducer,
+    registration: registrationReducer
 });
 
 // export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
