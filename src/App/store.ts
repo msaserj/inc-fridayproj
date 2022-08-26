@@ -5,6 +5,7 @@ import {LoginActionsType, loginReducer} from "../features/auth/login/login-reduc
 import {ProfileActionsType, profileReducer} from "../features/profile/profile-reducer";
 import {AppActionsType, appReducer} from "./app-reducer";
 import {configureStore} from "@reduxjs/toolkit";
+import {RegistrationActionsType, registrationReducer} from "../features/auth/registration/registration-reducer";
 
 
 // для работы с REDUX_DEVTOOLS: Window c Большой Буквы Window
