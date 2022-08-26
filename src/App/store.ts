@@ -15,7 +15,6 @@ declare global {
 	}
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const loadState = () => {
 	try {
 		const serializedState = localStorage.getItem('app-state')
