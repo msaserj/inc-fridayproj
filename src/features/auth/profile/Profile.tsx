@@ -21,17 +21,14 @@ export const Profile = () => {
 	const [value, setValue] = useState<string>(name ? name : 'Somebody')
 
 	// console.log(`user in Profile`, user)
-	console.log(`userName in Profile`, name)
+	//console.log(`userName in Profile`, name)
 	function LogoutHandler() {
 		dispatch(logoutThunkTC())
 		setValue('Somebody')
 	}
-	function onCLickButtonHandle() {
-		dispatch(updateUserDataTC(value))
-	}
 	function onKeyPressInputHandle(e: React.KeyboardEvent<HTMLInputElement>) {
 		if (e.key === `Enter`) {
-			onCLickButtonHandle()
+			dispatch(updateUserDataTC(value))
 		}
 	}
 	if (!isLoggedIn) {
