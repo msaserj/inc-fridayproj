@@ -37,7 +37,6 @@ export const LoginForm = () => {
 			} else if (!/^[A-Z\d._%+-]+@[A-Z\d.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
 				errors.email = 'Invalid email address';
 			}
-
 			if (!values.password) {
 				errors.password = 'Required'
 			} else if (values.password.trim().length < 3) {
@@ -106,28 +105,20 @@ export const LoginForm = () => {
                         <div style={{color: "red"}}>{formik.errors.password}</div>}
 
 				</div>
-
-
 				{/*<Checkbox*/}
 				{/*	{...formik.getFieldProps('rememberMe')}*/}
 				{/*>{' '}</Checkbox>Remember me (from Material UI)*/}
-
-
 				<div className={s.superCheckbox}>
 					<SuperCheckbox
-								   {...formik.getFieldProps('rememberMe')}
-					>
-						Remember me (from SuperCheckbox)
+								   {...formik.getFieldProps('rememberMe')}>
+						Remember me
 					</SuperCheckbox>
 				</div>
-
-
 
 				<div className={s.forgot_password}>
 					<NavLink to={PATH.RECOVERY_PASS}>
 						Forgot Password?
 					</NavLink>
-
 				</div>
 				<SuperButton type={'submit'} className={s.submit_button}
 							 disabled={!(formik.isValid && formik.dirty)}>

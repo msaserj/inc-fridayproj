@@ -1,11 +1,8 @@
 import {combineReducers, compose} from 'redux';
 import {ThunkDispatch, ThunkAction} from "redux-thunk";
-
-
 import {AppActionsType, appReducer} from "./app-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {AuthActionsType, authReducer} from "../features/auth/auth-reducer";
-
 
 
 // для работы с REDUX_DEVTOOLS: Window c Большой Буквы Window
@@ -35,8 +32,6 @@ const saveState = (state: AppStateType) => {
 		// ignore write errors
 	}
 }
-
-
 
 export type AppStateType = ReturnType<typeof rootReducer>;
 

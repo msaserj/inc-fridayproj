@@ -3,8 +3,8 @@ import {Dispatch} from "redux";
 import {AuthActionsType, setUserNameAC} from "../features/auth/auth-reducer";
 import {authApi} from "../features/auth/auth-api";
 
-type InitStateType = typeof initState;
 
+type InitStateType = typeof initState;
 const initState = {
 	appIsInitialized: false,
 	appIsLoading: false,
@@ -18,9 +18,9 @@ export type AppActionsType =
 	| SetAppInitializedActionType
 	| SetAppIsLoadingActionType
 	| SetAppErrorActionType;
-
 type ThunkDispatchType = Dispatch<AuthActionsType | AppActionsType>
 
+// Action Creators
 export const setAppIsInitializedAC = (value: boolean) =>
 	({type: "app/SET-INITIALIZED", payload: {appIsInitialized: value}} as const);
 export const setAppErrorAC = (value: null | string) =>
@@ -28,7 +28,19 @@ export const setAppErrorAC = (value: null | string) =>
 export const setAppIsLoadingAC = (value: boolean) =>
 	({type: "app/SET-IS-LOADING-STATUS", payload: {appIsLoading: value}} as const);
 
-
+// reducer
+export const appReducer = (state: InitStateType = initState, action: AppActionsType): InitStateType => {
+	switch (action.type) {
+		case "app/SET-INITIALIZED":
+			return {...state, ...action.payload};
+		case "app/SET-IS-LOADING-STATUS":
+			return {...state, ...action.payload};
+		case "app/SET-ERROR":
+			return {...state, ...action.payload};
+		default:
+			return state;
+	}
+};
 
 // Thunk creators
 export const initializeAppTC = (): AppThunkType => (dispatch:ThunkDispatchType) => {
@@ -42,19 +54,6 @@ export const initializeAppTC = (): AppThunkType => (dispatch:ThunkDispatchType) 
 				: (error.message + ', more details in the console');
 			console.log('Error: ', errorMessage);
 		})
-
 		.finally(() => dispatch(setAppIsInitializedAC(true)))
 };
 
-export const appReducer = (state: InitStateType = initState, action: AppActionsType): InitStateType => {
-	switch (action.type) {
-		case "app/SET-INITIALIZED":
-			return {...state, ...action.payload};
-		case "app/SET-IS-LOADING-STATUS":
-			return {...state, ...action.payload};
-		case "app/SET-ERROR":
-			return {...state, ...action.payload};
-		default:
-			return state;
-	}
-};

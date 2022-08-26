@@ -55,8 +55,8 @@ export const RegistrationForm = () => {
 
             if (!values.password) {
                 errors.password = 'Required'
-            } else if (values.password.trim().length < 9) {
-                errors.password = "Min 9 symbols"
+            } else if (values.password.trim().length < 3) {
+                errors.password = "Min 3 symbols"
             }
             if (values.password !== values.confirmPassword) {
                 errors.password = "passwords must be high"
@@ -81,7 +81,6 @@ export const RegistrationForm = () => {
         formik.setErrors({email: undefined, password: undefined});
         navigate(PATH.LOGIN);
     };
-
 
     return <div>
         <Grid item xs={4}>

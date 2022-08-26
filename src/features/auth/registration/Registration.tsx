@@ -1,5 +1,4 @@
 import {RegistrationForm} from "./RegistrationForm";
-import {FormLabel} from "@mui/material";
 import React from "react";
 import {useAppSelector} from "../../../common/hooks/hooks";
 import {Navigate} from "react-router-dom";
@@ -13,10 +12,7 @@ export const Registration = () => {
     if (user_ID) {
         return <Navigate to={PATH.PROFILE}/>
     }
-
     return <div>
-        <FormLabel>
-        </FormLabel>
         <RegistrationForm/>
         {error && <div style={{color: "red"}}>{error}</div>}
     </div>
