@@ -1,8 +1,5 @@
 import {AppThunkType} from "../../../App/store";
 import {registrationApi} from "./registration-api";
-import {Navigate} from "react-router-dom";
-import {PATH} from "../../../common/constants/Path";
-import React from "react";
 import {setAppErrorAC, setAppIsInitializedAC, setAppIsLoadingAC} from "../../../App/app-reducer";
 
 
