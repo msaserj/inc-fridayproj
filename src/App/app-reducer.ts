@@ -1,13 +1,14 @@
 import {AppThunkType} from "./store";
-import {ProfileApi} from "../features/auth/profile-api";
-import {setAuthDataAC} from "../features/auth/profile-reducer";
+import {Dispatch} from "redux";
+import {AuthActionsType, setUserNameAC} from "../features/auth/auth-reducer";
+import {authApi} from "../features/auth/auth-api";
 
 type InitStateType = typeof initState;
 
 const initState = {
 	appIsInitialized: false,
 	appIsLoading: false,
-	appError: null as null | string,
+	appError: null as null | string
 };
 
 type SetAppInitializedActionType = ReturnType<typeof setAppIsInitializedAC>;
@@ -18,21 +19,22 @@ export type AppActionsType =
 	| SetAppIsLoadingActionType
 	| SetAppErrorActionType;
 
+type ThunkDispatchType = Dispatch<AuthActionsType | AppActionsType>
 
 export const setAppIsInitializedAC = (value: boolean) =>
 	({type: "app/SET-INITIALIZED", payload: {appIsInitialized: value}} as const);
 export const setAppErrorAC = (value: null | string) =>
 	({type: "app/SET-ERROR", payload: {appError: value}} as const);
 export const setAppIsLoadingAC = (value: boolean) =>
-	({type: "app/SET-IS-LOADING", payload: {appIsLoading: value}} as const);
+	({type: "app/SET-IS-LOADING-STATUS", payload: {appIsLoading: value}} as const);
 
 
 
 // Thunk creators
-export const initializeAppTC = (): AppThunkType => (dispatch) => {
-	ProfileApi.me()
+export const initializeAppTC = (): AppThunkType => (dispatch:ThunkDispatchType) => {
+	authApi.me()
 		.then(data => {
-			dispatch(setAuthDataAC(data));
+			dispatch(setUserNameAC(data));
 		})
 		.catch(error => {
 			const errorMessage = error.response
@@ -47,7 +49,9 @@ export const initializeAppTC = (): AppThunkType => (dispatch) => {
 export const appReducer = (state: InitStateType = initState, action: AppActionsType): InitStateType => {
 	switch (action.type) {
 		case "app/SET-INITIALIZED":
-		case "app/SET-IS-LOADING":
+			return {...state, ...action.payload};
+		case "app/SET-IS-LOADING-STATUS":
+			return {...state, ...action.payload};
 		case "app/SET-ERROR":
 			return {...state, ...action.payload};
 		default:

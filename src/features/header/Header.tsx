@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import css from "./Header.module.css"
 import {PATH} from "../../common/constants/Path";
 import logo from "../../assets/img/logo.svg";
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import {useAppSelector} from "../../common/hooks/hooks";
 
 type HeaderType = {
     titleForHeader: string
@@ -14,7 +14,7 @@ const setActive = ({isActive}: { isActive: boolean }) => isActive ? css.activeLi
 export const Header = (props: HeaderType) => {
 
     //добавил для отрисовки юзера:
-    const {avatar, name} = useAppSelector(state => state.profile.user)
+    const {avatar, name} = useAppSelector(state => state.auth.user)
 
     return (<div>
             <nav className={css.nav}>

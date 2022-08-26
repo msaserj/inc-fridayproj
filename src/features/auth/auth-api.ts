@@ -38,17 +38,20 @@ export const authApi = {
 
 
 export type UserType = {
-    _id: string;
-    email: string;
-    name: string;
-    avatar?: string;
-    publicCardPacksCount: number; // количество колод
-    created: Date;
-    updated: Date;
-    isAdmin: boolean;
-    verified: boolean; // подтвердил ли почту
-    rememberMe: boolean;
-    error?: string;
+    _id: string
+    email: string
+    rememberMe: boolean
+    isAdmin: boolean
+    name: string
+    verified: boolean // подтвердил ли почту
+    publicCardPacksCount: number // количество колод
+    created: number
+    updated: number
+    // __v: number
+    // token: string
+    // tokenDeathTime: number
+    avatar?: string
+    error?: string
 }
 
 export type UpdatedUser = {
@@ -56,4 +59,5 @@ export type UpdatedUser = {
     tokenDeathTime: Date
     updatedUser: UserType
 }
+
 

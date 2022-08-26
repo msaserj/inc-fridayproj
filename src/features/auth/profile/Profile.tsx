@@ -6,27 +6,26 @@ import photoIcon from '../../../assets/img/photoIcon.svg'
 import SuperButton from "../../../common/components/c2-Button/SuperButton";
 import SuperEditableSpan from "../../../common/components/c4-EditableSpan/SuperEditableSpan";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
-import {Alert, Snackbar, Stack} from "@mui/material";
-import {logoutThunkTC} from "../login/login-reducer";
-import {updateUserDataTC} from "../profile-reducer";
+import {logoutThunkTC, updateUserDataTC} from "../auth-reducer";
+
 
 export const Profile = () => {
 
 
 	//добавил для отрисовки юзера:
-	const {avatar, name, email} = useAppSelector(state => state.profile.user)
-	const {user} = useAppSelector(state => state.profile)
+	const {avatar, name, email} = useAppSelector(state => state.auth.user)
+	// const {user} = useAppSelector(state => state.auth)
 
 	const dispatch = useAppDispatch();
 
-	const [value, setValue] = useState<string>(name ? name : 'Vasya Pupkina')
+	const [value, setValue] = useState<string>(name ? name : 'Somebody')
 
-	console.log(`user in Profile`, user)
+	// console.log(`user in Profile`, user)
 	console.log(`userName in Profile`, name)
 
 	function LogoutHandler() {
 		dispatch(logoutThunkTC())
-		setValue('Vasya Pupkina')
+		setValue('Somebody')
 	}
 
 	function onCLickButtonHandle() {

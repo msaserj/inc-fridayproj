@@ -1,22 +1,19 @@
 import {useFormik} from "formik";
 import {
     Button,
-    Checkbox,
     FormControl,
-    FormControlLabel,
     FormGroup,
-    FormLabel,
     Grid, IconButton, InputAdornment, InputLabel, OutlinedInput,
     TextField
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import React, {useState} from "react";
-import {registrationThunkTC} from "../registration-reducer";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {useNavigate} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../../App/store";
+import {registrationThunkTC} from "../auth-reducer";
 
 
 type ErrorFormikType = {
@@ -31,7 +28,7 @@ export const RegistrationForm = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const registration = useSelector<AppStateType, boolean>(state => state.registration.successfulRegistration);
+    const registration = useSelector<AppStateType, boolean>(state => state.auth.successfulRegistration);
 
     const [values, setValues] = useState({showPassword: false, showSnackBar: false});
 
@@ -42,9 +39,9 @@ export const RegistrationForm = () => {
         });
     };
 
-       if (registration) {
-                navigate(PATH.LOGIN)
-           }
+    if (registration) {
+        navigate(PATH.LOGIN)
+    }
 
 
     const formik = useFormik({
@@ -61,7 +58,7 @@ export const RegistrationForm = () => {
             } else if (values.password.trim().length < 9) {
                 errors.password = "Min 9 symbols"
             }
-            if (values.password != values.confirmPassword) {
+            if (values.password !== values.confirmPassword) {
                 errors.password = "passwords must be high"
             }
             return errors

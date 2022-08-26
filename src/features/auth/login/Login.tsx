@@ -11,7 +11,7 @@ import IT_Incubator from '../../../assets/img/Group 753.svg'
 
 export const Login = () => {
 
-	const user_ID = useAppSelector(state => state.profile.user._id);
+	const user_ID = useAppSelector(state => state.auth.user._id);
 
 	if (user_ID) {
 		return <Navigate to={PATH.PROFILE}/>

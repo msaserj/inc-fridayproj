@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import SuperButton from "../../../common/components/c2-Button/SuperButton";
 import {PATH} from "../../../common/constants/Path";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {NavLink} from "react-router-dom";
 import s from './Login.module.css';
 import {useFormik} from "formik";
-import {loginThunkTC} from "./login-reducer";
-import {Checkbox, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
-import {SnackbarTSX} from "../../../common/components/SnackbarTSX/SnackbarTSX";
+import {FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
 import SuperCheckbox from "../../../common/components/c3-Checkbox/SuperCheckbox";
+import {loginThunkTC} from "../auth-reducer";
 
 
 type FormikErrorType = {
@@ -109,9 +108,9 @@ export const LoginForm = () => {
 				</div>
 
 
-				<Checkbox
-					{...formik.getFieldProps('rememberMe')}
-				>{' '}</Checkbox>Remember me (from Material UI)
+				{/*<Checkbox*/}
+				{/*	{...formik.getFieldProps('rememberMe')}*/}
+				{/*>{' '}</Checkbox>Remember me (from Material UI)*/}
 
 
 				<div className={s.superCheckbox}>
