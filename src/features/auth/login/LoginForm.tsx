@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import SuperButton from "../../../common/components/c2-Button/SuperButton";
 import {PATH} from "../../../common/constants/Path";
 import {useAppDispatch} from "../../../common/hooks/hooks";
@@ -6,8 +6,7 @@ import {NavLink} from "react-router-dom";
 import s from './auth.module.css';
 import {useFormik} from "formik";
 import {loginThunkTC} from "./login-reducer";
-import {Checkbox, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
-import {SnackbarTSX} from "./SnackbarTSX";
+import {Checkbox, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
 import SuperCheckbox from "../../../common/components/c3-Checkbox/SuperCheckbox";
@@ -147,4 +146,5 @@ export const LoginForm = () => {
 		</>
 	)
 }
+
 
