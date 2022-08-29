@@ -17,7 +17,7 @@
     width: 20px;
     height: 20px;
     border-radius: 5px;
-    background: #c3ccff;
+    background: #ffffff;
     border: 2px solid #84a6ff;
     margin-right: 10px;
     cursor: pointer;
@@ -25,8 +25,8 @@
 .checkbox:checked {
     appearance: none;
     outline: #335eff solid 1px;
-    background-color: #1c49ff;
+    background-color: #0058ff;
 }
 .checkbox:focus {
-    outline: #087c00 solid 2px;
+    outline: #ffffff solid 2px;
 }

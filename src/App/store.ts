@@ -1,10 +1,8 @@
-import {applyMiddleware, combineReducers, compose, createStore, legacy_createStore} from 'redux';
-import thunk, {ThunkDispatch, ThunkAction} from "redux-thunk";
-import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {LoginActionsType, loginReducer} from "../features/auth/login/login-reducer";
-import {ProfileActionsType, profileReducer} from "../features/profile/profile-reducer";
+import {combineReducers, compose} from 'redux';
+import {ThunkDispatch, ThunkAction} from "redux-thunk";
 import {AppActionsType, appReducer} from "./app-reducer";
 import {configureStore} from "@reduxjs/toolkit";
+import {AuthActionsType, authReducer} from "../features/auth/auth-reducer";
 
 
 // для работы с REDUX_DEVTOOLS: Window c Большой Буквы Window
@@ -14,7 +12,6 @@ declare global {
 	}
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const loadState = () => {
 	try {
 		const serializedState = localStorage.getItem('app-state')
@@ -36,20 +33,16 @@ const saveState = (state: AppStateType) => {
 	}
 }
 
-
-
 export type AppStateType = ReturnType<typeof rootReducer>;
 
 export type RootActionsType =
-	| LoginActionsType
-	| ProfileActionsType
-	| AppActionsType
+    | AppActionsType
+    | AuthActionsType
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, RootActionsType>;
 
 export const rootReducer = combineReducers({
-	login: loginReducer,
-	profile: profileReducer,
-	app: appReducer,
+    auth: authReducer,
+    app: appReducer
 });
 
 // export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));

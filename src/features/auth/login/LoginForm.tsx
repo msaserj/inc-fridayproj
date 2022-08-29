@@ -3,13 +3,13 @@ import SuperButton from "../../../common/components/c2-Button/SuperButton";
 import {PATH} from "../../../common/constants/Path";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {NavLink} from "react-router-dom";
-import s from './auth.module.css';
+import s from './Login.module.css';
 import {useFormik} from "formik";
-import {loginThunkTC} from "./login-reducer";
-import {Checkbox, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
+import {FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
 import SuperCheckbox from "../../../common/components/c3-Checkbox/SuperCheckbox";
+import {loginThunkTC} from "../auth-reducer";
 
 
 type FormikErrorType = {
@@ -37,7 +37,6 @@ export const LoginForm = () => {
 			} else if (!/^[A-Z\d._%+-]+@[A-Z\d.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
 				errors.email = 'Invalid email address';
 			}
-
 			if (!values.password) {
 				errors.password = 'Required'
 			} else if (values.password.trim().length < 3) {
@@ -106,28 +105,20 @@ export const LoginForm = () => {
                         <div style={{color: "red"}}>{formik.errors.password}</div>}
 
 				</div>
-
-
-				<Checkbox
-					{...formik.getFieldProps('rememberMe')}
-				>{' '}</Checkbox>Remember me (from Material UI)
-
-
+				{/*<Checkbox*/}
+				{/*	{...formik.getFieldProps('rememberMe')}*/}
+				{/*>{' '}</Checkbox>Remember me (from Material UI)*/}
 				<div className={s.superCheckbox}>
 					<SuperCheckbox
-								   {...formik.getFieldProps('rememberMe')}
-					>
-						Remember me (from SuperCheckbox)
+								   {...formik.getFieldProps('rememberMe')}>
+						Remember me
 					</SuperCheckbox>
 				</div>
-
-
 
 				<div className={s.forgot_password}>
 					<NavLink to={PATH.RECOVERY_PASS}>
 						Forgot Password?
 					</NavLink>
-
 				</div>
 				<SuperButton type={'submit'} className={s.submit_button}
 							 disabled={!(formik.isValid && formik.dirty)}>
@@ -146,5 +137,4 @@ export const LoginForm = () => {
 		</>
 	)
 }
-
 

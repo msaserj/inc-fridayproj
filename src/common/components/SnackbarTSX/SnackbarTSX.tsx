@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {setAppErrorAC} from "../../../App/app-reducer";
 import {Alert, Snackbar, SnackbarContent, Stack} from "@mui/material";
 
 
 export const SnackbarTSX = () => {
 	const error = useAppSelector<null | string>(state => state.app.appError);
-	const userName = useAppSelector(state => state.profile.user.name)
+	const userName = useAppSelector(state => state.auth.user.name)
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {

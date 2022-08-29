@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import css from "./Header.module.css"
 import {PATH} from "../../common/constants/Path";
 import logo from "../../assets/img/logo.svg";
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import {useAppSelector} from "../../common/hooks/hooks";
 
 type HeaderType = {
     titleForHeader: string
@@ -12,9 +12,9 @@ type HeaderType = {
 const setActive = ({isActive}: { isActive: boolean }) => isActive ? css.activeLink : css.inactiveLink;
 
 export const Header = (props: HeaderType) => {
-
+    const randomAva = "https://thispersondoesnotexist.com/image"
     //добавил для отрисовки юзера:
-    const {avatar, name} = useAppSelector(state => state.profile.user)
+    const {avatar, name} = useAppSelector(state => state.auth.user)
 
     return (<div>
             <nav className={css.nav}>
@@ -31,30 +31,13 @@ export const Header = (props: HeaderType) => {
                 <div className={css.header}>
                     <img className={css.logo} src={logo} alt="logo"/>
                     <div className={css.profileBlock}>
-
                         {/*<p*/}
                         {/*    data-tooltip="Всплывающая подсказка"*/}
                         {/*>Vasya</p>*/}
-
-                        {name
-                            ? (<p className={css.email}>{name}</p>)
-                            : <><p className={css.email}>Vasya</p></>
-                        }
-
-                        {/*<img className={css.profilePhoto} src="https://thispersondoesnotexist.com/image" alt="avatar"/>*/}
-
-                        {name
-                            ? (<img className={css.profilePhoto} src={avatar} alt="avatar from Back-end"/>)
-                            : <><img className={css.profilePhoto} src="https://thispersondoesnotexist.com/image"
-                                     alt="avatar Random"/></>
-                        }
-
-
+                        <p className={css.email}>{name ? name : "Somebody"}</p>
+                        <img className={css.profilePhoto} src={avatar ? avatar : randomAva} alt="avatar"/>
                     </div>
-                    {/*<h1>Profile</h1>*/}
                 </div>
-
         </div>
-
     )
 }

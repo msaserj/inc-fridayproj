@@ -4,6 +4,7 @@ import css from './InputText.module.css'
 import SuperInputText from "./SuperInputText";
 import SuperButton from "../c2-Button/SuperButton";
 import SuperCheckbox from "../c3-Checkbox/SuperCheckbox";
+import SuperPasswordInput from "./PasswordInpit/SuperPasswordInput";
 
 
 function InputButtonCheckbox() {
@@ -35,6 +36,9 @@ function InputButtonCheckbox() {
                     // spanClassName={s.testSpanError}
                 />
                 <SuperInputText/>
+                <hr/>
+                <h3>PasswordInput</h3>
+                <SuperPasswordInput/>
                 <hr/>
                 <h3>Buttons</h3>
                 <SuperButton>default</SuperButton>
