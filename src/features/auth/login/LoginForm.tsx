@@ -87,7 +87,7 @@ export const LoginForm = () => {
 							{...formik.getFieldProps('password')}
 
 							endAdornment={
-								<InputAdornment position="end">
+								<InputAdornment position="end" >
 									<IconButton
 										aria-label="toggle password visibility"
 										onClick={handleClickShowPassword}
@@ -98,6 +98,7 @@ export const LoginForm = () => {
 								</InputAdornment>
 							}
 							label="Password"
+							autoComplete="on"
 						/>
 					</FormControl>
 

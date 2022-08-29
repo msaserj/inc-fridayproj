@@ -72,6 +72,7 @@ export const RegistrationForm = () => {
             console.log(values)
             formik.resetForm();
             dispatch(registrationThunkTC(values.email, values.password));
+            navigate(PATH.LOGIN);
         },
     })
 
@@ -106,7 +107,7 @@ export const RegistrationForm = () => {
                                 {...formik.getFieldProps('password')}
 
                                 endAdornment={
-                                    <InputAdornment position="end">
+                                    <InputAdornment position="end"  id="up"  key="up" >
                                         <IconButton
                                             aria-label="toggle password visibility"
                                             onClick={handleClickShowPassword}
@@ -117,6 +118,7 @@ export const RegistrationForm = () => {
                                     </InputAdornment>
                                 }
                                 label="Password"
+                                autoComplete="on"
                             />
                         </FormControl>
                         {/* {formik.errors.password ? <div>{formik.errors.password}</div> : null}*/}
@@ -125,7 +127,7 @@ export const RegistrationForm = () => {
                         <FormControl sx={{m: 1, width: '30ch'}} variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
-                                id="outlined-adornment-password"
+                                id="outlined-adornment-password_2"
                                 type={values.showPassword ? 'text' : 'password'}
 
                                 {...formik.getFieldProps('confirmPassword')}
@@ -142,6 +144,7 @@ export const RegistrationForm = () => {
                                     </InputAdornment>
                                 }
                                 label="Password"
+                                autoComplete="on"
                             />
                         </FormControl>
                         {/*  {formik.errors.password ? <div>{formik.errors.confirmPassword}</div> : null}*/}
