@@ -14,7 +14,9 @@ import {PATH} from "../../../common/constants/Path";
 
 
 export const Profile = () => {
-	const {avatar, name, email} = useAppSelector(state => state.auth.user)
+	const {avatar} = useAppSelector(state => state.auth.user)
+	const {name} = useAppSelector(state => state.auth.user)
+	const {email} = useAppSelector(state => state.auth.user)
 	const isLoggedIn = useAppSelector(state => state.auth.user._id)
 	const randomAva = "https://thispersondoesnotexist.com/image"
 	const dispatch = useAppDispatch();

@@ -14,6 +14,8 @@ import {Navigate} from "react-router-dom";
 
 export const RoutesComponent = () => {
     const initialized = useAppSelector<boolean>(state => state.app.appIsInitialized)
+    const isLoading = useAppSelector<boolean>(state => state.app.appIsLoading)
+
     if (!initialized) {
         return(
             <div style={{position: "fixed", top: "50%", width: "100%"}}>
@@ -21,6 +23,15 @@ export const RoutesComponent = () => {
             </div>
         )
     }
+
+    if (isLoading) {
+        return(
+            <div style={{position: "fixed", top: "50%", width: "100%"}}>
+                <DotedLoader large />
+            </div>
+        )
+    }
+
     return (
         <div>
             <Routes>

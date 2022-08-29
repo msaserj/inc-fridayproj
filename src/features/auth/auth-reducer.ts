@@ -116,6 +116,7 @@ export const updateUserDataTC = (name: string): AppThunkType => (dispatch: Thunk
         .then(res => {
             console.log(50, res)
             // dispatch(setAuthDataAC(res)); !!!!!!!!!!!!!!
+            dispatch(setUserNameAC(res.updatedUser)); // AgeevDmitry добавил dispatch для updatedUser
         })
         .catch(e => {
             const error = e.response
@@ -134,6 +135,7 @@ export const registrationThunkTC = (email: string, password: string): AppThunkTy
     dispatch(setAppIsLoadingAC(true))
     authApi.registration(email, password)
         .then(res => {
+            console.log(res)
             dispatch(registrationAC(true))
         })
         .catch(e => {
