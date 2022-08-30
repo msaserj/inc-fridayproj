@@ -6,5 +6,10 @@ export const PATH = {
     ERROR404: '/error404',
     RECOVERY_PASS: '/recovery_pass',
     NEW_PASS: '/new_pass',
-    TEST: '/components'
+    TEST: '/components',
+    PACK_LIST: '/packs_list',
+    CARDS_LIST: "/cards-list/",
 }
+
+
+

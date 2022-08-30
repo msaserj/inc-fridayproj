@@ -8,18 +8,22 @@ import SuperEditableSpan from "../../../common/components/c4-EditableSpan/SuperE
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {logoutThunkTC, updateUserDataTC} from "../auth-reducer";
 
-import {Navigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";
-
+import {useNavigate} from "react-router-dom";
 
 
 export const Profile = () => {
 	const {avatar} = useAppSelector(state => state.auth.user)
 	const {name} = useAppSelector(state => state.auth.user)
 	const {email} = useAppSelector(state => state.auth.user)
+
 	const isLoggedIn = useAppSelector(state => state.auth.user._id)
 	const randomAva = "https://thispersondoesnotexist.com/image"
+
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
 	const [value, setValue] = useState<string>(name ? name : 'Somebody')
 
 	// console.log(`user in Profile`, user)
@@ -28,22 +32,27 @@ export const Profile = () => {
 		dispatch(logoutThunkTC())
 		setValue('Somebody')
 	}
+
 	function onKeyPressInputHandle(e: React.KeyboardEvent<HTMLInputElement>) {
 		if (e.key === `Enter`) {
 			dispatch(updateUserDataTC(value))
 		}
 	}
+
 	if (!isLoggedIn) {
 		return <Navigate to={PATH.LOGIN}/>
 	}
+
 	return (
 		<div>
 			<div className={css.mainBlock}>
 				{/*Back to packs List*/}
-				<div className={css.backToBlock}>
-					<img src={arrow} alt="arrow"/>
-					<p>Back to packs List</p>
-				</div>
+				<NavLink to={PATH.PACK_LIST}>
+					<div className={css.backToBlock}>
+						<img src={arrow} alt="arrow"/>
+						<p>Back to packs List</p>
+					</div>
+				</NavLink>
 				{/*Personal information*/}
 				<div className={css.personalInfo}>
 					<h3>Personal Information</h3>

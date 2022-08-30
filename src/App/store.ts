@@ -3,6 +3,8 @@ import {ThunkDispatch, ThunkAction} from "redux-thunk";
 import {AppActionsType, appReducer} from "./app-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {AuthActionsType, authReducer} from "../features/auth/auth-reducer";
+import {PacksListActionsType, packsListReducer} from "../features/packList/packList-reducer";
+import {CardsListActionsType, cardsListReducer} from "../features/cardList/cardList-reducer";
 
 
 // для работы с REDUX_DEVTOOLS: Window c Большой Буквы Window
@@ -36,13 +38,17 @@ const saveState = (state: AppStateType) => {
 export type AppStateType = ReturnType<typeof rootReducer>;
 
 export type RootActionsType =
-    | AppActionsType
-    | AuthActionsType
+	| AppActionsType
+	| AuthActionsType
+	| PacksListActionsType
+	| CardsListActionsType
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, RootActionsType>;
 
 export const rootReducer = combineReducers({
-    auth: authReducer,
-    app: appReducer
+	auth: authReducer,
+	app: appReducer,
+	packsList: packsListReducer,
+	cardsList: cardsListReducer,
 });
 
 // export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));

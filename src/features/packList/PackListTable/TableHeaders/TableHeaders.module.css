@@ -1,0 +1,9 @@
+.trStyle {
+    border-radius: 10px;
+    color: #000000;
+    background-color: #EFEFEF;
+}
+
+.sortBlock {
+    cursor: pointer;
+}

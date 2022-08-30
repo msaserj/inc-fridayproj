@@ -1,0 +1,76 @@
+import {instanceLocal} from "../../api/api-instance";
+
+export type GetCardsQueryParams = {
+	cardsPack_id: string
+	cardAnswer?: string
+	cardQuestion?: string
+	min?: number
+	max?: number
+	sortCards?: string
+	page?: number
+	pageCount?: number
+};
+
+export type CardType = {
+	_id: string
+	cardsPack_id: string
+	user_id: string
+	question: string
+	answer: string
+	grade: number
+	shots: number
+	comments?: string
+	type?: string
+	rating?: number
+	more_id?: string
+	created: string
+	updated: string
+	__v?: number
+	answerImg?: string
+	answerVideo?: string
+	questionImg?: string
+	questionVideo?: string
+}
+
+export type NewCardDataType = {
+	cardsPack_id: string
+	question?: string
+	answer?: string
+	grade?: number
+	shots?: number
+	answerImg?: string
+	questionImg?: string
+	questionVideo?: string
+	answerVideo?: string
+};
+
+export type UpdateCardModelType = {_id: string} & Partial<Omit<CardType, "_id">>;
+
+export type GetCardsResponseDataType = {
+	cards: Array<CardType>
+	packUserId: string
+	cardsTotalCount: number
+	maxGrade: number
+	minGrade: number
+	page: number
+	pageCount: number
+};
+
+export const cardsAPI = {
+	getCards(params: GetCardsQueryParams) {
+		return instanceLocal.get<GetCardsResponseDataType>("cards/card", {params})
+			.then(response => response.data);
+	},
+	createCard(newCard: NewCardDataType) {
+		return instanceLocal.post("cards/card", {card: newCard})
+			.then(response => response.data);
+	},
+	deleteCard(id: string) {
+		return instanceLocal.delete("cards/card", {params: {id}})
+			.then(response => response.data);
+	},
+	updateCard(cardModel: UpdateCardModelType) {
+		return instanceLocal.put("cards/card", {card: cardModel})
+			.then(response => response.data);
+	},
+};
