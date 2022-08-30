@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import s from "./PackList.module.css"
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {DotedLoader} from "../../common/components/c8-Loaders/DotedLoader/DotedLoader";
 import {
 	getCardsPackThunk,
 	getMyCardsPackThunk,
@@ -12,7 +11,7 @@ import {
 import {DebounceSearch} from "./DebounceSearch/DebounceSearch";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
 import {PacksListTable} from "./PackListTable/PackListTable";
-import reset_filter from "../../assets/img/Vector (Stroke).png";
+import reset_filter from "../../assets/img/resetFilter.svg";
 import {Paginator} from "./Paginator/Paginator";
 
 

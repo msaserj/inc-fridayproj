@@ -1,37 +1,36 @@
-import {instanceExternal, instanceLocal} from "../../api/api-instance";
-
-
 
 // endPoints API
+import {instance} from "../../api/api-instance";
+
 export const authApi = {
     registration(email: string, password: string) {
-        return instanceLocal.post('/auth/register', {email,password})
+        return instance.post('/auth/register', {email,password})
             .then(res => res.data)
     },
     login(email: string, password: string, rememberMe?: boolean) {
-        return instanceLocal.post('auth/login', {email, password, rememberMe})
+        return instance.post('auth/login', {email, password, rememberMe})
             .then(res => res.data)
     },
     logout() {
-        return instanceLocal.delete('auth/me')
+        return instance.delete('auth/me')
             .then(res => res.data)
     },
     forgotPswd(email: string, from: string, message: string) {
-        return instanceExternal.post('auth/forgot', {email, from, message}).then(res => res.data)
+        return instance.post('auth/forgot', {email, from, message}).then(res => res.data)
     },
     me() {
-        return instanceLocal.post<UserType>(`/auth/me`, {})
+        return instance.post<UserType>(`/auth/me`, {})
             .then(res => res.data)
     },
     newPswd(password: string, resetPasswordToken: string) {
-        return instanceLocal.post('auth/set-new-password', {password, resetPasswordToken}).then(res => res.data)
+        return instance.post('auth/set-new-password', {password, resetPasswordToken}).then(res => res.data)
     },
     updateUserName(name: string) {
-        return instanceLocal.put<UpdatedUser>(`/auth/me`, {name})
+        return instance.put<UpdatedUser>(`/auth/me`, {name})
             .then(res => res.data)
     },
     updateUserAvatar(name: string, avatar: string) {
-        return instanceLocal.put<UpdatedUser>(`/auth/me`, {avatar})
+        return instance.put<UpdatedUser>(`/auth/me`, {avatar})
             .then(res => res.data)
     },
 }

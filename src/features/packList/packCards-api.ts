@@ -1,4 +1,4 @@
-import {instanceLocal} from "../../api/api-instance";
+import {instance} from "../../api/api-instance";
 
 export type PacksType = {
 	_id: string
@@ -52,20 +52,20 @@ export type requestDataType = {
 
 export const packCardsApi = {
 	getCardsPack(requestData: requestDataType) {
-		return instanceLocal.get<cardPacksDataType>(`/cards/pack`,
+		return instance.get<cardPacksDataType>(`/cards/pack`,
 			{params: {...requestData}})
 			.then(res => {
 				return res.data
 			})
 	},
 	addNewPack(name: string, makePrivate: boolean) {
-		return instanceLocal.post<AddPackType>(`/cards/pack`,
+		return instance.post<AddPackType>(`/cards/pack`,
 			{cardsPack: {name, private: makePrivate}})
 	},
 	deleteCardsPack(id: string) {
-		return instanceLocal.delete<cardPacksDataType>(`/cards/pack/?id=${id}`)
+		return instance.delete<cardPacksDataType>(`/cards/pack/?id=${id}`)
 	},
 	updateCardsPack(_id: string, name: string, makePrivate: boolean) {
-		return instanceLocal.put<UpdatePackType>(`/cards/pack`, {cardsPack: {_id, name, private: makePrivate}})
+		return instance.put<UpdatePackType>(`/cards/pack`, {cardsPack: {_id, name, private: makePrivate}})
 	},
 }

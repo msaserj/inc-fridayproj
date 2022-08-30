@@ -1,4 +1,4 @@
-import {instanceLocal} from "../../api/api-instance";
+import {instance} from "../../api/api-instance";
 
 export type GetCardsQueryParams = {
 	cardsPack_id: string
@@ -58,19 +58,19 @@ export type GetCardsResponseDataType = {
 
 export const cardsAPI = {
 	getCards(params: GetCardsQueryParams) {
-		return instanceLocal.get<GetCardsResponseDataType>("cards/card", {params})
+		return instance.get<GetCardsResponseDataType>("cards/card", {params})
 			.then(response => response.data);
 	},
 	createCard(newCard: NewCardDataType) {
-		return instanceLocal.post("cards/card", {card: newCard})
+		return instance.post("cards/card", {card: newCard})
 			.then(response => response.data);
 	},
 	deleteCard(id: string) {
-		return instanceLocal.delete("cards/card", {params: {id}})
+		return instance.delete("cards/card", {params: {id}})
 			.then(response => response.data);
 	},
 	updateCard(cardModel: UpdateCardModelType) {
-		return instanceLocal.put("cards/card", {card: cardModel})
+		return instance.put("cards/card", {card: cardModel})
 			.then(response => response.data);
 	},
 };
