@@ -18,7 +18,8 @@ const App = () => {
                 <Header titleForHeader={"Header"}/>
                 <div>
                     <RoutesComponent/>
-                    {/*<Body titleForBody={"New Body"}/>*/}
+                   {/*<Body titleForBody={"New Body"}/>*/}
+
                 </div>
                 <SnackbarTSX/>
             </BrowserRouter>
