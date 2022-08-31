@@ -1,11 +1,10 @@
-// вот вам функция для сохранения объектов в память браузера
-// (данные в этом хранилище сохраняться даже при перезагрузке компа):
+// функция для сохранения объектов в память браузера
 export function saveState<T>(key: string, state: T) {
     const stateAsString = JSON.stringify(state)
     localStorage.setItem(key, stateAsString)
 }
 
-// и вот вам функция для получения сохранённого объекта в памяти браузера:
+// функция для получения сохранённого объекта в памяти браузера:
 export function restoreState<T>(key: string, defaultState: T) {
     let state = defaultState
     const stateAsString = localStorage.getItem(key)
@@ -13,7 +12,6 @@ export function restoreState<T>(key: string, defaultState: T) {
     return state
 }
 
-// ---------------------------------------------------------------------------------------------------------------
 // пример использования:
 type StateType = {
     x: string

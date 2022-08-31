@@ -1,15 +1,16 @@
 import React, {ChangeEvent, useState} from 'react'
-
 import css from './InputText.module.css'
 import SuperInputText from "./SuperInputText";
 import SuperButton from "../c2-Button/SuperButton";
 import SuperCheckbox from "../c3-Checkbox/SuperCheckbox";
 import SuperPasswordInput from "./PasswordInpit/SuperPasswordInput";
 
-
 function InputButtonCheckbox() {
     const [text, setText] = useState<string>('')
     const error = text ? '' : 'error'
+
+    const [pswd, setPswd] = useState<string>('')
+    const errorPswd = pswd ? '' : 'Password required!'
 
     const showAlert = () => {
         if (error) {
@@ -29,6 +30,7 @@ function InputButtonCheckbox() {
             <div className={css.column}>
                 {/*input with error*/}
                 <SuperInputText
+                    placeholder={"text"}
                     value={text}
                     onChangeText={setText}
                     onEnter={showAlert}
@@ -38,7 +40,12 @@ function InputButtonCheckbox() {
                 <SuperInputText/>
                 <hr/>
                 <h3>PasswordInput</h3>
-                <SuperPasswordInput/>
+                <SuperPasswordInput
+                    placeholder={"password"}
+                    value={pswd}
+                    onChangeText={setPswd}
+                    error={errorPswd}
+                />
                 <hr/>
                 <h3>Buttons</h3>
                 <SuperButton>default</SuperButton>

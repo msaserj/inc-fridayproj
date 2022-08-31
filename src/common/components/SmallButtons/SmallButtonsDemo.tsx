@@ -3,7 +3,7 @@ import {SuperSmallButton} from "./SuperSmallButton/SuperSmallButton";
 
 export const SmallButtonsDemo = () => {
     const showalert = () => {
-        alert("aaa")
+       alert("aaa")
     }
   return<>
       <hr/>

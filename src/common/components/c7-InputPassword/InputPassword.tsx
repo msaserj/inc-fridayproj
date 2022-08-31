@@ -18,8 +18,9 @@ type SuperInputTextPropsType = DefaultInputPropsType & {
 	spanClassName?: string
 };
 
-export const InputPassword: React.FC<SuperInputTextPropsType> = (
+const InputPassword: React.FC<SuperInputTextPropsType> = (
 	{
+		placeholder,
 		type,
 		onChange, onChangeText,
 		onKeyPress, onEnter,
@@ -55,7 +56,6 @@ export const InputPassword: React.FC<SuperInputTextPropsType> = (
 				onChange={onChangeCallback}
 				onKeyDown={onKeyPressCallback}
 				className={finalInputClassName}
-
 				{...restProps}
 			/>
 			<div className={s.eyeButton} onClick={changeInputTypeHandler}>

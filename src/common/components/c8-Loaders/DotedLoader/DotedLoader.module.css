@@ -2,7 +2,6 @@
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    /*width: 230px;*/
 }
 
 @keyframes scaling{
@@ -41,8 +40,6 @@
     margin: .2rem;
 
 }
-
-
 .main div:nth-child(0){
     animation-delay:0s;
 }

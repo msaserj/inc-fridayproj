@@ -16,8 +16,6 @@ function EditableSpan() {
         <div>
             <hr/>
            <h3>Editable Span</h3>
-
-            {/*should work (должно работать)*/}
             <div>
                 <SuperEditableSpan
                     value={value}
