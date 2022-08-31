@@ -65,6 +65,16 @@
     width: 50%;
 }
 
+.disabled {
+    align-items: center;
+    background: #8c8c8c;
+    border-radius: 0 2px 2px 0;
+    color: black;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
 .active:hover{
     transition: transform .5s;
     transform: scale(1.1);
