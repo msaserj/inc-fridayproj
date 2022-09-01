@@ -1,7 +1,9 @@
 .nav {
     background: #AFCDE7;
-    padding: 20px;
+    padding: 5px;
+    height: 30px;
 }
+
 
 a {
     padding: 20px;
@@ -28,6 +30,17 @@ a {
     margin: auto;
     box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     justify-content: space-between;
+}
+.header a {
+    text-decoration: none;
+    color: #6d89fc;
+    transition: color 0.5s ease-in-out, font-size 0.5s ease-in-out;
+}
+.header a:hover {
+    font-size: 1.05em;
+    text-decoration: none;
+    color: #1849ff;
+    transition: color 0.5s ease-in-out, font-size 0.5s ease-in-out;
 }
 .logo {
     margin-left: 136px;

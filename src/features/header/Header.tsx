@@ -24,6 +24,7 @@ export const Header = (props: HeaderType) => {
                 <NavLink to={PATH.PROFILE} className={setActive}>Profile</NavLink>
                 <NavLink to={PATH.RECOVERY_PASS} className={setActive}>RecoveryPass</NavLink>
                 <NavLink to={PATH.NEW_PASS} className={setActive}>NewPass</NavLink>
+                <NavLink to={PATH.SEND_MAIL} className={setActive}>Mail Sanded</NavLink>
                 <NavLink to={PATH.ERROR404} className={setActive}>Error404</NavLink>
                 <NavLink to={PATH.PACK_LIST} className={setActive}>Packs</NavLink>
                 <NavLink to={PATH.CARDS_LIST} className={setActive}>Cards</NavLink>
@@ -32,13 +33,16 @@ export const Header = (props: HeaderType) => {
 
                 <div className={css.header}>
                     <img className={css.logo} src={logo} alt="logo"/>
-                    <div className={css.profileBlock}>
-                        {/*<p*/}
-                        {/*    data-tooltip="Всплывающая подсказка"*/}
-                        {/*>Vasya</p>*/}
-                        <p className={css.email}>{name ? name : "Somebody"}</p>
-                        <img className={css.profilePhoto} src={avatar ? avatar : randomAva} alt="avatar"/>
-                    </div>
+                    <NavLink to={PATH.PROFILE}>
+                        <div className={css.profileBlock}>
+                            {/*<p*/}
+                            {/*    data-tooltip="Всплывающая подсказка"*/}
+                            {/*>Vasya</p>*/}
+                            <p className={css.email}>{name ? name : "Somebody"}</p>
+                            <img className={css.profilePhoto} src={avatar ? avatar : randomAva} alt="avatar"/>
+                        </div>
+                    </NavLink>
+
                 </div>
         </div>
     )
