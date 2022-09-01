@@ -32,7 +32,7 @@ export const Header = (props: HeaderType) => {
             </nav>
 
                 <div className={css.header}>
-                    <img className={css.logo} src={logo} alt="logo"/>
+                    <a target="_blank" href="https://it-incubator.ru/"><img className={css.logo} src={logo} alt="logo"/></a>
                     <NavLink to={PATH.PROFILE}>
                         <div className={css.profileBlock}>
                             {/*<p*/}
