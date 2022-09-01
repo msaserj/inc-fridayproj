@@ -1,8 +1,8 @@
 import {Dispatch} from "redux";
 import {AppThunkType} from "../../App/store";
-import {AppActionsType, setAppErrorAC, setAppIsLoadingAC} from "../../App/app-reducer";
-
+import {AppActionsType, setAppIsLoadingAC} from "../../App/app-reducer";
 import {authApi, UserType} from "./auth-api";
+import {handleAppRequestError} from "../../common/utils/error-utils";
 
 // types
 export type AuthActionsType =
@@ -11,7 +11,8 @@ export type AuthActionsType =
     | ReturnType<typeof logoutAC>
     | ReturnType<typeof authMeAC>
     | ReturnType<typeof setUserNameAC>
-// | ReturnType<typeof loadingStatusAC>
+    | ReturnType<typeof recoveryPswdAC>
+    | ReturnType<typeof newPswdAC>
 
 type ThunkDispatchType = Dispatch<AuthActionsType | AppActionsType>
 
@@ -20,19 +21,40 @@ export const loginAC = (payload: InitStateType) => ({type: "AUTH/LOGIN", payload
 export const logoutAC = () => ({type: "AUTH/LOGOUT"} as const);
 export const authMeAC = (payload: InitStateType) => ({type: "AUTH/AUTH_ME", payload} as const);
 export const setUserNameAC = (payload: UserType) => ({type: "AUTH/SET-USER-DATA", payload} as const);
-//export const loadingStatusAC = (value: boolean) => ({type: "AUTH/LOADING-STATUS", value} as const);
 export const registrationAC = (condition: boolean) => ({type: "AUTH/SET-REGISTRATION", condition} as const);
+export const recoveryPswdAC = (payload: RecoveryPswdType) => ({type: "AUTH/RECOVERY-PSWD", payload} as const);
+export const newPswdAC = (payload: NewPswdType) => ({type: "AUTH/NEW-PSWD", payload} as const);
 
-// reducers
+
+type NewPswdType = {
+    password: string
+    token: string
+}
+type RecoveryPswdType = {
+    email: string
+    from: string
+    message: string
+}
 
 type InitStateType = {
     loggedIn: boolean
     successfulRegistration: boolean
     user: UserType
+    RecoveryPswd: RecoveryPswdType
+    newPswd: NewPswdType
 };
 const InitialState: InitStateType = {
     loggedIn: false,
     successfulRegistration: false,
+    RecoveryPswd: {
+        email: "",
+        from: "",
+        message: ""
+    },
+    newPswd: {
+        password: "",
+        token: ""
+    },
     user: {
         _id: '',
         email: '',
@@ -48,8 +70,7 @@ const InitialState: InitStateType = {
 
     }
 }
-
-
+// reducers
 export const authReducer = (state: InitStateType = InitialState, action: AuthActionsType): InitStateType => {
     switch (action.type) {
         case "AUTH/AUTH_ME":
@@ -60,30 +81,24 @@ export const authReducer = (state: InitStateType = InitialState, action: AuthAct
             return {...state}
         case "AUTH/SET-USER-DATA":
             return {...state,  user: action.payload};
-        // case "AUTH/LOADING-STATUS":
-        //     return {...state, loading: action.value}
         case "AUTH/SET-REGISTRATION":
             return {...state, successfulRegistration: action.condition}
+        case "AUTH/RECOVERY-PSWD":
+            return {...state, RecoveryPswd: action.payload}
+         case "AUTH/NEW-PSWD":
+            return {...state, newPswd: action.payload}
         default:
             return state;
     }
 }
-
 // sanki
 export const loginThunkTC = (email: string, password: string, remember: boolean): AppThunkType => (dispatch: ThunkDispatchType) => {
     dispatch(setAppIsLoadingAC(true))
     authApi.login(email, password, remember)
         .then(res => {
-            console.log(50, res)
             dispatch(setUserNameAC(res));
         })
-        .catch(e => {
-            const error = e.response
-                ? e.response.data.error
-                : (e.message + ', more details in the console');
-            console.log(error)
-            dispatch(setAppErrorAC(error));
-        })
+        .catch(error => handleAppRequestError(error, dispatch))
         .finally(() => {
             dispatch(setAppIsLoadingAC(false))
         })
@@ -93,62 +108,48 @@ export const logoutThunkTC = (): AppThunkType => (dispatch: ThunkDispatchType) =
     dispatch(setAppIsLoadingAC(true))
     authApi.logout()
         .then(res => {
-            console.log(50, res)
             dispatch(setUserNameAC(res));
         })
-        .catch(e => {
-            const error = e.response
-                ? e.response.data.error
-                : (e.message + ', more details in the console');
-
-            console.log(error)
-            dispatch(setAppErrorAC(error));
-        })
-        .finally(() => {
-            dispatch(setAppIsLoadingAC(false))
-        })
+        .catch(error => handleAppRequestError(error, dispatch))
+        .finally(() => {dispatch(setAppIsLoadingAC(false))})
 };
 
 export const updateUserDataTC = (name: string): AppThunkType => (dispatch: ThunkDispatchType) => {
-
     dispatch(setAppIsLoadingAC(true))
     authApi.updateUserName(name)
         .then(res => {
-            console.log(50, res)
             // dispatch(setAuthDataAC(res)); !!!!!!!!!!!!!!
             dispatch(setUserNameAC(res.updatedUser)); // AgeevDmitry добавил dispatch для updatedUser
         })
-        .catch(e => {
-            const error = e.response
-                ? e.response.data.error
-                : (e.message + ', more details in the console');
-            console.log(error)
-            dispatch(setAppErrorAC(error));
-        })
-        .finally(() => {
-
-            dispatch(setAppIsLoadingAC(false))
-        })
+        .catch(error => handleAppRequestError(error, dispatch))
+        .finally(() => {dispatch(setAppIsLoadingAC(false))})
 };
-export const registrationThunkTC = (email: string, password: string): AppThunkType => (dispatch: ThunkDispatchType) => {
 
+export const registrationThunkTC = (email: string, password: string): AppThunkType => (dispatch: ThunkDispatchType) => {
     dispatch(setAppIsLoadingAC(true))
     authApi.registration(email, password)
         .then(res => {
-            console.log(res)
             dispatch(registrationAC(true))
         })
-        .catch(e => {
-            const error = e.response
-                ? e.response.data.error
-                : (e.message + ', more details in the console');
-
-            console.log(error)
-
-            dispatch(setAppErrorAC(error));
+        .catch(error => handleAppRequestError(error, dispatch))
+        .finally(() => {dispatch(setAppIsLoadingAC(false))})
+};
+export const recoveryPswdThunkTC = (email: string, from: string, message: string): AppThunkType => (dispatch: ThunkDispatchType) => {
+    dispatch(setAppIsLoadingAC(true))
+    authApi.forgotPswd(email, from, message)
+        .then(res => {
+            dispatch(recoveryPswdAC({email, from, message}))
         })
-        .finally(() => {
-            dispatch(setAppIsLoadingAC(false))
+        .catch(error => handleAppRequestError(error, dispatch))
+        .finally(() => {dispatch(setAppIsLoadingAC(false))})
+};
+export const newPswdThunkTC = (password: string, token: string): AppThunkType => (dispatch: ThunkDispatchType) => {
+    dispatch(setAppIsLoadingAC(true))
+    authApi.newPswd(password, token)
+        .then(res => {
+            dispatch(newPswdAC({password, token}))
         })
+        .catch(error => handleAppRequestError(error, dispatch))
+        .finally(() => {dispatch(setAppIsLoadingAC(false))})
 };
 
