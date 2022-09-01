@@ -72,6 +72,7 @@ export const Profile = () => {
 							spanProps={{children: value}}
 						/><img src={pencil} alt="pencil"/>
 					</div>
+
 					{/*<p className={css.email}>serg.ks@gmail.com</p>*/}
 					{email
 						? (<p className={css.email}>{email}</p>)

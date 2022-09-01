@@ -1,11 +1,7 @@
-
-
-
 .mainBlock {
-
     display: flex;
     width: 1280px;
-    height: 600px;
+    height: 800px;
     margin: auto;
 }
 .backToBlock {
@@ -14,7 +10,7 @@
     align-items: center;
     width: 180px;
     height: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 136px;
     cursor: pointer;
 }
@@ -23,14 +19,13 @@
     margin-right: 10px;
 }
 
-
 .personalInfo {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 413px;
-    height: 360px;
+    height: 390px;
     background: #FFFFFF;
     /*box-shadow: 1px 1px 2px rgb(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);*/
     box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -42,7 +37,7 @@
     position: relative;
 }
 .profilePhoto {
-    width: 96px;
+    width: 128px;
     border-radius: 50%;
 }
 .photoIcon {
@@ -61,23 +56,27 @@
     transition: opacity 0.5s ease-in-out;
     cursor: pointer;
 }
+.input {
+    width: 100px;
+    text-align: center;
+}
 
 .profileName {
     display: flex;
-    height: 52px;
-    margin-left: 22px;
+    margin-left: 30px;
     align-items: center;
+    min-width: 120px;
 }
-
 .profileName img{
-  margin-left: 4px;
+    margin-left: 4px;
+    margin-top: 6px;
+    height: 24px;
+    width: 24px;
 }
-
 .email {
     /*font-family: 'Montserrat';*/
-    margin-top: 16px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 24px;
-    color: #8c8c8c;
+    color: #8c8c8c;;
 }
 
