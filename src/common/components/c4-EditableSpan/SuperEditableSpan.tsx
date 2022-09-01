@@ -41,21 +41,25 @@ const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
     }
     const spanClassName = `${css.span} ${className}`
     return (
-        <div>
+        <div className={css.main} >
             {editMode
                 ? (
-                    <SuperInputText
-                        autoFocus
-                        onBlur={onBlurCallback}
-                        onEnter={onEnterCallback}
-                        {...restProps}
-                    />
+                        <SuperInputText
+                            className={css.input}
+                            autoFocus
+                            onBlur={onBlurCallback}
+                            onEnter={onEnterCallback}
+                            {...restProps}
+                        />
+
                 ) : (
-                    <span
-                        onDoubleClick={onDoubleClickCallBack}
-                        className={spanClassName}
-                        {...restSpanProps}
-                    >{children || restProps.value}</span>
+
+                         <span
+                             onDoubleClick={onDoubleClickCallBack}
+                             className={spanClassName}
+                             {...restSpanProps}
+                         >{children || restProps.value}</span>
+
                 )
             }
         </div>

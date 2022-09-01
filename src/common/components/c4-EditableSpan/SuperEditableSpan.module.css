@@ -1,6 +1,12 @@
+.main {
+    position: relative;
+    height: 70px;
+    margin-top: 5px;
+    min-width: 80px;
+}
 .span {
     display: inline-block;
-    margin: 10px;
-    height: 70px;
-
+    margin-top: 22px;
+    font-size: 20px;
 }
+
