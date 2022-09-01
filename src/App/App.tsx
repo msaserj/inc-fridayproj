@@ -9,7 +9,7 @@ import {initializeAppTC} from "./app-reducer";
 
 const App = () => {
     const dispatch = useAppDispatch()
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(initializeAppTC())
     }, [])
     return (
