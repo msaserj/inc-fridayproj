@@ -63,22 +63,16 @@ export const PackList = () => {
 
 	return (
 		<>
-
 			<div className={s.mainBlock}>
-
 				<div className={s.head}>
 					<h1>Packs list</h1>
 					<SuperButton onClick={addCardsPackHandlerModal}>Add new pack</SuperButton>
 				</div>
-
-
 				<div className={s.searchHeader}>
 					<div>
 						<h3>Search</h3>
 						<DebounceSearch/>
 					</div>
-
-
 					<div>
 						<h3>Show packs cards</h3>
 						<div className={s.userChooseButton}>
@@ -88,21 +82,16 @@ export const PackList = () => {
 							<span className={isMyPacks ? s.inactive : s.active} onClick={getAllPackHandler}>
               					All
             				</span>
-
 						</div>
-
 					</div>
-
 					<div className={s.rangeBlock}>
 						<h3>Number of cards</h3>
 						<div> будет двойной ползунок</div>
 					</div>
 
-
 					<div className={s.reset_filter}>
 						<img src={reset_filter} alt="reset_filter" onClick={resetFilterHandler}/>
 					</div>
-
 
 				</div>
 

@@ -4,11 +4,13 @@
 }
 
 .paginationBlock {
+    padding: 10px 0;
     display: flex;
     align-items: center;
 }
 
 .paginationItem {
+    background-color: #e3e3e3;
     display: flex;
     align-items: center;
     padding: 0 12px;
@@ -17,31 +19,35 @@
     text-align: center;
     border-radius: 16px;
     min-width: 32px;
+    justify-content: center;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .dots:hover {
     background-color: transparent;
     cursor: default;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .paginationItem:hover {
-    background-color: rgb(183, 185, 234);
+    background-color: rgb(212, 214, 255);
     cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+
 }
 
 .selected {
+    background-color: #ff6400;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: #0241b7;
-    color: white;
-    border-radius: 50%;
-    height: 45px;
+    padding: 0 12px;
+    height: 32px;
+    margin: auto 4px;
     text-align: center;
-    width: 45px;
-    padding: 7px 1px;
-    font-size: larger;
-    font-weight: bold;
+    border-radius: 16px;
+    justify-content: center;
+    min-width: 32px;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .arrow::before {
