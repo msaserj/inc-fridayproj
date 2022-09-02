@@ -7,6 +7,33 @@ import {PacksListActionsType, packsListReducer} from "../features/packList/packL
 import {CardsListActionsType, cardsListReducer} from "../features/cardList/cardList-reducer";
 
 
+export const rootReducer = combineReducers({
+	auth: authReducer,
+	app: appReducer,
+	packsList: packsListReducer,
+	cardsList: cardsListReducer,
+});
+
+// export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
+//export const store = legacy_createStore(rootReducer, loadState(), composeEnhancers(applyMiddleware(thunk)));
+//на поддержке посоветовали переписать store на новый метод store
+export const store = configureStore({reducer: rootReducer})
+
+export type RootActionsType =
+	| AppActionsType
+	| AuthActionsType
+	| PacksListActionsType
+	| CardsListActionsType
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, RootActionsType>;
+
+export type AppDispatchType = ThunkDispatch<AppStateType, unknown, RootActionsType>;
+export type AppStateType = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>
+
+
+// @ts-ignore
+window.store = store
+
 // для работы с REDUX_DEVTOOLS: Window c Большой Буквы Window
 declare global {
 	interface Window {
@@ -35,35 +62,4 @@ const saveState = (state: AppStateType) => {
 	}
 }
 
-export type AppStateType = ReturnType<typeof rootReducer>;
 
-export type RootActionsType =
-	| AppActionsType
-	| AuthActionsType
-	| PacksListActionsType
-	| CardsListActionsType
-export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, RootActionsType>;
-
-export const rootReducer = combineReducers({
-	auth: authReducer,
-	app: appReducer,
-	packsList: packsListReducer,
-	cardsList: cardsListReducer,
-});
-
-// export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
-//export const store = legacy_createStore(rootReducer, loadState(), composeEnhancers(applyMiddleware(thunk)));
-//на поддержке посоветовали переписать store на новый метод store
-export const store = configureStore({reducer: rootReducer})
-
-export type AppDispatchType = ThunkDispatch<AppStateType, unknown, RootActionsType>;
-
-export type RootState = ReturnType<typeof store.getState>
-//export type AppDispatch = ThunkDispatch<RootState, unknown, AppActionsType>
-//export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AppActionsType>
-//type AppActionsType = FirstActionsType | SecondActionsType
-
-
-// а это, чтобы можно было в консоли браузера обращаться к store в любой момент
-// @ts-ignore
-window.store = store

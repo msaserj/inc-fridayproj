@@ -1,23 +1,9 @@
-// Types
-
 import {AppThunkType} from "../../App/store";
 import {setAppIsLoadingAC} from "../../App/app-reducer";
 import {packCardsApi, PacksType} from "./packCards-api";
 import {handleAppRequestError} from "../../common/utils/error-utils";
 
-enum ActionsTypes {
-    getCardsPack = 'packsList/GET-CARDS-PACK',
-    loadingStatus = 'packsList/LOADING-STATUS',
-    setCardPacksTotalCount = 'packsList/SET-CARD-PACKS-TOTAL-COUNT',
-    setCurrentPage = 'packsList/SET-CURRENT-PAGE',
-    setMaxMinCardsCount = 'packsList/SET-MAX-MIN-CARDS-COUNT',
-    setCurrentFilter = 'packsList/SET-CURRENT-FILTER',
-    setViewPacks = 'packsList/SET-VIEW-PACKS',
-    setSearchResult = 'packsList/SET-SEARCH-RESULT',
-    filterCardsCount = 'packsList/FILTER-CARDS-COUNT',
-}
-
-type InitStateType = typeof initState;
+// types AC
 type GetCardsPackActionType =
     ReturnType<typeof getCardsPackAC> |
     ReturnType<typeof loadingCardsPackAC> |
@@ -29,16 +15,37 @@ type GetCardsPackActionType =
     ReturnType<typeof setSearchResultAC> |
     ReturnType<typeof filterCardsCountAC>
 
-
+type InitStateType = typeof initState;
 export type PacksListActionsType = GetCardsPackActionType
+
+// Action creators
+export const getCardsPackAC = (cardPacks: PacksType[]) =>
+    ({type: 'packsList/GET-CARDS-PACK', payload: {cardPacks}} as const);
+export const setCardPacksTotalCountAC = (cardPacksTotalCount: number) =>
+    ({type: 'packsList/SET-CARD-PACKS-TOTAL-COUNT', payload: {cardPacksTotalCount}} as const);
+export const setCurrentPageCardPacksAC = (page: number) =>
+    ({type: 'packsList/SET-CURRENT-PAGE', payload: {page}} as const);
+export const setMaxMinCardsCountAC = (max: number, min: number) =>
+    ({type: 'packsList/SET-MAX-MIN-CARDS-COUNT', max, min} as const);
+export const loadingCardsPackAC = (isLoading: boolean) =>
+    ({type: 'packsList/LOADING-STATUS', payload: {isLoading}} as const);
+export const setCurrentFilterAC = (filter: string) =>
+    ({type: 'packsList/SET-CURRENT-FILTER', payload: {filter}} as const);
+export const setViewPacksAC = (isMyPacks: boolean) =>
+    ({type: 'packsList/SET-VIEW-PACKS', payload: {isMyPacks}} as const);
+export const setSearchResultAC = (searchResult: string) =>
+    ({type: 'packsList/SET-SEARCH-RESULT', payload: {searchResult}} as const);
+export const filterCardsCountAC = (min: number, max: number) =>
+    ({type: 'packsList/FILTER-CARDS-COUNT', cardsCount: {min, max}} as const);
+
 
 // Initial state
 const initState = {
     cardPacks: [] as PacksType[],
     pageCount: 10,
     cardPacksTotalCount: 0,
-    min: undefined as number | undefined, // o_O
-    max: undefined as number | undefined, // o_O
+    min: undefined as number | undefined,
+    max: undefined as number | undefined,
     cardsCount: {
         maxCardsCount: 0,
         minCardsCount: 0,
@@ -50,47 +57,28 @@ const initState = {
     searchResult: '',
 };
 
+// reduser
 export const packsListReducer = (state: InitStateType = initState, action: PacksListActionsType): InitStateType => {
     switch (action.type) {
-        case ActionsTypes.getCardsPack:
-        case ActionsTypes.loadingStatus:
-        case ActionsTypes.setCardPacksTotalCount:
-        case ActionsTypes.setCurrentPage:
-        case ActionsTypes.setCurrentFilter:
-        case ActionsTypes.setViewPacks:
-        case ActionsTypes.setSearchResult:
+        case 'packsList/GET-CARDS-PACK':
+        case 'packsList/LOADING-STATUS':
+        case 'packsList/SET-CARD-PACKS-TOTAL-COUNT':
+        case 'packsList/SET-CURRENT-PAGE':
+        case 'packsList/SET-CURRENT-FILTER':
+        case 'packsList/SET-VIEW-PACKS':
+        case 'packsList/SET-SEARCH-RESULT':
             return {...state, ...action.payload}
-        case ActionsTypes.setMaxMinCardsCount:
+        case 'packsList/SET-MAX-MIN-CARDS-COUNT':
             return {...state, cardsCount: {maxCardsCount: action.max, minCardsCount: action.min}}
-        case ActionsTypes.filterCardsCount:
+        case 'packsList/FILTER-CARDS-COUNT':
             return {...state, ...action.cardsCount};
         default:
             return state;
     }
 };
 
-// Action creators
-export const getCardsPackAC = (cardPacks: PacksType[]) =>
-    ({type: ActionsTypes.getCardsPack, payload: {cardPacks}} as const);
-export const setCardPacksTotalCountAC = (cardPacksTotalCount: number) =>
-    ({type: ActionsTypes.setCardPacksTotalCount, payload: {cardPacksTotalCount}} as const);
-export const setCurrentPageCardPacksAC = (page: number) =>
-    ({type: ActionsTypes.setCurrentPage, payload: {page}} as const);
-export const setMaxMinCardsCountAC = (max: number, min: number) =>
-    ({type: ActionsTypes.setMaxMinCardsCount, max, min} as const);
-export const loadingCardsPackAC = (isLoading: boolean) =>
-    ({type: ActionsTypes.loadingStatus, payload: {isLoading}} as const);
-export const setCurrentFilterAC = (filter: string) =>
-    ({type: ActionsTypes.setCurrentFilter, payload: {filter}} as const);
-export const setViewPacksAC = (isMyPacks: boolean) =>
-    ({type: ActionsTypes.setViewPacks, payload: {isMyPacks}} as const);
-export const setSearchResultAC = (searchResult: string) =>
-    ({type: ActionsTypes.setSearchResult, payload: {searchResult}} as const);
-export const filterCardsCountAC = (min: number, max: number) =>
-    ({type: ActionsTypes.filterCardsCount, cardsCount: {min, max}} as const);
 
-
-// Thunk creators
+// sanki
 export const getCardsPackThunk = (): AppThunkType => (dispatch, getState) => {
     const {pageCount, page, filter, isMyPacks, searchResult, min, max} = getState().packsList;
     const {_id} = getState().auth.user;

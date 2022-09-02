@@ -4,7 +4,7 @@ import {AppActionsType, setAppIsLoadingAC} from "../../App/app-reducer";
 import {authApi, UserType} from "./auth-api";
 import {handleAppRequestError} from "../../common/utils/error-utils";
 
-// types
+// types AC
 export type AuthActionsType =
     | ReturnType<typeof registrationAC>
     | ReturnType<typeof loginAC>
@@ -24,6 +24,9 @@ export const setUserNameAC = (payload: UserType) => ({type: "AUTH/SET-USER-DATA"
 export const registrationAC = (condition: boolean) => ({type: "AUTH/SET-REGISTRATION", condition} as const);
 export const recoveryPswdAC = (payload: RecoveryPswdType) => ({type: "AUTH/RECOVERY-PSWD", payload} as const);
 export const newPswdAC = (payload: NewPswdType) => ({type: "AUTH/NEW-PSWD", payload} as const);
+
+// types
+
 
 
 type NewPswdType = {
