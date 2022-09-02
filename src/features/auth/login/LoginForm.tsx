@@ -88,27 +88,3 @@ export const LoginForm = () => {
 }
 
 
-// <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-// 	<InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-// 	<OutlinedInput
-// 		id="outlined-adornment-password"
-// 		type={values.showPassword ? 'text' : 'password'}
-//
-// 		{...formik.getFieldProps('password')}
-//
-// 		endAdornment={
-// 			<InputAdornment position="end" >
-// 				<IconButton
-// 					aria-label="toggle password visibility"
-// 					onClick={handleClickShowPassword}
-// 					edge="end"
-// 				>
-// 					{values.showPassword ? <VisibilityOff/> : <Visibility/>}
-// 				</IconButton>
-// 			</InputAdornment>
-// 		}
-// 		label="Password"
-// 		autoComplete="on"
-// 	/>
-// </FormControl>
-

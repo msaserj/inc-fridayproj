@@ -40,8 +40,8 @@ export const PackList = () => {
         dispatch(getCardsPackThunk());
     }
 
-    //будет функция добавления новой колоды через модальное окно
-    function addCardsPackHandlerModal() {
+    //будет функция добавления новой колоды
+    function addCardsPackHandler() {
         console.log('add new pack')
     }
 
@@ -52,14 +52,14 @@ export const PackList = () => {
 
     function changePageHandler(page: number) {
         dispatch(setCurrentPageCardPacksAC(page))
-        dispatch(getCardsPackThunk()); // ???
+        dispatch(getCardsPackThunk());
     }
 
 
     function resetFilterHandler() {
         dispatch(setSearchResultAC(``));
         console.log(`resetFilterHandler clicked`)
-        dispatch(getCardsPackThunk()); // ???
+        dispatch(getCardsPackThunk());
     }
 
     return (
@@ -68,8 +68,8 @@ export const PackList = () => {
             <div className={s.mainBlock}>
 
                 <div className={s.head}>
-                    <h1>Packs list</h1>
-                    <SuperButton onClick={addCardsPackHandlerModal}>Add new pack</SuperButton>
+                    <h2>Packs list</h2>
+                    <SuperButton onClick={addCardsPackHandler}>Add new pack</SuperButton>
                 </div>
 
 
@@ -83,16 +83,16 @@ export const PackList = () => {
                     <div>
                         <h3>Show packs cards</h3>
                         <div className={s.userChooseButton}>
-                            <button className={isLoad ? s.disabled : isMyPacks ? s.active : s.inactive}
+                            <SuperButton style={{minWidth: "120px"}}
                                     onClick={getMyPackHandler}
                                     disabled={isLoad}>
-                                My
-                            </button>
-                            <button className={isLoad ? s.disabled : isMyPacks ? s.inactive : s.active}
+                                My packs
+                            </SuperButton >
+                            <SuperButton style={{minWidth: "120px"}}
                                     onClick={getAllPackHandler}
                                     disabled={isLoad}>
-                                All
-                            </button>
+                                All packs
+                            </SuperButton>
 
                         </div>
 
