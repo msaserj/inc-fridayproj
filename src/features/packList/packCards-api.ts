@@ -65,7 +65,7 @@ export const packCardsApi = {
 	deleteCardsPack(id: string) {
 		return instance.delete<cardPacksDataType>(`/cards/pack/?id=${id}`)
 	},
-	updateCardsPack(_id: string, name: string, makePrivate: boolean) {
-		return instance.put<UpdatePackType>(`/cards/pack`, {cardsPack: {_id, name, private: makePrivate}})
+	updateCardsPack(_id: string, name: string) {
+		return instance.put<UpdatePackType>(`/cards/pack`, {cardsPack: {_id, name}})
 	},
 }

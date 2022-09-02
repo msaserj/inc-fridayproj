@@ -1,5 +1,3 @@
-
-// Types
 import {
 	cardsAPI,
 	CardType,
@@ -19,7 +17,6 @@ export type CardsListActionsType =
 	| ReturnType<typeof setPageCountAC>
 	| ReturnType<typeof setIsFetchingCards>
 	| ReturnType<typeof setSearchQueryByQuestionAC>
-	| ReturnType<typeof setSearchQueryByAnswerAC>
 	| ReturnType<typeof setCardsSortDirectionAC>;
 
 // Initial state
@@ -36,7 +33,7 @@ const initState = {
 	sortCards: '0updated',
 	isFetchingCards: false,
 };
-
+// reducer
 export const cardsListReducer = (state: InitStateType = initState, action: CardsListActionsType): InitStateType => {
 	switch (action.type) {
 		case "cardsList/SET_CARDS_DATA":
@@ -49,8 +46,6 @@ export const cardsListReducer = (state: InitStateType = initState, action: Cards
 			return {...state, isFetchingCards: action.value};
 		case "cardsList/SET_SEARCH_QUERY_BY_QUESTION":
 			return {...state, cardQuestion: action.value};
-		case "cardsList/SET_SEARCH_QUERY_BY_ANSWER":
-			return {...state, cardAnswer: action.value};
 		case "cardsList/SET_CARDS_SORT_DIRECTION":
 			return {...state, sortCards: action.value};
 		default:
@@ -61,15 +56,12 @@ export const cardsListReducer = (state: InitStateType = initState, action: Cards
 // Action creators
 export const setCardsDataAC = (data: GetCardsResponseDataType) =>
 	({type: "cardsList/SET_CARDS_DATA", payload: data} as const);
-
 export const setCurrentPageCardsListAC = (page: number) =>
 	({type: "cardsList/SET_CURRENT_PAGE", page} as const);
 export const setPageCountAC = (pageCount: number) =>
 	({type: "cardsList/SET_PAGE_COUNT", pageCount} as const);
 export const setSearchQueryByQuestionAC = (value: string) =>
 	({type: "cardsList/SET_SEARCH_QUERY_BY_QUESTION", value} as const);
-export const setSearchQueryByAnswerAC = (value: string) =>
-	({type: "cardsList/SET_SEARCH_QUERY_BY_ANSWER", value} as const);
 export const setCardsSortDirectionAC = (value: string) =>
 	({type: "cardsList/SET_CARDS_SORT_DIRECTION", value} as const);
 export const setIsFetchingCards = (value: boolean) =>
@@ -93,7 +85,6 @@ export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispat
 		pageCount,
 		...params,
 	};
-
 	dispatch(setAppIsLoadingAC(true));
 	dispatch(setIsFetchingCards(true));
 	cardsAPI.getCards(queryParams)

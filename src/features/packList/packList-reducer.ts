@@ -6,10 +6,8 @@ import {handleAppRequestError} from "../../common/utils/error-utils";
 // types AC
 type GetCardsPackActionType =
     ReturnType<typeof getCardsPackAC> |
-    ReturnType<typeof loadingCardsPackAC> |
     ReturnType<typeof setCardPacksTotalCountAC> |
     ReturnType<typeof setCurrentPageCardPacksAC> |
-    ReturnType<typeof setMaxMinCardsCountAC> |
     ReturnType<typeof setCurrentFilterAC> |
     ReturnType<typeof setViewPacksAC> |
     ReturnType<typeof setSearchResultAC> |
@@ -25,10 +23,6 @@ export const setCardPacksTotalCountAC = (cardPacksTotalCount: number) =>
     ({type: 'packsList/SET-CARD-PACKS-TOTAL-COUNT', payload: {cardPacksTotalCount}} as const);
 export const setCurrentPageCardPacksAC = (page: number) =>
     ({type: 'packsList/SET-CURRENT-PAGE', payload: {page}} as const);
-export const setMaxMinCardsCountAC = (max: number, min: number) =>
-    ({type: 'packsList/SET-MAX-MIN-CARDS-COUNT', max, min} as const);
-export const loadingCardsPackAC = (isLoading: boolean) =>
-    ({type: 'packsList/LOADING-STATUS', payload: {isLoading}} as const);
 export const setCurrentFilterAC = (filter: string) =>
     ({type: 'packsList/SET-CURRENT-FILTER', payload: {filter}} as const);
 export const setViewPacksAC = (isMyPacks: boolean) =>
@@ -51,7 +45,6 @@ const initState = {
         minCardsCount: 0,
     },
     page: 1,
-    isLoading: false,
     filter: '0updated' as string,
     isMyPacks: false,
     searchResult: '',
@@ -61,15 +54,17 @@ const initState = {
 export const packsListReducer = (state: InitStateType = initState, action: PacksListActionsType): InitStateType => {
     switch (action.type) {
         case 'packsList/GET-CARDS-PACK':
-        case 'packsList/LOADING-STATUS':
+            return {...state, ...action.payload}
         case 'packsList/SET-CARD-PACKS-TOTAL-COUNT':
+            return {...state, ...action.payload}
         case 'packsList/SET-CURRENT-PAGE':
+            return {...state, ...action.payload}
         case 'packsList/SET-CURRENT-FILTER':
+            return {...state, ...action.payload}
         case 'packsList/SET-VIEW-PACKS':
+            return {...state, ...action.payload}
         case 'packsList/SET-SEARCH-RESULT':
             return {...state, ...action.payload}
-        case 'packsList/SET-MAX-MIN-CARDS-COUNT':
-            return {...state, cardsCount: {maxCardsCount: action.max, minCardsCount: action.min}}
         case 'packsList/FILTER-CARDS-COUNT':
             return {...state, ...action.cardsCount};
         default:
@@ -84,7 +79,6 @@ export const getCardsPackThunk = (): AppThunkType => (dispatch, getState) => {
     const {_id} = getState().auth.user;
     const user_id = isMyPacks ? _id : '';
     const packName = searchResult ? searchResult : '';
-    dispatch(loadingCardsPackAC(true));
     dispatch(setAppIsLoadingAC(true));
     packCardsApi.getCardsPack({
         pageCount,
@@ -98,14 +92,9 @@ export const getCardsPackThunk = (): AppThunkType => (dispatch, getState) => {
         .then(res => {
             dispatch(getCardsPackAC(res.cardPacks));
             dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount));
-            dispatch(setMaxMinCardsCountAC(res.maxCardsCount, res.minCardsCount));
-            if (!min && !max) {
-                dispatch(filterCardsCountAC(res.minCardsCount, res.maxCardsCount));
-            }
         })
         .catch(error => handleAppRequestError(error, dispatch))
         .finally(() => {
-            dispatch(loadingCardsPackAC(false));
             dispatch(setAppIsLoadingAC(false));
         })
 };
@@ -177,9 +166,9 @@ export const deleteCardsPackThunk = (id: string): AppThunkType => (dispatch => {
         .finally(() => dispatch(setAppIsLoadingAC(false)));
 });
 
-export const updateCardsPackThunk = (id: string, name: string, makePrivate: boolean): AppThunkType => (dispatch => {
+export const updateCardsPackThunk = (id: string, name: string): AppThunkType => (dispatch => {
     dispatch(setAppIsLoadingAC(true));
-    packCardsApi.updateCardsPack(id, name, makePrivate)
+    packCardsApi.updateCardsPack(id, name)
         .then(() => {
             dispatch(getCardsPackThunk());
         })

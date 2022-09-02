@@ -1,9 +1,11 @@
 import {CardType, UpdateCardModelType} from "./cards-api";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {deleteCardTC, updateCardTC} from "./cardList-reducer";
-import {FC, useState} from "react";
+import {FC} from "react";
 import {BeautyDate} from "../../common/components/BeautyDate/BeautyDate";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
+import pencil from "../../assets/img/pencil.svg";
+import deleteIcon from "../../assets/img/delete.svg";
 
 type CardsListItemPropsType = {
 	card: CardType
@@ -14,10 +16,9 @@ export const CardsListItem: FC<CardsListItemPropsType> = ({card}) => {
 	const userId = useAppSelector<string>(state => state.auth.user._id);
 	const dispatch = useAppDispatch();
 
-	const [activeDeleteModal, setActiveDeleteModal] = useState(false);
-	const [activeModal, setActiveModal] = useState<boolean>(false);
-	const [answer, setAnswer] = useState<string>(card.answer);
-	const [question, setQuestion] = useState<string>(card.question);
+
+	const question = "6*6"
+	const answer = "36"
 
 	const editCardHandler = () => {
 		const cardUpdateModel: UpdateCardModelType = {
@@ -27,12 +28,9 @@ export const CardsListItem: FC<CardsListItemPropsType> = ({card}) => {
 		};
 		dispatch(updateCardTC(card.cardsPack_id, cardUpdateModel));
 	};
-	const deleteCardHandler = () => {
-		dispatch(deleteCardTC(card.cardsPack_id, card._id));
-		setActiveDeleteModal(false);
-	};
+
 	const deleteButtonHandler = () => {
-		setActiveDeleteModal(true);
+		dispatch(deleteCardTC(card.cardsPack_id, card._id));
 	};
 
 	return (
@@ -44,9 +42,10 @@ export const CardsListItem: FC<CardsListItemPropsType> = ({card}) => {
 				<td>{Math.round(card.grade * 100) / 100}</td>
 				{card.user_id === userId &&
                     <td>
-                        <SuperButton onClick={() => setActiveModal(true)} disabled={isFetchingCards}>Edit</SuperButton>
-                        <SuperButton onClick={deleteButtonHandler} disabled={isFetchingCards} red>Delete</SuperButton>
-
+                        <SuperButton style={{backgroundColor: "white"}} onClick={editCardHandler} disabled={isFetchingCards}>
+							<img alt="editIco" src={pencil}/></SuperButton>
+                        <SuperButton style={{backgroundColor: "white"}} onClick={deleteButtonHandler} disabled={isFetchingCards}>
+							<img alt="deleteIco" src={deleteIcon}/></SuperButton>
                     </td>
 				}
 			</tr>

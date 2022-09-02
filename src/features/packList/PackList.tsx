@@ -1,122 +1,53 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from "./PackList.module.css"
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {
-    getCardsPackThunk,
-    getMyCardsPackThunk,
-    setCurrentFilterAC,
-    setCurrentPageCardPacksAC, setSearchResultAC,
-    setViewPacksAC
-} from "./packList-reducer";
-import {DebounceSearch} from "./DebounceSearch/DebounceSearch";
+import {addNewPackThunk, getCardsPackThunk, setCurrentPageCardPacksAC} from "./packList-reducer";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
 import {PacksListTable} from "./PackListTable/PackListTable";
-import reset_filter from "../../assets/img/resetFilter.svg";
 import {Paginator} from "./Paginator/Paginator";
+import {SearchPanel} from "./SearchPanel";
+import {Navigate} from "react-router-dom";
+import {PATH} from "../../common/constants/Path";
 
 
 export const PackList = () => {
 
     const dispatch = useAppDispatch();
 
-    const [name, setName] = useState<string>('');
-
-    const isMyPacks = useAppSelector<boolean>(store => store.packsList.isMyPacks);
     const currentPage = useAppSelector<number>(store => store.packsList.page);
     const pageSize = useAppSelector<number>(store => store.packsList.pageCount);
     const totalCountPage = useAppSelector<number>(store => store.packsList.cardPacksTotalCount);
-    const isLoad = useAppSelector<boolean>(store => store.app.appIsLoading)
 
-    //функция отображения своих колод
-    function getMyPackHandler() {
-        dispatch(setViewPacksAC(true));
-        dispatch(getMyCardsPackThunk());
-    }
 
-    //функция отображения всех колод
-    function getAllPackHandler() {
-        dispatch(setViewPacksAC(false));
-        dispatch(setCurrentFilterAC('0updated'));
-        dispatch(getCardsPackThunk());
-    }
 
     //будет функция добавления новой колоды
     function addCardsPackHandler() {
-        console.log('add new pack')
+        dispatch(addNewPackThunk("addNewPack", false))
+        alert('add new pack')
     }
 
-    function onFocusHandler() {
-        console.log(`onFocusHandler`, name)
-        name ? setName(name) : setName("userNameStore")
-    }
 
     function changePageHandler(page: number) {
         dispatch(setCurrentPageCardPacksAC(page))
         dispatch(getCardsPackThunk());
     }
-
-
-    function resetFilterHandler() {
-        dispatch(setSearchResultAC(``));
-        console.log(`resetFilterHandler clicked`)
-        dispatch(getCardsPackThunk());
+    const user_ID = useAppSelector(state => state.auth.user._id);
+    if (!user_ID) {
+        return <Navigate to={PATH.LOGIN}/>
     }
 
     return (
         <>
-
             <div className={s.mainBlock}>
-
                 <div className={s.head}>
                     <h2>Packs list</h2>
                     <SuperButton onClick={addCardsPackHandler}>Add new pack</SuperButton>
                 </div>
 
-
-                <div className={s.searchHeader}>
-                    <div>
-                        <h3>Search</h3>
-                        <DebounceSearch/>
-                    </div>
-
-
-                    <div>
-                        <h3>Show packs cards</h3>
-                        <div className={s.userChooseButton}>
-                            <SuperButton style={{minWidth: "120px"}}
-                                    onClick={getMyPackHandler}
-                                    disabled={isLoad}>
-                                My packs
-                            </SuperButton >
-                            <SuperButton style={{minWidth: "120px"}}
-                                    onClick={getAllPackHandler}
-                                    disabled={isLoad}>
-                                All packs
-                            </SuperButton>
-
-                        </div>
-
-                    </div>
-
-                    <div className={s.rangeBlock}>
-                        <h3>Number of cards</h3>
-                        <div> будет двойной ползунок</div>
-                    </div>
-
-
-                    <div className={s.reset_filter}>
-                        <img src={reset_filter} alt="reset_filter" onClick={resetFilterHandler}/>
-                    </div>
-
-
-                </div>
+                <SearchPanel/>
 
                 <section className={s.packList}>
-
-
-                    <PacksListTable name={name}
-                                    setName={setName}
-                                    onFocusHandler={onFocusHandler}/>
+                    <PacksListTable/>
 
                     <Paginator currentPage={currentPage}
                                pageSize={pageSize}

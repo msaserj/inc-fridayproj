@@ -1,8 +1,7 @@
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
-import {deleteCardsPackThunk, setSearchResultAC, updateCardsPackThunk} from "../packList-reducer";
-import {Button} from "@mui/material";
-import {useState} from "react";
+import {deleteCardsPackThunk, updateCardsPackThunk} from "../packList-reducer";
+
 import {PacksType} from "../packCards-api";
 import s from './PackListTable.module.css'
 import {TableHeaders} from "./TableHeaders/TableHeaders";
@@ -14,58 +13,30 @@ import teacher from "../../../assets/img/teacher.svg";
 import pencil from "../../../assets/img/pencil.svg";
 
 
-type PacksListTableType = {
-    name: string
-    onFocusHandler: () => void
-    setName: (value: string) => void
-}
-
-export const PacksListTable: React.FC<PacksListTableType> = (
-    {
-        name,
-        onFocusHandler,
-        setName,
-    }
-) => {
-    const navigate = useNavigate();
+export const PacksListTable = () => {
+    const isLoading = useAppSelector<boolean>(state => state.app.appIsLoading)
     const dispatch = useAppDispatch();
-
-    const [id, setId] = useState<string>('');
-    const [makePrivate, setMakePrivate] = useState(false);
-
     const userId = useAppSelector<string>(state => state.auth.user._id);
-    const dataPack = useAppSelector<PacksType[]>(store => store.packsList.cardPacks);
+    const cardPacks = useAppSelector<PacksType[]>(store => store.packsList.cardPacks);
+    const packName = "newNameEdited"
 
-    //ф-ия вызова модального окна при изменении имени колоды
-    const editHandler = (id: string, name: string) => {
-        dispatch(setSearchResultAC(''));
-        setName(name);
-        setId(id);
+    const editHandler = (id: string, packName: string) => {
+        dispatch(updateCardsPackThunk(id, packName))
+
     }
-    //ф-ия вызова модального окна при удалении колоды
-    const deletePackCardsHandler = (id: string, name: string) => {
-        dispatch(setSearchResultAC(''));
-        setId(id);
-        setName(name);
-    }
-    const learnHandler = (id: string, name: string) => {
-    }
-    //ф-ия изменения имени колоды и закрытия окна
-    const changeName = () => {
-        dispatch(updateCardsPackThunk(id, name, makePrivate))
-    }
-    //ф-ия удаления колоды и закрытия окна
-    const deletePack = () => {
+    const deletePackCardsHandler = (id: string) => {
         dispatch(deleteCardsPackThunk(id))
     }
-
+    const learnHandler = (id: string, name: string) => {
+        alert("You press learn button  " + name)
+    }
     return (
         <div className={s.tableMainBlock}>
             {
                 <table>
                     <TableHeaders/>
                     <tbody className={s.tbodyStyle}>
-                    {dataPack.map((el, index) => {
+                    {cardPacks.map((el, index) => {
                         return (
                             <tr key={el._id}>
 
@@ -79,14 +50,14 @@ export const PacksListTable: React.FC<PacksListTableType> = (
                                 <td>{el.user_name}</td>
                                 <td className={s.actions}>
                                     <div className={s.buttonBlock}>
-                                        <Button onClick={() => learnHandler(el._id, el.name)}
-                                        ><img src={teacher}/></Button>
+                                        <SuperButton style={{backgroundColor: "white"}} disabled={isLoading} onClick={() => learnHandler(el._id, el.name)}
+                                        ><img src={teacher} alt="teacherIco"/></SuperButton>
                                         {el.user_id === userId &&
-                                            <Button onClick={() => editHandler(el._id, el.name)}
-                                            ><img src={pencil}/></Button>}
+                                            <SuperButton style={{backgroundColor: "white"}} disabled={isLoading} onClick={() => editHandler(el._id, packName)}
+                                            ><img alt="editIco" src={pencil}/></SuperButton>}
                                         {el.user_id === userId &&
-                                            <SuperButton onClick={() => deletePackCardsHandler(el._id, el.name)}
-                                                         red><img src={deleteIcon}/></SuperButton>}
+                                            <SuperButton style={{backgroundColor: "white"}} disabled={isLoading} onClick={() => deletePackCardsHandler(el._id)}
+                                                         ><img alt="deleteIco" src={deleteIcon}/></SuperButton>}
                                     </div>
                                 </td>
                             </tr>
