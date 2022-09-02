@@ -13,7 +13,7 @@ type FormikErrorType = {
 }
 
 export const NewPass = () => {
-    const params = useParams()
+    const params = useParams<'token'>()
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     const resetPasswordToken = params.token
