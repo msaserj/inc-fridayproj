@@ -49,7 +49,7 @@ export const RoutesComponent = () => {
 
                 <Route path={PATH.TEST} element={<AllComponents/>} />
 
-                <Route path="/it-inc-fridayproj" element={<Navigate to={PATH.PROFILE}/>}/>
+                <Route path="/" element={<Navigate to={PATH.PROFILE}/>}/>
                 <Route path={PATH.PACK_LIST} element={<PackList/>} />
                 <Route path={PATH.CARDS_LIST + ":cardPackID"} element={<CardsList/>}/>
                 <Route path={PATH.ERROR404} element={<PageNotFound/>} />
