@@ -46,7 +46,7 @@ export const SuperStarRating: React.FC<StarRatingPropsType> = (
                         />
                     ))}
                 </div>
-                <div className="label">rating {numSelectedStars}</div>
+                <div className="label"> {numSelectedStars}</div>
             </div>
 
         </div>
