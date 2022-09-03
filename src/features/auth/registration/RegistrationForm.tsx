@@ -88,7 +88,7 @@ export const RegistrationForm = () => {
                         className={s.superInputText}
                         error={formik.errors.confirmPassword && formik.touched.confirmPassword ? formik.errors.confirmPassword : ''}
                         placeholder={"enter password"}/>
-                </div>
+                </div>z
                 <SuperButton type={'submit'} className={s.submit_button}
                              disabled={!(formik.isValid && formik.dirty)}>Register</SuperButton>
                 <div className={s.regQuestion}>

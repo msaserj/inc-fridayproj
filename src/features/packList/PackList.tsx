@@ -1,13 +1,15 @@
-import React from 'react';
 import s from "./PackList.module.css"
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {addNewPackThunk, getCardsPackThunk, setCurrentPageCardPacksAC} from "./packList-reducer";
+import {getCardsPackThunk, setCurrentPageCardPacksAC} from "./packList-reducer";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
 import {PacksListTable} from "./PackListTable/PackListTable";
 import {Paginator} from "./Paginator/Paginator";
 import {SearchPanel} from "./SearchPanel";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../common/constants/Path";
+import * as React from "react";
+import {useState} from "react";
+import {AddNewPack} from "./AddNewPack/AddNewPack";
 
 
 export const PackList = () => {
@@ -17,15 +19,15 @@ export const PackList = () => {
     const currentPage = useAppSelector<number>(store => store.packsList.page);
     const pageSize = useAppSelector<number>(store => store.packsList.pageCount);
     const totalCountPage = useAppSelector<number>(store => store.packsList.cardPacksTotalCount);
-
+    const [activeModalPack, setModalActivePack] = useState<boolean>(false)
 
 
     //будет функция добавления новой колоды
     function addCardsPackHandler() {
-        dispatch(addNewPackThunk("addNewPack", false))
-        alert('add new pack')
-    }
+        // dispatch(addNewPackThunk("addNewPack", false))
+        setModalActivePack(true)
 
+    }
 
     function changePageHandler(page: number) {
         dispatch(setCurrentPageCardPacksAC(page))
@@ -35,6 +37,7 @@ export const PackList = () => {
     if (!user_ID) {
         return <Navigate to={PATH.LOGIN}/>
     }
+    const modalCloseHandler = () => setModalActivePack(false);
 
     return (
         <>
@@ -56,6 +59,8 @@ export const PackList = () => {
                                siblingCount={2}
                     />
                 </section>
+                <AddNewPack open={activeModalPack} handleClose={modalCloseHandler}/>
+
             </div>
         </>
 

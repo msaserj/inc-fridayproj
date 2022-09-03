@@ -151,6 +151,7 @@ export const addNewPackThunk = (name: string, makePrivate: boolean): AppThunkTyp
     packCardsApi.addNewPack(name, makePrivate)
         .then(() => {
             dispatch(getCardsPackThunk());
+            console.log(name, makePrivate)
         })
         .catch(error => handleAppRequestError(error, dispatch))
         .finally(() => dispatch(setAppIsLoadingAC(false)));
