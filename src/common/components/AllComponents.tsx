@@ -5,6 +5,7 @@ import SelectRadio from "./c5-Select/SelectRadio";
 import {Loaders} from "./c8-Loaders/Loaders";
 import {SuperDoubleRange} from "./DoubleRange/DoubleRangeTwo";
 import {SmallButtonsDemo} from "./SmallButtons/SmallButtonsDemo";
+import {SuperStarRating} from "./StarRating/SuperStarsRating";
 
 export const AllComponents = () => {
     return<>
@@ -16,6 +17,7 @@ export const AllComponents = () => {
         <Loaders/>
         <SuperDoubleRange />
         <SmallButtonsDemo/>
+        <SuperStarRating numTotalStars={5} initialRating={2}/>
 
         <div style={{marginTop: "100px"}}/>
     </>
