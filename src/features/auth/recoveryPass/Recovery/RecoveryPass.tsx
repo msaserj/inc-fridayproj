@@ -17,7 +17,7 @@ type FormikErrorType = {
 export const RecoveryPass = () => {
     const dispatch = useAppDispatch();
     const nickName = useAppSelector<string>(state => state.auth.user.name)
-    const message = "<p>Press <a href='http://msaserj.github.io/set-new-password/$token$'>link</a> for recovery password</p>"
+    const message = "<p>Press <a href='https://msaserj.github.io/#/set-new-password/$token$'>link</a> for recovery password</p>"
     const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
