@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/it-inc-fridayproj/static/css/main.1da31dce.css",
-    "main.js": "/it-inc-fridayproj/static/js/main.a2cbb327.js",
+    "main.js": "/it-inc-fridayproj/static/js/main.ef3e27a8.js",
     "static/js/787.15192eda.chunk.js": "/it-inc-fridayproj/static/js/787.15192eda.chunk.js",
     "static/media/error404.jpg": "/it-inc-fridayproj/static/media/error404.8c8042467bcb07d7180e.jpg",
     "static/media/emailIcon.svg": "/it-inc-fridayproj/static/media/emailIcon.836e246556dd50d082cf05d8309583a6.svg",
@@ -17,11 +17,11 @@
     "static/media/eyeIcon.svg": "/it-inc-fridayproj/static/media/eyeIcon.042432cb7b893187894b53b3d2b7c9bc.svg",
     "static/media/arrow.svg": "/it-inc-fridayproj/static/media/arrow.519110c32786a43bcb3957820cd9c116.svg",
     "main.1da31dce.css.map": "/it-inc-fridayproj/static/css/main.1da31dce.css.map",
-    "main.a2cbb327.js.map": "/it-inc-fridayproj/static/js/main.a2cbb327.js.map",
+    "main.ef3e27a8.js.map": "/it-inc-fridayproj/static/js/main.ef3e27a8.js.map",
     "787.15192eda.chunk.js.map": "/it-inc-fridayproj/static/js/787.15192eda.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1da31dce.css",
-    "static/js/main.a2cbb327.js"
+    "static/js/main.ef3e27a8.js"
   ]
 }
