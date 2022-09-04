@@ -8,7 +8,7 @@ import {SearchPanel} from "./SearchPanel";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../common/constants/Path";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AddNewPack} from "./AddNewPack/AddNewPack";
 
 
@@ -16,11 +16,15 @@ export const PackList = () => {
 
     const dispatch = useAppDispatch();
 
+    useEffect(()=>
+        dispatch(getCardsPackThunk()),
+        [dispatch])
+
     const currentPage = useAppSelector<number>(store => store.packsList.page);
     const pageSize = useAppSelector<number>(store => store.packsList.pageCount);
     const totalCountPage = useAppSelector<number>(store => store.packsList.cardPacksTotalCount);
     const [activeModalPack, setModalActivePack] = useState<boolean>(false)
-
+    const [name, setName] = useState<string>('');
 
     //будет функция добавления новой колоды
     function addCardsPackHandler() {
