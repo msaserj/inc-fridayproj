@@ -12,9 +12,8 @@ import {addNewPackThunk} from "../packList-reducer";
 type AddNewPackPropsType = {
     open: boolean
     handleClose: () => void
-
-
 }
+
 type FormikPackType = {
     packName?: string
     privatePack?: boolean
@@ -50,14 +49,14 @@ export const AddNewPack: React.FC<AddNewPackPropsType> = (
         formik.resetForm();
         handleClose();
     }
-    const crestik = () => {
-
+    const krestikHandler = () => {
+        cancelHandler()
     }
 
     return (
         <div>
 
-            <ModalMUI title={"Add New Pack"} opens={open} handleClose={handleClose}>
+            <ModalMUI title={"Add New Pack"} opens={open} handleClose={krestikHandler}>
                 <form onSubmit={formik.handleSubmit} >
                 <SuperInputText
                     placeholder={"Name pack"}

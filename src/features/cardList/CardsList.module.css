@@ -1,9 +1,14 @@
 .cardsPage {
-    max-width: 1300px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 24px 48px;
     background: #fff;
     border-radius: 8px;
+}
+
+.headPackName {
+    display: flex;
+    margin-top: 75px;
+    align-self: auto;
 }
 
 .cardsPage h2 {

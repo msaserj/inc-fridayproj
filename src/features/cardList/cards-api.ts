@@ -9,6 +9,7 @@ export type GetCardsQueryParams = {
 	sortCards?: string
 	page?: number
 	pageCount?: number
+	packName?: string
 };
 
 export type CardType = {

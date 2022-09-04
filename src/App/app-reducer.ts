@@ -43,17 +43,32 @@ export const appReducer = (state: InitStateType = initState, action: AppActionsT
 };
 
 // Thunk creators
-export const initializeAppTC = (): AppThunkType => (dispatch:ThunkDispatchType) => {
-	authApi.me()
-		.then(data => {
-			dispatch(setUserNameAC(data));
-		})
-		.catch(error => {
+// export const initializeAppTC = (): AppThunkType => (dispatch:ThunkDispatchType) => {
+// 	authApi.me()
+// 		.then(data => {
+// 			dispatch(setUserNameAC(data));
+// 		})
+// 		.catch(error => {
+// 			const errorMessage = error.response
+// 				? error.response.data.error
+// 				: (error.message + ', more details in the console');
+// 			console.log('Error: ', errorMessage);
+// 		})
+// 		.finally(() => dispatch(setAppIsInitializedAC(true)))
+// };
+
+export const initializeAppTC = (): AppThunkType => async (dispatch:ThunkDispatchType) => {
+	try{
+		const res = await authApi.me()
+		dispatch(setUserNameAC(res));
+	}
+	catch (error:any) {
 			const errorMessage = error.response
 				? error.response.data.error
 				: (error.message + ', more details in the console');
 			console.log('Error: ', errorMessage);
-		})
-		.finally(() => dispatch(setAppIsInitializedAC(true)))
+		}
+	finally {
+		dispatch(setAppIsInitializedAC(true))
+	}
 };
-

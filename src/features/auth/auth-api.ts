@@ -19,7 +19,7 @@ export const authApi = {
         return instance.post('auth/forgot', {email, from, message}).then(res => res.data)
     },
     me() {
-        return instance.post<UserType>(`/auth/me`, {})
+        return instance.post<UserType>(`auth/me`, {})
             .then(res => res.data)
     },
     newPswd(password: string, resetPasswordToken: string) {

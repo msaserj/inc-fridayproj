@@ -32,6 +32,7 @@ const initState = {
 	cardQuestion: "",
 	sortCards: '0updated',
 	isFetchingCards: false,
+	packName: ''
 };
 // reducer
 export const cardsListReducer = (state: InitStateType = initState, action: CardsListActionsType): InitStateType => {
@@ -75,6 +76,7 @@ export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispat
 		sortCards,
 		page,
 		pageCount,
+		packName
 	} = getState().cardsList;
 
 	const queryParams: GetCardsQueryParams = {
@@ -85,6 +87,7 @@ export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispat
 		pageCount,
 		...params,
 	};
+	console.log(packName)
 	dispatch(setAppIsLoadingAC(true));
 	dispatch(setIsFetchingCards(true));
 	cardsAPI.getCards(queryParams)
@@ -145,3 +148,74 @@ export const updateCardTC = (cardsPack_ID: string, cardModel: UpdateCardModelTyp
 			dispatch(setAppIsLoadingAC(false));
 		});
 };
+
+
+// export const sortCardsThunk = (sortCards: string): AppThunkType => (dispatch, getState: () => AppStateType) => {
+// 	const {
+// 		cardAnswer,
+// 		cardQuestion,
+// 		sortCards,
+// 		page,
+// 		pageCount,
+// 		packName
+// 	} = getState().cardsList;
+//
+//
+//
+// 	// const queryParams: GetCardsQueryParams = {
+// 	// 	cardAnswer,
+// 	// 	cardQuestion,
+// 	// 	sortCards,
+// 	// 	page,
+// 	// 	pageCount,
+// 	// 	...params,
+// 	// };
+// 	console.log(packName)
+// 	dispatch(setAppIsLoadingAC(true));
+// 	dispatch(setIsFetchingCards(true));
+// 	// cardsAPI.getCards(queryParams)
+// 	 cardsAPI.getCards({ cardAnswer,
+// 		 	cardQuestion,
+// 		 	sortCards,
+// 		 	page,
+// 		 	pageCount
+// 		 	})
+// 		.then(data => {
+// 			dispatch(setCardsDataAC(data));
+// 		})
+// 		.catch(error => {
+// 			handleAppRequestError(error, dispatch);
+// 		})
+// 		.finally(() => {
+// 			dispatch(setAppIsLoadingAC(false));
+// 			dispatch(setIsFetchingCards(false));
+// 		});
+// };
+
+//
+// export const sortCardsThunk = (sortCards: string): AppThunkType => (
+// 	dispatch, getState) => {
+// 	const queryParams: GetCardsQueryParams = {
+// 		cardAnswer,
+// 		cardQuestion,
+// 		sortCards,
+// 		page,
+// 		pageCount,
+// 		...params,
+// 	};
+// 	const {pageCount, } = getState().cardsList;
+// 	const packName = searchResult ? searchResult : '';
+// 	const {_id} = getState().auth.user;
+// 	const user_id = isMyPacks ? _id : '';
+// 	dispatch(setAppIsLoadingAC(true));
+// 	dispatch(setCurrentFilterAC(sortPacks));
+//
+//
+// 	cardsAPI.getCards({pageCount, sortPacks, user_id, packName})
+// 		.then(res => {
+// 			dispatch(getCardsPackAC(res.cardPacks));
+// 			dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount));
+// 		})
+// 		.catch(error => handleAppRequestError(error, dispatch))
+// 		.finally(() => dispatch(setAppIsLoadingAC(false)));
+// };
