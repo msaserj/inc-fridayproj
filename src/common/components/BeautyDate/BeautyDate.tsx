@@ -6,7 +6,7 @@ type BeautyDateType = {
 export const BeautyDate: React.FC<BeautyDateType> = ({date}) => {
 	return (
 		<div className={s.main}>
-			<div>{new Date(date).toLocaleDateString()}</div>
+			<div>{new Date(date).toLocaleString()}</div>
 		</div>
 	);
 };
