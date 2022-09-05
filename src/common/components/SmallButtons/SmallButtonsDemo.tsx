@@ -9,16 +9,16 @@ export const SmallButtonsDemo = () => {
       <hr/>
       <h3>Small Buttons</h3>
       <div>
-          <SuperSmallButton callBack={showalert} learn />
-          <SuperSmallButton callBack={showalert} edit />
-          <SuperSmallButton callBack={showalert} delet />
-          <SuperSmallButton callBack={showalert} filter />
+          <SuperSmallButton onClick={showalert} learn />
+          <SuperSmallButton onClick={showalert} edit />
+          <SuperSmallButton onClick={showalert} delet />
+          <SuperSmallButton onClick={showalert} filter />
       </div>
       <div>
-          <SuperSmallButton callBack={showalert} disabled learn />
-          <SuperSmallButton callBack={showalert} disabled edit />
-          <SuperSmallButton callBack={showalert} disabled delet />
-          <SuperSmallButton callBack={showalert} disabled filter />
+          <SuperSmallButton onClick={showalert} disabled learn />
+          <SuperSmallButton onClick={showalert} disabled edit />
+          <SuperSmallButton onClick={showalert} disabled delet />
+          <SuperSmallButton onClick={showalert} disabled filter />
       </div>
       </>
 }

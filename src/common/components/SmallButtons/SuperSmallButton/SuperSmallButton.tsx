@@ -8,14 +8,12 @@ import css from "./SmallButton.module.css"
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 type ButtonType = DefaultButtonPropsType & {
     //SMALL BUTTON OPTIONS!!!!
-    callBack: () => void
     delet?: boolean
     learn?: boolean
     filter?: boolean
     edit?: boolean
 }
 export const SuperSmallButton: React.FC<ButtonType> = ({
-    callBack,
     delet,
     learn,
     filter,
@@ -26,8 +24,6 @@ export const SuperSmallButton: React.FC<ButtonType> = ({
     && learn ? learnIco : "?"
     && filter ? filterIco : "?"
     && edit ? editIco : "?"
-    const onClickHandler = () => {
-        callBack()
-    }
-    return <button {...restProps} className={css.button} onClick={onClickHandler}><img src={Buttontype} alt="del"/></button>
+
+    return <button {...restProps} className={css.button} ><img src={Buttontype} alt="del"/></button>
 }

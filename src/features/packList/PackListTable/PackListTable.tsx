@@ -6,13 +6,10 @@ import s from './PackListTable.module.css'
 import {TableHeaders} from "./TableHeaders/TableHeaders";
 import {PATH} from "../../../common/constants/Path";
 import {BeautyDate} from "../../../common/components/BeautyDate/BeautyDate";
-import SuperButton from "../../../common/components/c2-Button/SuperButton";
-import deleteIcon from "../../../assets/img/delete.svg";
-import teacher from "../../../assets/img/teacher.svg";
-import pencil from "../../../assets/img/pencil.svg";
 import {EditPackName} from "../EditPackNamr/EditPackName";
 import React, {useState} from "react";
 import {DotedLoader} from "../../../common/components/c8-Loaders/DotedLoader/DotedLoader";
+import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
 
 
 export const PacksListTable = () => {
@@ -59,17 +56,14 @@ export const PacksListTable = () => {
                                 <td>{el.user_name}</td>
                                 <td className={s.actions}>
                                     <div className={s.buttonBlock}>
-                                        <SuperButton style={{backgroundColor: "white"}} disabled={isFetching}
-                                                     onClick={() => learnHandler(el._id, el.name)}
-                                        ><img src={teacher} alt="teacherIco"/></SuperButton>
+                                        <SuperSmallButton learn disabled={isFetching}
+                                                     onClick={() => learnHandler(el._id, el.name)}/>
                                         {el.user_id === userId &&
-                                            <SuperButton style={{backgroundColor: "white"}} disabled={isFetching}
-                                                         onClick={() => editHandler(el._id, el.name)}
-                                            ><img alt="editIco" src={pencil}/></SuperButton>}
+                                            <SuperSmallButton edit disabled={isFetching || activeModalPack}
+                                                         onClick={() => editHandler(el._id, el.name)}/>}
                                         {el.user_id === userId &&
-                                            <SuperButton style={{backgroundColor: "white"}} disabled={isFetching}
-                                                         onClick={() => deletePackCardsHandler(el._id)}
-                                            ><img alt="deleteIco" src={deleteIcon}/></SuperButton>}
+                                            <SuperSmallButton delet disabled={isFetching}
+                                                         onClick={() => deletePackCardsHandler(el._id)}/>}
                                     </div>
                                 </td>
                             </tr>
