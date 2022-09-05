@@ -13,7 +13,6 @@ type AddNewPackPropsType = {
 	idCard: string
 	packNameFromPackListTable: string
 }
-
 type FormikPackType = {
 	packName?: string
 }
@@ -27,15 +26,9 @@ export const EditPackName: React.FC<AddNewPackPropsType> = (
 	}
 ) => {
 	const dispatch = useAppDispatch();
-
-	useEffect(()=> {},[packNameFromPackListTable])
-
-	console.log( "console.log(idCard, packNameFromPackListTable) from EditPackName", idCard, packNameFromPackListTable)
-
 	const formik = useFormik({
 		initialValues: {
-			packName: packNameFromPackListTable,
-			// privatePack: false
+			packName: '',
 		},
 		validate: (values) => {
 			const errors: FormikPackType = {};
@@ -49,49 +42,30 @@ export const EditPackName: React.FC<AddNewPackPropsType> = (
 			formik.setErrors({packName: undefined});
 			handleClose()
 		},
-
 	});
+	useEffect(()=>{
+		formik.setFieldValue("packName", packNameFromPackListTable)
+
+	},[packNameFromPackListTable])
 	const cancelHandler = () => {
 		formik.resetForm();
 		handleClose();
 	}
-	const krestikHandler = () => {
-		cancelHandler()
-	}
-
-
-
+	const krestikHandler = () => cancelHandler()
 	return (
 		<div>
-
 			<ModalMUI title={"Edit Pack Name"} opens={open} handleClose={krestikHandler}>
 				<form onSubmit={formik.handleSubmit}>
 					<SuperInputText
-						// placeholder={packNameFromPackListTable}
-						//  name={packNameFromPackListTable}
-						// name={packName}
-
 						type="text" {...formik.getFieldProps('packName')}
 						error={formik.errors.packName && formik.touched.packName ? formik.errors.packName : ''}
 					/>
-
-
-
 					<div className={css.buttons}>
 						<SuperButton onClick={cancelHandler} type='reset'>Cancel</SuperButton>
 						<SuperButton disabled={!(formik.isValid && formik.dirty)} type={'submit'}>Save</SuperButton>
 					</div>
 				</form>
-
-				{/*<input*/}
-				{/*	value={'packNameFromPackListTable'}*/}
-				{/*	type="text"*/}
-
-				{/*/>*/}
-
 			</ModalMUI>
-
-
 		</div>
 	);
 };

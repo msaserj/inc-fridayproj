@@ -15,25 +15,18 @@ import {AddNewPack} from "./AddNewPack/AddNewPack";
 export const PackList = () => {
 
     const dispatch = useAppDispatch();
-
-    useEffect(()=>
-        dispatch(getCardsPackThunk()),
-        [dispatch])
-
     const currentPage = useAppSelector<number>(store => store.packsList.page);
     const pageSize = useAppSelector<number>(store => store.packsList.pageCount);
     const totalCountPage = useAppSelector<number>(store => store.packsList.cardPacksTotalCount);
+    const isFetching = useAppSelector<boolean>(store => store.app.appIsLoading);
+    useEffect(()=>
+            dispatch(getCardsPackThunk()),
+        [dispatch])
+
     const [activeModalPack, setModalActivePack] = useState<boolean>(false)
-    const [name, setName] = useState<string>('');
 
-    //будет функция добавления новой колоды
-    function addCardsPackHandler() {
-        // dispatch(addNewPackThunk("addNewPack", false))
-        setModalActivePack(true)
-
-    }
-
-    function changePageHandler(page: number) {
+    const addCardsPackHandler = () => setModalActivePack(true)
+    const changePageHandler = (page: number) => {
         dispatch(setCurrentPageCardPacksAC(page))
         dispatch(getCardsPackThunk());
     }
@@ -48,14 +41,11 @@ export const PackList = () => {
             <div className={s.mainBlock}>
                 <div className={s.head}>
                     <h2>Packs list</h2>
-                    <SuperButton onClick={addCardsPackHandler}>Add new pack</SuperButton>
+                    <SuperButton disabled={isFetching} onClick={addCardsPackHandler}>Add new pack</SuperButton>
                 </div>
-
                 <SearchPanel/>
-
                 <section className={s.packList}>
                     <PacksListTable/>
-
                     <Paginator currentPage={currentPage}
                                pageSize={pageSize}
                                totalCount={totalCountPage}
@@ -64,10 +54,8 @@ export const PackList = () => {
                     />
                 </section>
                 <AddNewPack open={activeModalPack} handleClose={modalCloseHandler}/>
-
             </div>
         </>
-
     );
 };
 
