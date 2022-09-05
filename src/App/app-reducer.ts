@@ -2,6 +2,7 @@ import {AppThunkType} from "./store";
 import {Dispatch} from "redux";
 import {AuthActionsType, setUserNameAC} from "../features/auth/auth-reducer";
 import {authApi} from "../features/auth/auth-api";
+import {handleAppRequestError} from "../common/utils/error-utils";
 
 
 type InitStateType = typeof initState;
@@ -62,12 +63,9 @@ export const initializeAppTC = (): AppThunkType => async (dispatch:ThunkDispatch
 		const res = await authApi.me()
 		dispatch(setUserNameAC(res));
 	}
-	catch (error:any) {
-			const errorMessage = error.response
-				? error.response.data.error
-				: (error.message + ', more details in the console');
-			console.log('Error: ', errorMessage);
-		}
+	catch(error: any){
+		handleAppRequestError(error, dispatch)
+	}
 	finally {
 		dispatch(setAppIsInitializedAC(true))
 	}

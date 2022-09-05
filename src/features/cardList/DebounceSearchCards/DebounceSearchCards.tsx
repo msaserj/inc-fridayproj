@@ -6,12 +6,15 @@ type DebounceSearchPropsType = {
 	setSearchValue: (value: string) => void
 	placeholder?: string
 	disabled?: boolean
+	onChangeResetValue?: () => void
 };
 
 export const DebounceSearchCards: FC<DebounceSearchPropsType> = (
-	{searchValue, setSearchValue, placeholder, disabled}
+	{searchValue, setSearchValue, placeholder, disabled,onChangeResetValue}
 ) => {
+	console.log("Debounce", searchValue)
 	const [inputValue, setInputValue] = useState<string>(searchValue);
+	console.log("Debounce inerState", inputValue)
 
 	useEffect(() => {
 		const id: number = +setTimeout(() => {
@@ -26,6 +29,7 @@ export const DebounceSearchCards: FC<DebounceSearchPropsType> = (
 	const onChangeValue = (value: string) => {
 		setInputValue(value);
 	};
+
 
 	return (
 		<SuperInputText

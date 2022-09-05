@@ -43,10 +43,11 @@ export const CardsList = () => {
 	console.log(currentFilter)
 
 	useEffect(() => {
+		// cardsPack_ID достаем из useParams, что бы знать в каком паке ищутся карточки
 		if (cardsPack_ID) {
 			dispatch(getCardsTC({cardsPack_id: cardsPack_ID}));
 		}
-	}, [dispatch, cardsPack_ID, currentFilter ]);
+	}, [dispatch, cardsPack_ID, currentFilter, cardQuestion]);
 
 	const changePageHandler = (page: number) => {
 		dispatch(setCurrentPageCardsListAC(page));
@@ -86,7 +87,7 @@ export const CardsList = () => {
 						searchValue={cardQuestion}
 						setSearchValue={searchCardsByQuestion}
 						placeholder={"Search by question..."}
-						disabled={isFetchingCards}
+						//disabled={isFetchingCards}
 					/>
 				</div>
 				<div>
@@ -106,9 +107,7 @@ export const CardsList = () => {
 							<thead className={s.theadStyle}>
 							<tr className={s.trStyle}>
 								<th className={s.sortBlock} onClick={() => changeCardsSortDirection("question")}>
-                  <span>
-                    Question
-                  </span>
+                  <span>Question</span>
 									<SortButton
 										isActive={sortCards.slice(1) === "question"}
 										direction={sortCards && sortCards[0]}
@@ -116,9 +115,7 @@ export const CardsList = () => {
 									/>
 								</th>
 								<th className={s.sortBlock} onClick={() => changeCardsSortDirection("answer")}>
-                  <span>
-                    Answer
-                  </span>
+                  <span>Answer</span>
 									<SortButton
 										isActive={sortCards.slice(1) === "answer"}
 										direction={sortCards && sortCards[0]}
@@ -126,9 +123,7 @@ export const CardsList = () => {
 									/>
 								</th>
 								<th className={s.sortBlock} onClick={() => changeCardsSortDirection("updated")}>
-                  <span>
-                    Last Updated
-                  </span>
+                  <span>Last Updated</span>
 									<SortButton
 										isActive={sortCards.slice(1) === "updated"}
 										direction={sortCards && sortCards[0]}
@@ -136,9 +131,7 @@ export const CardsList = () => {
 									/>
 								</th>
 								<th className={s.sortBlock} onClick={() => changeCardsSortDirection("grade")}>
-                  <span>
-                    Grade
-                  </span>
+                  <span>Grade</span>
 									<SortButton
 										isActive={sortCards.slice(1) === "grade"}
 										direction={sortCards && sortCards[0]}

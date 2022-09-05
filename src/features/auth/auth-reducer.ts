@@ -40,14 +40,12 @@ type RecoveryPswdType = {
 }
 
 type InitStateType = {
-    loggedIn: boolean
     successfulRegistration: boolean
     user: UserType
     RecoveryPswd: RecoveryPswdType
     newPswd: NewPswdType
 };
 const InitialState: InitStateType = {
-    loggedIn: false,
     successfulRegistration: false,
     RecoveryPswd: {
         email: "",
