@@ -14,7 +14,8 @@ import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 
 export const SearchPanel = () => {
     const dispatch = useAppDispatch();
-    const isLoad = useAppSelector<boolean>(store => store.app.appIsLoading)
+    const isLoad = useAppSelector<boolean>(state => state.app.appIsLoading)
+    const isMyPacks = useAppSelector<boolean>(state => state.packsList.isMyPacks)
 
 
     function getMyPackHandler() {
@@ -44,17 +45,18 @@ export const SearchPanel = () => {
                     <div className={s.userChooseButton}>
                         <SuperButton style={{minWidth: "120px"}}
                                      onClick={getMyPackHandler}
+                                     red={isMyPacks}
                                      disabled={isLoad}>
                             My packs
                         </SuperButton >
                         <SuperButton style={{minWidth: "120px"}}
                                      onClick={getAllPackHandler}
+                                     red={!isMyPacks}
                                      disabled={isLoad}>
                             All packs
                         </SuperButton>
                     </div>
                 </div>
-
                 <div className={s.rangeBlock}>
                     <h3>Number of cards</h3>
                     <div> будет двойной ползунок</div>
