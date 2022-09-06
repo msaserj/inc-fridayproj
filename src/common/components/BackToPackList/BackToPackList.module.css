@@ -1,0 +1,22 @@
+.backToBlock {
+
+}
+.navLink {
+    height: 40px;
+    padding: 0;
+    margin: 40px 50px 0;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+}
+p {
+    padding: 5px;
+    margin: 5px;
+}
+
+
+.navLink img {
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+}

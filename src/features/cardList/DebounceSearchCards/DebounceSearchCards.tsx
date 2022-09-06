@@ -14,7 +14,9 @@ export const DebounceSearchCards: FC<DebounceSearchPropsType> = (
 ) => {
 	console.log("Debounce", searchValue)
 	const [inputValue, setInputValue] = useState<string>(searchValue);
-	console.log("Debounce inerState", inputValue)
+
+
+	console.log("Debounce innerState", inputValue)
 
 	useEffect(() => {
 		const id: number = +setTimeout(() => {

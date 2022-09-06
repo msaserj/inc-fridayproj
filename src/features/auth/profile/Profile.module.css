@@ -4,20 +4,6 @@
     height: 800px;
     margin: auto;
 }
-.backToBlock {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    width: 180px;
-    height: 30px;
-    margin-top: 20px;
-    margin-left: 136px;
-    cursor: pointer;
-}
-.backToBlock img {
-    width: 30px;
-    margin-right: 10px;
-}
 
 .personalInfo {
     position: relative;
