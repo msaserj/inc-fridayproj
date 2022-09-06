@@ -14,7 +14,7 @@ import {Paginator} from "../packList/Paginator/Paginator";
 
 import {PATH} from "../../common/constants/Path";
 import s from './CardsList.module.css';
-import {DebounceSearchCards} from "./DebounceSearchCards/DebounceSearchCards";
+import {DebounceSearch} from "../../common/components/DebounceSearch/DebounceSearch";
 import {DotedLoader} from "../../common/components/c8-Loaders/DotedLoader/DotedLoader";
 import {CardsListItem} from "./CardsListItem";
 
@@ -29,7 +29,6 @@ export const CardsList = () => {
 	const dispatch = useAppDispatch();
 
 	const user_ID = useAppSelector(state => state.auth.user._id);
-	const packUser_ID = useAppSelector(state => state.cardsList.packUserId);
 	const cards = useAppSelector<Array<CardType>>(state => state.cardsList.cards);
 	const cardsTotalCount = useAppSelector<number>(state => state.cardsList.cardsTotalCount);
 	const pageSize = useAppSelector<number>(store => store.cardsList.pageCount);
@@ -38,9 +37,9 @@ export const CardsList = () => {
 	const cardQuestion = useAppSelector<string>(state => state.cardsList.cardQuestion);
 	const sortCards = useAppSelector<string>(state => state.cardsList.sortCards);
 	const packName = useAppSelector(state => state.cardsList.packName)
-
+	const packUser_ID = useAppSelector(state => state.cardsList.packUserId);
 	const currentFilter = useAppSelector<string>(state => state.cardsList.sortCards);
-	console.log(currentFilter)
+
 
 	useEffect(() => {
 		// cardsPack_ID достаем из useParams, что бы знать в каком паке ищутся карточки
@@ -83,7 +82,7 @@ export const CardsList = () => {
 
 			<div className={s.searchBlock}>
 				<div>
-					<DebounceSearchCards
+					<DebounceSearch
 						searchValue={cardQuestion}
 						setSearchValue={searchCardsByQuestion}
 						placeholder={"Search by question..."}
@@ -91,7 +90,7 @@ export const CardsList = () => {
 					/>
 				</div>
 				<div>
-					<SuperButton onClick={addCardHandler} disabled={isFetchingCards}>Add card</SuperButton>
+					<SuperButton onClick={addCardHandler} disabled={isFetchingCards || user_ID !== packUser_ID}>Add card</SuperButton>
 				</div>
 
 			</div>

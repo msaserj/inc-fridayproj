@@ -23,12 +23,12 @@
     display: flex;
     font-size: 14px;
     font-weight: 400;
-    height: 36px;
+    height: 44px;
     justify-content: center;
     line-height: 17px;
     margin: 20px 10px 45px;
     text-align: center;
-    width: 196px;
+    width: 300px;
     cursor: pointer;
 }
 

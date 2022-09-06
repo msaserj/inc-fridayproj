@@ -1,7 +1,7 @@
 import {CardType, UpdateCardModelType} from "./cards-api";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {deleteCardTC, updateCardGradeTC, updateCardTC} from "./cardList-reducer";
-import {FC, useState} from "react";
+import {FC} from "react";
 import {BeautyDate} from "../../common/components/BeautyDate/BeautyDate";
 import {SuperSmallButton} from "../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
 import {SuperStarRating} from "../../common/components/StarRating/SuperStarsRating";
@@ -31,10 +31,8 @@ export const CardsListItem: FC<CardsListItemPropsType> = ({card}) => {
 	const deleteButtonHandler = () => {
 		dispatch(deleteCardTC(card.cardsPack_id, card._id));
 	};
-	const [state, setState] = useState(0)
-	console.log("Star State22", state)
+
 	const setStars = (stars: any) => {
-		setState(stars)
 		dispatch(updateCardGradeTC(card.cardsPack_id, card._id, stars))
 	}
 

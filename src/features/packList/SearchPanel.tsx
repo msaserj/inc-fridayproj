@@ -10,7 +10,8 @@ import {
     setViewPacksAC
 } from "./packList-reducer";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {DebounceSearchCards} from "../cardList/DebounceSearchCards/DebounceSearchCards";
+import {DebounceSearch} from "../../common/components/DebounceSearch/DebounceSearch";
+
 
 
 
@@ -19,7 +20,7 @@ export const SearchPanel = () => {
     const isLoad = useAppSelector<boolean>(state => state.app.appIsLoading)
     const isMyPacks = useAppSelector<boolean>(state => state.packsList.isMyPacks)
     const searchValue = useAppSelector<string>(state => state.packsList.searchResult)
-
+    const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
 
     function getMyPackHandler() {
         dispatch(setViewPacksAC(true));
@@ -34,6 +35,7 @@ export const SearchPanel = () => {
     }
     function searchCardsByPackName(value: string)  {
         dispatch(setSearchResultAC(value));
+        console.log(value)
     }
 
     function resetFilterHandler() {
@@ -46,20 +48,18 @@ export const SearchPanel = () => {
             dispatch(searchCardsPackThunk(searchValue));
         }
     }, [dispatch, searchValue]);
-
+    console.log('')
     console.log("Search Panel", searchValue)
     return (
         <div>
             <div className={s.searchHeader}>
                 <div>
                     <h3>Search</h3>
-                    {/*<DebounceSearch/>*/}
-                    <DebounceSearchCards
-
+                    <DebounceSearch
                         searchValue={searchValue}
                         setSearchValue={searchCardsByPackName}
-                        placeholder={"Search by question..."}
-                        //disabled={isFetchingCards}
+                        placeholder={"Search by pack name..."}
+                        disabled={isFetching}
                     />
                 </div>
                 <div>
