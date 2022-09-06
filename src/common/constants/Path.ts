@@ -10,6 +10,7 @@ export const PATH = {
     TEST: '/components',
     PACK_LIST: '/packs_list',
     CARDS_LIST: "/cards-list/",
+    CARD_LEARNING: "/card-learning/",
 }
 
 

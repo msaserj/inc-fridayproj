@@ -25,8 +25,8 @@ export const Profile = () => {
 
     const [value, setValue] = useState<string>(name ? name : 'Somebody')
 
-    // console.log(`user in Profile`, user)
-    //console.log(`userName in Profile`, name)
+    // console.log(`user in CardLearning`, user)
+    //console.log(`userName in CardLearning`, name)
     function LogoutHandler() {
         dispatch(logoutThunkTC())
         setValue('Somebody')

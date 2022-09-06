@@ -24,13 +24,13 @@ export const SearchPanel = () => {
     function getMyPackHandler() {
         dispatch(setViewPacksAC(true));
         dispatch(getCardsPackThunk());
-        // dispatch(setSearchResultAC(""));
+        dispatch(setSearchResultAC(""));
     }
     function getAllPackHandler() {
         dispatch(setViewPacksAC(false));
         dispatch(setCurrentFilterAC('0updated'));
         dispatch(getCardsPackThunk());
-        // dispatch(setSearchResultAC(""));
+        dispatch(setSearchResultAC(""));
     }
     function searchCardsByPackName(value: string)  {
         dispatch(setSearchResultAC(value));

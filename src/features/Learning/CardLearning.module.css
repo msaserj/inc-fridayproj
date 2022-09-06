@@ -1,0 +1,31 @@
+.mainBlock {
+    display: flex;
+    width: 1280px;
+    height: 800px;
+    margin: auto;
+}
+
+.headPackName {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 90px auto 0;
+    width: 300px;
+    height: 40px;
+}
+
+.personalInfo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 413px;
+    height: 390px;
+    background: #FFFFFF;
+    /*box-shadow: 1px 1px 2px rgb(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);*/
+    box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    margin: 160px auto 0;
+}
+
+

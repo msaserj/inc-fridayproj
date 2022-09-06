@@ -4,12 +4,20 @@
     background: #fff;
     border-radius: 8px;
 }
-
+/*.headPackName {*/
+/*    display: flex;*/
+/*    margin-top: 75px ;*/
+/*    align-self: auto;*/
+/*}*/
 .headPackName {
-    display: flex;
-    margin-top: 75px;
-    align-self: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto 0;
+    width: 300px;
+    height: 40px;
 }
+
 
 .cardsPage h2 {
     margin: 0;
@@ -18,7 +26,7 @@
 .searchBlock{
     display: flex;
     flex-direction: row;
-    margin-top: 50px;
+    padding-top: 100px;
     justify-content: space-between;
 }
 .tableMainBlock {

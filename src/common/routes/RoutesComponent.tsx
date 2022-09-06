@@ -15,6 +15,7 @@ import {PackList} from "../../features/packList/PackList";
 import {CardsList} from "../../features/cardList/CardsList";
 import {SendMail} from "../../features/auth/recoveryPass/SendMail/SendMail";
 import css from "./RoutesComponents.module.css"
+import {CardLearning} from "../../features/Learning/CardLearning";
 
 export const RoutesComponent = () => {
     const initialized = useAppSelector<boolean>(state => state.app.appIsInitialized)
@@ -52,6 +53,7 @@ export const RoutesComponent = () => {
                 <Route path="/" element={<Navigate to={PATH.PROFILE}/>}/>
                 <Route path={PATH.PACK_LIST} element={<PackList/>} />
                 <Route path={PATH.CARDS_LIST + ":cardPackID"} element={<CardsList/>}/>
+                <Route path={PATH.CARD_LEARNING} element={<CardLearning/>}/>
                 <Route path={PATH.ERROR404} element={<PageNotFound/>} />
                 <Route path="*" element={<Navigate to={PATH.ERROR404}/>}/>
             </Routes>

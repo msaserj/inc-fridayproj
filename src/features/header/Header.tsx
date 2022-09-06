@@ -28,6 +28,7 @@ export const Header = (props: HeaderType) => {
                 <NavLink to={PATH.ERROR404} className={setActive}>Error404</NavLink>
                 <NavLink to={PATH.PACK_LIST} className={setActive}>Packs</NavLink>
                 <NavLink to={PATH.CARDS_LIST} className={setActive}>Cards</NavLink>
+                <NavLink to={PATH.CARD_LEARNING} className={setActive}>Learning</NavLink>
                 <NavLink to={PATH.TEST} className={setActive}>Components</NavLink>
             </nav>
 
