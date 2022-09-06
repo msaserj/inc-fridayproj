@@ -4,7 +4,7 @@ import {useFormik} from "formik";
 import {updateCardsPackThunk} from "../packList-reducer";
 import {ModalMUI} from "../../../common/components/ModalMUI/ModalMUI";
 import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
-import css from "../AddNewPack/AddNewPack.module.css";
+import css from "../AddNewPackModal/AddNewPackModal.module.css";
 import SuperButton from "../../../common/components/c2-Button/SuperButton";
 
 type AddNewPackPropsType = {

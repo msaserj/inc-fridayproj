@@ -9,7 +9,7 @@ import {Navigate} from "react-router-dom";
 import {PATH} from "../../common/constants/Path";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {AddNewPack} from "./AddNewPack/AddNewPack";
+import {AddNewPackModal} from "./AddNewPackModal/AddNewPackModal";
 
 
 export const PackList = () => {
@@ -56,7 +56,7 @@ export const PackList = () => {
                                siblingCount={2}
                     />
                 </section>
-                <AddNewPack open={activeModalPack} handleClose={modalCloseHandler}/>
+                <AddNewPackModal open={activeModalPack} handleClose={modalCloseHandler}/>
             </div>
         </>
     );
