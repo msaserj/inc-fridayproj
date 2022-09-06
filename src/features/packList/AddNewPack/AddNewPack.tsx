@@ -52,7 +52,6 @@ export const AddNewPack: React.FC<AddNewPackPropsType> = (
     const krestikHandler = () => {
         cancelHandler()
     }
-
     return (
         <div>
 
