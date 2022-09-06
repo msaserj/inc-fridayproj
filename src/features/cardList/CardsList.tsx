@@ -83,7 +83,7 @@ export const CardsList = () => {
 			<div className={s.searchBlock}>
 				<div>
 					<DebounceSearch
-						searchValue={cardQuestion}
+						resetValue={cardQuestion}
 						setSearchValue={searchCardsByQuestion}
 						placeholder={"Search by question..."}
 						//disabled={isFetchingCards}

@@ -2,41 +2,32 @@ import {FC, useEffect, useState} from "react";
 import SuperInputText from "../c1-InputText/SuperInputText";
 
 type DebounceSearchPropsType = {
-	searchValue: string
+	resetValue: string
 	setSearchValue: (value: string) => void
-	//resetValue: (value: string) => void
 	placeholder?: string
 	disabled?: boolean
 };
 
 export const DebounceSearch: FC<DebounceSearchPropsType> = (
 	{
-		searchValue,
+		resetValue,
 		setSearchValue,
-		//resetValue,
 		placeholder,
 		disabled,
-
 	}
 ) => {
-	console.log("Debounce", searchValue)
-	const [inputValue, setInputValue] = useState<string>(searchValue);
-
-	console.log("Debounce innerState", inputValue)
+	const [inputValue, setInputValue] = useState<string>(resetValue);
 
 	useEffect(() => {
 		const id: number = +setTimeout(() => {
 			setSearchValue(inputValue);
 		}, 1500);
-
-		return () => {
-			clearTimeout(id);
-		};
+		return () => clearTimeout(id);
 	}, [setSearchValue, inputValue]);
 
 	useEffect(()=> {
-		setInputValue(searchValue)
-	},[searchValue])
+		setInputValue(resetValue)
+	},[resetValue])
 
 	const onChangeValue = (value: string) => {
 		setInputValue(value);
