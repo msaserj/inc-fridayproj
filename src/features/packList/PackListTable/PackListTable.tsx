@@ -6,7 +6,7 @@ import s from './PackListTable.module.css'
 import {TableHeaders} from "./TableHeaders/TableHeaders";
 import {PATH} from "../../../common/constants/Path";
 import {BeautyDate} from "../../../common/components/BeautyDate/BeautyDate";
-import {EditPackName} from "../EditPackNamr/EditPackName";
+import {EditPackName} from "../EditPackName/EditPackName";
 import React, {useState} from "react";
 import {DotedLoader} from "../../../common/components/c8-Loaders/DotedLoader/DotedLoader";
 import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
@@ -77,6 +77,11 @@ export const PacksListTable = () => {
                               idCard={id}
                               packNameFromPackListTable={packName}
                 />
+                {/*<DeletePack open={activeModalPack}*/}
+                {/*              handleClose={modalCloseHandler}*/}
+                {/*              idCard={id}*/}
+                {/*              packNameFromPackListTable={packName}*/}
+                {/*/>*/}
             </div>
     );
 };

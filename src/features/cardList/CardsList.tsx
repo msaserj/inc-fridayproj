@@ -83,7 +83,7 @@ export const CardsList = () => {
 			<div className={s.searchBlock}>
 				<div>
 					<DebounceSearch
-						searchValue={cardQuestion}
+						resetValue={cardQuestion}
 						setSearchValue={searchCardsByQuestion}
 						placeholder={"Search by question..."}
 						//disabled={isFetchingCards}
@@ -92,9 +92,7 @@ export const CardsList = () => {
 				<div>
 					<SuperButton onClick={addCardHandler} disabled={isFetchingCards || user_ID !== packUser_ID}>Add card</SuperButton>
 				</div>
-
 			</div>
-
 			{isFetchingCards ?
 				<DotedLoader/>
 				:

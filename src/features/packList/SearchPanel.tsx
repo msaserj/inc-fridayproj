@@ -20,16 +20,16 @@ export const SearchPanel = () => {
     const searchValue = useAppSelector<string>(state => state.packsList.searchResult)
     const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
 
+
+    // The order of the dispatches important!!!
     function getMyPackHandler() {
         dispatch(setViewPacksAC(true));
-        dispatch(getCardsPackThunk());
-        dispatch(setSearchResultAC(""));
+        resetFilterHandler()
     }
     function getAllPackHandler() {
         dispatch(setViewPacksAC(false));
         dispatch(setCurrentFilterAC('0updated'));
-        dispatch(getCardsPackThunk());
-        dispatch(setSearchResultAC(""));
+        resetFilterHandler()
     }
     function searchCardsByPackName(value: string)  {
         dispatch(setSearchResultAC(value));
@@ -38,7 +38,6 @@ export const SearchPanel = () => {
 
     function resetFilterHandler() {
         dispatch(setSearchResultAC(``));
-        console.log(`resetFilterHandler clicked`)
         dispatch(getCardsPackThunk());
     }
     useEffect(() => {
@@ -54,7 +53,7 @@ export const SearchPanel = () => {
                 <div>
                     <h3>Search</h3>
                     <DebounceSearch
-                        searchValue={searchValue}
+                        resetValue={searchValue}
                         setSearchValue={searchCardsByPackName}
                         placeholder={"Search by pack name..."}
                         disabled={isFetching}
