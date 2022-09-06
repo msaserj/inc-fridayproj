@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {getCardsPackThunk, setCurrentPageCardPacksAC} from "./packList-reducer";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
 import {PacksListTable} from "./PackListTable/PackListTable";
-import {Paginator} from "./Paginator/Paginator";
+import {Paginator} from "../../common/components/Paginator/Paginator";
 import {SearchPanel} from "./SearchPanel";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../common/constants/Path";
