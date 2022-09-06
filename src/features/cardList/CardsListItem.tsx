@@ -1,11 +1,10 @@
 import {CardType, UpdateCardModelType} from "./cards-api";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {deleteCardTC, updateCardTC} from "./cardList-reducer";
-import {FC} from "react";
+import {deleteCardTC, updateCardGradeTC, updateCardTC} from "./cardList-reducer";
+import {FC, useState} from "react";
 import {BeautyDate} from "../../common/components/BeautyDate/BeautyDate";
-import SuperButton from "../../common/components/c2-Button/SuperButton";
-import pencil from "../../assets/img/pencil.svg";
-import deleteIcon from "../../assets/img/delete.svg";
+import {SuperSmallButton} from "../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {SuperStarRating} from "../../common/components/StarRating/SuperStarsRating";
 
 type CardsListItemPropsType = {
 	card: CardType
@@ -32,6 +31,12 @@ export const CardsListItem: FC<CardsListItemPropsType> = ({card}) => {
 	const deleteButtonHandler = () => {
 		dispatch(deleteCardTC(card.cardsPack_id, card._id));
 	};
+	const [state, setState] = useState(0)
+	console.log("Star State22", state)
+	const setStars = (stars: any) => {
+		setState(stars)
+		dispatch(updateCardGradeTC(card.cardsPack_id, card._id, stars))
+	}
 
 	return (
 		<>
@@ -39,13 +44,12 @@ export const CardsListItem: FC<CardsListItemPropsType> = ({card}) => {
 				<td>{card.question}</td>
 				<td>{card.answer}</td>
 				<td><BeautyDate date={card.updated}/></td>
-				<td>{Math.round(card.grade * 100) / 100}</td>
+
+				<td><SuperStarRating initialRating={Math.round(card.grade * 10) / 10}   onRate={setStars}/></td>
 				{card.user_id === userId &&
                     <td>
-                        <SuperButton style={{backgroundColor: "white"}} onClick={editCardHandler} disabled={isFetchingCards}>
-							<img alt="editIco" src={pencil}/></SuperButton>
-                        <SuperButton style={{backgroundColor: "white"}} onClick={deleteButtonHandler} disabled={isFetchingCards}>
-							<img alt="deleteIco" src={deleteIcon}/></SuperButton>
+                        <SuperSmallButton edit onClick={editCardHandler} disabled={isFetchingCards}/>
+                        <SuperSmallButton delet onClick={deleteButtonHandler} disabled={isFetchingCards}/>
                     </td>
 				}
 			</tr>

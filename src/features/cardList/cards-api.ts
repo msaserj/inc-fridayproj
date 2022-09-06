@@ -74,4 +74,8 @@ export const cardsAPI = {
 		return instance.put("cards/card", {card: cardModel})
 			.then(response => response.data);
 	},
+	updateGrade(card_id: string, grade: number) {
+		return instance.put("cards/grade", {card_id, grade})
+			.then(response => response.data);
+	},
 };

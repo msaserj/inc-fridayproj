@@ -5,25 +5,30 @@ import css from "./SuperStarsRating.module.css"
 // надо onChange добавить что-бы передавать наверх измененное значение
 
 type StarRatingPropsType = {
-    numTotalStars: number
+
     initialRating: number
+    onRate?: (rate: number) => void
 }
 
 export const SuperStarRating: React.FC<StarRatingPropsType> = (
     {
-        numTotalStars,
-        initialRating
+        initialRating ,
+        onRate= t => t
     }) => {
 
+    const numTotalStars = 5;
     const [numSelectedStars, setNumSelectedStars] = useState(initialRating);
     const [numHoveringStars, setNumHoveringStars] = useState<null | number>(null);
+    console.log("numHoveringStars", numHoveringStars)
+    console.log("numSelectedStars", numSelectedStars)
 
     const [isUserHovering, setIsUserHovering] = useState(false);
 
-    function getColor(isUserHovering: boolean, i: number, numSelectedStars: number, numHoveringStars: null | number) {
-        const threshold = isUserHovering ? numHoveringStars : numSelectedStars;
+    function getColor(isUserHovering: boolean, i: number, numSelectedStars2: number, numHoveringStars: null | number) {
+        const threshold = isUserHovering ? numHoveringStars : numSelectedStars2;
         if (threshold) return i < threshold ? "orange" : "grey";
     }
+
 
     return (
         <div className={css.starRatingBlock}>
@@ -38,15 +43,15 @@ export const SuperStarRating: React.FC<StarRatingPropsType> = (
                             color={getColor(
                                 isUserHovering,
                                 i,
-                                numSelectedStars,
+                                Math.round(numSelectedStars),
                                 numHoveringStars
                             )}
-                            handleSelect={() => setNumSelectedStars(i + 1)}
+                            handleSelect={() => {setNumSelectedStars(i + 1); onRate(i+1)}}
                             handleHover={() => setNumHoveringStars(i + 1)}
                         />
                     ))}
                 </div>
-                <div className="label"> {numSelectedStars}</div>
+                <div className={css.number}> {numSelectedStars}</div>
             </div>
 
         </div>

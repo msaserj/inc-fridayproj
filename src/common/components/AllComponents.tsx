@@ -17,7 +17,7 @@ export const AllComponents = () => {
         <Loaders/>
         <SuperDoubleRange />
         <SmallButtonsDemo/>
-        <SuperStarRating numTotalStars={5} initialRating={2.5}/>
+        <SuperStarRating initialRating={2.5}/>
 
         <div style={{marginTop: "100px"}}/>
     </>
