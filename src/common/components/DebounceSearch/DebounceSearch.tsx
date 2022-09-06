@@ -17,7 +17,14 @@ export const DebounceSearch: FC<DebounceSearchPropsType> = (
 	}
 ) => {
 	const [inputValue, setInputValue] = useState<string>(resetValue);
-
+		searchValue,
+		setSearchValue,
+		placeholder,
+		disabled,
+	}
+) => {
+	console.log("Debounce", searchValue)
+	const [inputValue, setInputValue] = useState<string>(searchValue);
 	useEffect(() => {
 		const id: number = +setTimeout(() => {
 			setSearchValue(inputValue);
@@ -28,7 +35,6 @@ export const DebounceSearch: FC<DebounceSearchPropsType> = (
 	useEffect(()=> {
 		setInputValue(resetValue)
 	},[resetValue])
-
 	const onChangeValue = (value: string) => {
 		setInputValue(value);
 	};

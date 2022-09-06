@@ -92,9 +92,7 @@ export const CardsList = () => {
 				<div>
 					<SuperButton onClick={addCardHandler} disabled={isFetchingCards || user_ID !== packUser_ID}>Add card</SuperButton>
 				</div>
-
 			</div>
-
 			{isFetchingCards ?
 				<DotedLoader/>
 				:

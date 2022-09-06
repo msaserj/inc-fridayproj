@@ -20,6 +20,7 @@ export const SearchPanel = () => {
     const searchValue = useAppSelector<string>(state => state.packsList.searchResult)
     const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
 
+
     // The order of the dispatches important!!!
     function getMyPackHandler() {
         dispatch(setViewPacksAC(true));
@@ -32,6 +33,7 @@ export const SearchPanel = () => {
     }
     function searchCardsByPackName(value: string)  {
         dispatch(setSearchResultAC(value));
+        console.log(value)
     }
 
     function resetFilterHandler() {
