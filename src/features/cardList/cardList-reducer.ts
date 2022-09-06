@@ -149,6 +149,20 @@ export const updateCardTC = (cardsPack_ID: string, cardModel: UpdateCardModelTyp
 		});
 };
 
+export const updateCardGradeTC = (cardsPack_ID: string, card_id: string, grade: number): AppThunkType => (dispatch) => {
+	dispatch(setAppIsLoadingAC(true));
+	cardsAPI.updateGrade(card_id, grade)
+		.then(() => {
+			dispatch(getCardsTC({cardsPack_id: cardsPack_ID}));
+		})
+		.catch(error => {
+			handleAppRequestError(error, dispatch);
+		})
+		.finally(() => {
+			dispatch(setAppIsLoadingAC(false));
+		});
+};
+
 
 // export const sortCardsThunk = (sortCards: string): AppThunkType => (dispatch, getState: () => AppStateType) => {
 // 	const {

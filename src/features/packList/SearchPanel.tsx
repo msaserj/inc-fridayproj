@@ -34,7 +34,7 @@ export const SearchPanel = () => {
     }
     function searchCardsByPackName(value: string)  {
         dispatch(setSearchResultAC(value));
-    };
+    }
 
     function resetFilterHandler() {
         dispatch(setSearchResultAC(``));
@@ -42,7 +42,7 @@ export const SearchPanel = () => {
         dispatch(getCardsPackThunk());
     }
     useEffect(() => {
-        if (true) {
+        if (searchValue) {
             dispatch(searchCardsPackThunk(searchValue));
         }
     }, [dispatch, searchValue]);
@@ -67,13 +67,13 @@ export const SearchPanel = () => {
                     <div className={s.userChooseButton}>
                         <SuperButton style={{minWidth: "120px"}}
                                      onClick={getMyPackHandler}
-                                     red={isMyPacks}
+                                     red={isMyPacks && !isLoad}
                                      disabled={isLoad}>
                             My packs
                         </SuperButton >
                         <SuperButton style={{minWidth: "120px"}}
                                      onClick={getAllPackHandler}
-                                     red={!isMyPacks}
+                                     red={!isMyPacks && !isLoad}
                                      disabled={isLoad}>
                             All packs
                         </SuperButton>
