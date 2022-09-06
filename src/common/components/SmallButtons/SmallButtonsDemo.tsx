@@ -13,6 +13,8 @@ export const SmallButtonsDemo = () => {
           <SuperSmallButton onClick={showalert} edit />
           <SuperSmallButton onClick={showalert} delet />
           <SuperSmallButton onClick={showalert} filter />
+          <SuperSmallButton onClick={showalert} arrowUp />
+          <SuperSmallButton onClick={showalert} />
       </div>
       <div>
           <SuperSmallButton onClick={showalert} disabled learn />
