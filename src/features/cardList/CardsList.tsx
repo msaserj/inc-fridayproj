@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Navigate, useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {CardType} from "./cards-api";
 import {
-	addNewCardTC,
 	getCardsTC,
 	setCardsSortDirectionAC,
 	setCurrentPageCardsListAC,
@@ -11,15 +10,14 @@ import {
 } from "./cardList-reducer";
 import {SortButton} from "../../common/components/SortButton/SortButton";
 import {Paginator} from "../packList/Paginator/Paginator";
-
 import {PATH} from "../../common/constants/Path";
 import s from './CardsList.module.css';
 import {DebounceSearch} from "../../common/components/DebounceSearch/DebounceSearch";
 import {DotedLoader} from "../../common/components/c8-Loaders/DotedLoader/DotedLoader";
 import {CardsListItem} from "./CardsListItem";
-
 import {BackToPackList} from "../../common/components/BackToPackList/BackToPackList";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
+import {AddNewCardModal} from "./AddNewCardModal/AddNewCardModal";
 
 
 export const CardsList = () => {
@@ -40,13 +38,16 @@ export const CardsList = () => {
 	const packUser_ID = useAppSelector(state => state.cardsList.packUserId);
 	const currentFilter = useAppSelector<string>(state => state.cardsList.sortCards);
 
+	const [activeModalPack, setModalActivePack] = useState<boolean>(false)
+	const modalCloseHandler = () => setModalActivePack(false);
+	const addCardsPackHandler = () => setModalActivePack(true)
 
 	useEffect(() => {
 		// cardsPack_ID достаем из useParams, что бы знать в каком паке ищутся карточки
 		if (cardsPack_ID) {
 			dispatch(getCardsTC({cardsPack_id: cardsPack_ID}));
 		}
-	}, [dispatch, cardsPack_ID, currentFilter, cardQuestion]);
+	}, [dispatch, cardsPack_ID, currentFilter, cardQuestion, currentPage]);
 
 	const changePageHandler = (page: number) => {
 		dispatch(setCurrentPageCardsListAC(page));
@@ -54,7 +55,6 @@ export const CardsList = () => {
 	const searchCardsByQuestion = (value: string) => {
 		dispatch(setSearchQueryByQuestionAC(value));
 	};
-
 
 	//	фильтрация карт по типу (тип передаем в виде строки)
 	const changeCardsSortDirection = (sortType: string) => {
@@ -64,33 +64,23 @@ export const CardsList = () => {
 			dispatch(setCardsSortDirectionAC(`0${sortType}`));
 		}
 	};
-	const addCardHandler = () => {
-		if (cardsPack_ID) {
-			dispatch(addNewCardTC({question: "5*5", answer: "25", cardsPack_id: cardsPack_ID}));
-		}
-	};
 	if (!user_ID) {
 		return <Navigate to={PATH.LOGIN}/>
 	}
 	return (
 		<div className={s.cardsPage}>
 			<BackToPackList/>
-
-
 			<div className={s.headPackName}><h3>Name Pack: {packName}</h3></div>
-
-
 			<div className={s.searchBlock}>
 				<div>
 					<DebounceSearch
 						resetValue={cardQuestion}
 						setSearchValue={searchCardsByQuestion}
 						placeholder={"Search by question..."}
-						//disabled={isFetchingCards}
 					/>
 				</div>
 				<div>
-					<SuperButton onClick={addCardHandler} disabled={isFetchingCards || user_ID !== packUser_ID}>Add card</SuperButton>
+					<SuperButton onClick={addCardsPackHandler} disabled={isFetchingCards || user_ID !== packUser_ID}>Add card</SuperButton>
 				</div>
 			</div>
 			{isFetchingCards ?
@@ -138,6 +128,7 @@ export const CardsList = () => {
 								{user_ID === packUser_ID && <th>Actions</th>}
 							</tr>
 							</thead>
+							
 							<tbody className={s.tbodyStyle}>
 							{cards.map(c => {
 								return (
@@ -157,6 +148,7 @@ export const CardsList = () => {
 						</div>
 					</div>
 			}
+			<AddNewCardModal handleClose={modalCloseHandler} open={activeModalPack}/>
 		</div>
 	);
 };
