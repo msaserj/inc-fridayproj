@@ -23,12 +23,12 @@
     display: flex;
     font-size: 14px;
     font-weight: 400;
-    height: 36px;
+    height: 44px;
     justify-content: center;
     line-height: 17px;
     margin: 20px 10px 45px;
     text-align: center;
-    width: 196px;
+    width: 300px;
     cursor: pointer;
 }
 
@@ -39,23 +39,14 @@
 }
 
 .reset_filter{
-    margin: auto 20px;
-    padding: 5px;
+    margin-top: 60px;
 }
-
-.reset_filter:hover{
-    cursor: pointer;
-    transition: transform .5s;
-    transform: scale(1.1);
-}
-
 .rangeBlock h3 {
     margin: 20px;
     text-align: center;
     font-weight: bold;
     color: #2D2E46;
 }
-
 .active {
     align-items: center;
     background: #366EFF;
@@ -77,8 +68,8 @@
 }
 
 .active:hover{
-    transition: transform .5s;
-    transform: scale(1.1);
+    /*transition: transform .5s;*/
+    /*transform: scale(1.1);*/
 }
 
 .inactive {

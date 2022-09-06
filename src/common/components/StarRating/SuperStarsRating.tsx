@@ -19,8 +19,6 @@ export const SuperStarRating: React.FC<StarRatingPropsType> = (
     const numTotalStars = 5;
     const [numSelectedStars, setNumSelectedStars] = useState(initialRating);
     const [numHoveringStars, setNumHoveringStars] = useState<null | number>(null);
-    console.log("numHoveringStars", numHoveringStars)
-    console.log("numSelectedStars", numSelectedStars)
 
     const [isUserHovering, setIsUserHovering] = useState(false);
 

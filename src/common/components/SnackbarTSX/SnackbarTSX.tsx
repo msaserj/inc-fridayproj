@@ -8,9 +8,7 @@ export const SnackbarTSX = () => {
 	const error = useAppSelector<null | string>(state => state.app.appError);
 	const userName = useAppSelector(state => state.auth.user.name)
 	const dispatch = useAppDispatch();
-
 	useEffect(() => {
-		console.log(`userName in useEffect`, userName)
 		const timeout_ID = setTimeout(() => {
 			dispatch(setAppErrorAC(null));
 		}, 3000);
@@ -18,18 +16,14 @@ export const SnackbarTSX = () => {
 			clearTimeout(timeout_ID);
 		}
 	}, [dispatch, error, userName]);
-
-
 	const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(true);
 
 	const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
 		if (reason === 'clickaway') {
 			return;
 		}
-
 		setOpenSuccessSnackbar(false);
 	};
-
 	if (error) {
 		return <>
 			<Snackbar open={true}>
@@ -39,12 +33,10 @@ export const SnackbarTSX = () => {
 			</Snackbar>
 		</>
 	}
-
 	return (
 		<>
 			{userName
 				? (<Stack spacing={2} sx={{width: '100%'}}>
-
 					<Snackbar open={openSuccessSnackbar} autoHideDuration={5000} onClose={handleClose}>
 						<Alert onClose={handleClose} severity="success" sx={{width: '100%'}}>
 							{userName} is login successfully!
@@ -54,6 +46,4 @@ export const SnackbarTSX = () => {
 				: <></>}
 		</>
 	)
-
-
 };

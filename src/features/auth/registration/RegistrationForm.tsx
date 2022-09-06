@@ -18,7 +18,6 @@ type ErrorFormikType = {
 }
 
 export const RegistrationForm = () => {
-
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const registration = useAppSelector<boolean>(state => state.auth.successfulRegistration);
@@ -47,7 +46,6 @@ export const RegistrationForm = () => {
             return errors
         },
         onSubmit: values => {
-            console.log(values)
             formik.resetForm();
             dispatch(registrationThunkTC(values.email, values.password));
             navigate(PATH.LOGIN);
@@ -99,73 +97,3 @@ export const RegistrationForm = () => {
             </form>
     </div>
 }
-
-{/*<form onSubmit={formik.handleSubmit}>*/}
-{/*    <FormControl>*/}
-{/*        <FormGroup>*/}
-{/*            <FormControl sx={{m: 1, width: '30ch'}} variant="outlined">*/}
-{/*                <TextField*/}
-{/*                    label="Email"*/}
-{/*                    margin="normal"*/}
-{/*                    {...formik.getFieldProps("email")}*/}
-{/*                />*/}
-
-{/*            </FormControl>*/}
-{/*            {formik.errors.email && formik.touched.email &&*/}
-{/*                <div style={{color: "red"}}>{formik.errors.email}</div>}*/}
-{/*            <FormControl sx={{m: 1, width: '30ch'}} variant="outlined">*/}
-{/*                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>*/}
-{/*                <OutlinedInput*/}
-{/*                    id="outlined-adornment-password"*/}
-{/*                    type={values.showPassword ? 'text' : 'password'}*/}
-{/*                    {...formik.getFieldProps('password')}*/}
-
-{/*                    endAdornment={*/}
-{/*                        <InputAdornment position="end"  id="up"  key="up" >*/}
-{/*                            <IconButton*/}
-{/*                                aria-label="toggle password visibility"*/}
-{/*                                onClick={handleClickShowPassword}*/}
-{/*                                edge="end"*/}
-{/*                            >*/}
-{/*                                {values.showPassword ? <VisibilityOff/> : <Visibility/>}*/}
-{/*                            </IconButton>*/}
-{/*                        </InputAdornment>*/}
-{/*                    }*/}
-{/*                    label="Password"*/}
-{/*                    autoComplete="on"*/}
-{/*                />*/}
-{/*            </FormControl>*/}
-{/*            {formik.errors.password && formik.touched.password &&*/}
-{/*                <div style={{color: "red"}}>{formik.errors.password}</div>}*/}
-
-{/*            <FormControl sx={{m: 1, width: '30ch'}} variant="outlined">*/}
-{/*                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>*/}
-{/*                <OutlinedInput*/}
-{/*                    id="outlined-adornment-password_2"*/}
-{/*                    type={values.showPassword ? 'text' : 'password'}*/}
-{/*                    {...formik.getFieldProps('confirmPassword')}*/}
-{/*                    endAdornment={*/}
-{/*                        <InputAdornment position="end">*/}
-{/*                            <IconButton*/}
-{/*                                aria-label="toggle password visibility"*/}
-{/*                                onClick={handleClickShowPassword}*/}
-{/*                                edge="end"*/}
-{/*                            >*/}
-{/*                                {values.showPassword ? <VisibilityOff/> : <Visibility/>}*/}
-{/*                            </IconButton>*/}
-{/*                        </InputAdornment>*/}
-{/*                    }*/}
-{/*                    label="Password"*/}
-{/*                    autoComplete="on"*/}
-{/*                />*/}
-{/*            </FormControl>*/}
-{/*            {formik.errors.confirmPassword && formik.touched.confirmPassword &&*/}
-{/*                <div style={{color: "red"}}>{formik.errors.confirmPassword}</div>}*/}
-
-{/*            <div>*/}
-{/*                <Button type={'submit'} variant={'contained'} color={'primary'}>Register</Button>*/}
-{/*                <Button variant={'contained'} onClick={onCancelButtonClick}>Cansel</Button>*/}
-{/*            </div>*/}
-{/*        </FormGroup>*/}
-{/*    </FormControl>*/}
-{/*</form>*/}

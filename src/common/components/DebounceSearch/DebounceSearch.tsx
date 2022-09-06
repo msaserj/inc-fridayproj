@@ -1,20 +1,26 @@
 import {FC, useEffect, useState} from "react";
-import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
+import SuperInputText from "../c1-InputText/SuperInputText";
 
 type DebounceSearchPropsType = {
 	searchValue: string
 	setSearchValue: (value: string) => void
+	//resetValue: (value: string) => void
 	placeholder?: string
 	disabled?: boolean
-	onChangeResetValue?: () => void
 };
 
-export const DebounceSearchCards: FC<DebounceSearchPropsType> = (
-	{searchValue, setSearchValue, placeholder, disabled,onChangeResetValue}
+export const DebounceSearch: FC<DebounceSearchPropsType> = (
+	{
+		searchValue,
+		setSearchValue,
+		//resetValue,
+		placeholder,
+		disabled,
+
+	}
 ) => {
 	console.log("Debounce", searchValue)
 	const [inputValue, setInputValue] = useState<string>(searchValue);
-
 
 	console.log("Debounce innerState", inputValue)
 
@@ -28,10 +34,13 @@ export const DebounceSearchCards: FC<DebounceSearchPropsType> = (
 		};
 	}, [setSearchValue, inputValue]);
 
+	useEffect(()=> {
+		setInputValue(searchValue)
+	},[searchValue])
+
 	const onChangeValue = (value: string) => {
 		setInputValue(value);
 	};
-
 
 	return (
 		<SuperInputText
