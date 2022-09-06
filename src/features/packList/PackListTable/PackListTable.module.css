@@ -50,16 +50,12 @@ tr:nth-child(2n) {
 .tbodyStyle td {
     max-width: 190px;
 }
+.nameStyle {
+    transition: transform .3s;
+    transform: scale(1.0);
+}
 
 .nameStyle:hover {
-    transition: transform .5s;
-    transform: scale(1.1);
-}
-
-.nameStyle a {
-    color: #2D2E46;
-}
-
-.nameStyle a:hover {
-    color: #0241b7;
+    transition: transform .3s;
+    transform: scale(1.05);
 }

@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
 import s from "./PackList.module.css";
-
 import SuperButton from "../../common/components/c2-Button/SuperButton";
-import reset_filter from "../../assets/img/resetFilter.svg";
+
 import {
     getCardsPackThunk, searchCardsPackThunk,
     setCurrentFilterAC,
@@ -11,8 +10,7 @@ import {
 } from "./packList-reducer";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {DebounceSearch} from "../../common/components/DebounceSearch/DebounceSearch";
-
-
+import {SuperSmallButton} from "../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
 
 
 export const SearchPanel = () => {
@@ -84,7 +82,7 @@ export const SearchPanel = () => {
                     <div> будет двойной ползунок</div>
                 </div>
                 <div className={s.reset_filter}>
-                    <img src={reset_filter} alt="reset_filter" onClick={resetFilterHandler}/>
+                    <SuperSmallButton disabled={isLoad} filter onClick={resetFilterHandler} />
                 </div>
             </div>
         </div>
