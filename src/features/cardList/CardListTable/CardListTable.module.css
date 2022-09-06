@@ -1,11 +1,12 @@
+
 .tableMainBlock {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     word-wrap: break-word;
     text-align: center;
     color: #595959;
     font-size: 16px;
-
     line-height: 16px;
     padding: 5px;
 }
@@ -16,16 +17,19 @@
 }
 
 table {
-    width: 100%;
     border-collapse: separate;
+    width: 100%;
 }
 
-.actions {
-
+.theadStyle .sortBlock {
+    cursor: pointer;
 }
 
-.tbodyStyle {
-
+.trStyle {
+    border-radius: 10px;
+    color: #1c1c1c;
+    background-color: #847bc4;
+    font-weight: 700;
 }
 
 .buttonBlock {
@@ -39,8 +43,9 @@ table {
     padding: 5px 12px;
     margin: 5px 5px;
 }
-tr:nth-child(1n) {
-    background: #84e7d5;
+
+.tbodyStyle {
+
 }
 
 tr:nth-child(2n) {
@@ -50,12 +55,21 @@ tr:nth-child(2n) {
 .tbodyStyle td {
     max-width: 190px;
 }
-.nameStyle {
-    transition: transform .3s;
-    transform: scale(1.0);
-}
 
 .nameStyle:hover {
-    transition: transform .3s;
-    transform: scale(1.05);
+    transition: transform .5s;
+    transform: scale(1.1);
+}
+
+.nameStyle a {
+    color: #2D2E46;
+}
+
+.nameStyle a:hover {
+    color: #0241b7;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center;
 }

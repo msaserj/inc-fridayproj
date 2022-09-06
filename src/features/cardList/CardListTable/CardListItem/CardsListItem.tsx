@@ -1,10 +1,10 @@
-import {CardType, UpdateCardModelType} from "./cards-api";
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {deleteCardTC, updateCardGradeTC, updateCardTC} from "./cardList-reducer";
+import {CardType, UpdateCardModelType} from "../../cards-api";
+import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
+import {deleteCardTC, updateCardGradeTC, updateCardTC} from "../../cardList-reducer";
 import {FC} from "react";
-import {BeautyDate} from "../../common/components/BeautyDate/BeautyDate";
-import {SuperSmallButton} from "../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
-import {SuperStarRating} from "../../common/components/StarRating/SuperStarsRating";
+import {BeautyDate} from "../../../../common/components/BeautyDate/BeautyDate";
+import {SuperSmallButton} from "../../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {SuperStarRating} from "../../../../common/components/StarRating/SuperStarsRating";
 
 type CardsListItemPropsType = {
 	card: CardType
@@ -14,7 +14,6 @@ export const CardsListItem: FC<CardsListItemPropsType> = ({card}) => {
 	const isFetchingCards = useAppSelector<boolean>(state => state.cardsList.isFetchingCards);
 	const userId = useAppSelector<string>(state => state.auth.user._id);
 	const dispatch = useAppDispatch();
-
 
 	const question = "6*6"
 	const answer = "36"
