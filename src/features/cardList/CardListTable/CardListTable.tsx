@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from "./CardListTable.module.css";
 import {SortButton} from "../../../common/components/SortButton/SortButton";
 import {CardsListItem} from "./CardListItem/CardsListItem";
@@ -8,6 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 
 import {CardType} from "../cards-api";
 import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {AddNewCardModal} from "../AddNewCardModal/AddNewCardModal";
 
 export const CardListTable = () => {
 
@@ -21,6 +22,26 @@ export const CardListTable = () => {
     const user_ID = useAppSelector(state => state.auth.user._id);
     const cards = useAppSelector<Array<CardType>>(state => state.cardsList.cards);
     const packUser_ID = useAppSelector(state => state.cardsList.packUserId);
+
+    const [activeModalPack, setModalActivePack] = useState<boolean>(false)
+    const modalCloseHandler = () => setModalActivePack(false);
+
+    const [id, setId] = useState<string>('');
+    const [question, setQuestion] = useState<string>('')
+    const [answer, setAnswer] = useState<string>('')
+
+    const setQuestion_Answer = (id: string, question: string, answer:string ) => {
+        setId(id)
+        setQuestion(question)
+        setAnswer(answer)
+    }
+
+    const setOpenModal = (id: string, question: string, answer:string) => {
+        setModalActivePack(true)
+        setQuestion_Answer(id , question, answer)
+    }
+
+    //dispatch(updateCardTC(card.cardsPack_id, cardUpdateModel));
 
     const changePageHandler = (page: number) => {
         dispatch(setCurrentPageCardsListAC(page));
@@ -82,7 +103,7 @@ export const CardListTable = () => {
                     <tbody className={s.tbodyStyle}>
                     {cards.map(c => {
                         return (
-                            <CardsListItem key={c._id} card={c}/>
+                            <CardsListItem key={c._id} card={c} editCardHandler={setOpenModal}/>
                         );
                     })}
                     </tbody>
@@ -97,6 +118,10 @@ export const CardListTable = () => {
                     />
                 </div>
             </div>
+
+            <AddNewCardModal handleClose={modalCloseHandler} open={activeModalPack}
+                             answer={answer} question={question} id={id}/>
+
         </div>
     );
 };

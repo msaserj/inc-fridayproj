@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ModalMUI} from "../../../common/components/ModalMUI/ModalMUI";
 import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
 import SuperButton from "../../../common/components/c2-Button/SuperButton";
@@ -14,6 +14,9 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 type AddNewPackPropsType = {
     open: boolean
     handleClose: () => void
+    question?: string
+    answer?:string
+    id?:string
 }
 
 type FormikPackType = {
@@ -25,6 +28,9 @@ export const AddNewCardModal: React.FC<AddNewPackPropsType> = (
     {
         open,
         handleClose,
+        question,
+        answer,
+        id
     }
 ) => {
     const urlParams = useParams<'cardPackID'>();
@@ -52,6 +58,14 @@ export const AddNewCardModal: React.FC<AddNewPackPropsType> = (
         },
 
     });
+
+    useEffect(()=>{
+        formik.setFieldValue("question", question)
+        formik.setFieldValue("answer", answer)
+        console.log("eseEffect modal", question, answer)
+        // formik.setValues({packName: packNameFromPackListTable})
+
+    },[question, answer])
     const cancelHandler = () => {
         formik.resetForm();
         handleClose();
@@ -69,7 +83,7 @@ export const AddNewCardModal: React.FC<AddNewPackPropsType> = (
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={5}
+                            value={10}
                             label="Age"
                             onChange={x=>x}
                         >

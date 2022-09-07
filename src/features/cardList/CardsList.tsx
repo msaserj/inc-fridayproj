@@ -60,14 +60,16 @@ export const CardsList = () => {
                     />
                 </div>
                 <div>
-                    <SuperButton onClick={addCardsPackHandler} disabled={isFetchingCards || user_ID !== packUser_ID}>Add
-                        card</SuperButton>
+                    <SuperButton onClick={addCardsPackHandler} disabled={isFetchingCards || user_ID !== packUser_ID}>
+                        Add card
+                    </SuperButton>
                 </div>
             </div>
             {isFetchingCards ? <DotedLoader/> : cards.length === 0 ?
                     <div>No cards found. Press "Add card" to create new card in this pack</div>
                     : <CardListTable/>}
             <AddNewCardModal handleClose={modalCloseHandler} open={activeModalPack}/>
+
         </div>
     );
 };

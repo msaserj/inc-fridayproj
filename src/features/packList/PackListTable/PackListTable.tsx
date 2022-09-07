@@ -1,5 +1,5 @@
-import {NavLink} from "react-router-dom";
-import {useAppSelector} from "../../../common/hooks/hooks";
+import {NavLink, useNavigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {PacksType} from "../packCards-api";
 import s from './PackListTable.module.css'
 import {TableHeaders} from "./TableHeaders/TableHeaders";
@@ -13,9 +13,14 @@ import {DeletePackModal} from "../DeletePackModal/DeletePackModal";
 
 
 export const PacksListTable = () => {
+
+    const dispatch = useAppDispatch();
+
     const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
     const userId = useAppSelector<string>(state => state.auth.user._id);
     const cardPacks = useAppSelector<PacksType[]>(store => store.packsList.cardPacks);
+
+    const navigate = useNavigate()
 
     const [activeDeleteModalPack, setActiveDeleteModalPack] = useState<boolean>(false)
     const [activeEditModalPack, setActiveEditModalPack] = useState<boolean>(false)
@@ -32,6 +37,7 @@ export const PacksListTable = () => {
     const editPackCardsHandler = (id: string, packName: string, privatePack: boolean) => {
         setActiveEditModalPack(true)
         setIdAndPackName(id, packName, privatePack);
+        // dispatch(getCardsTC({cardsPack_id}));
 
     }
     const deletePackCardsHandler = (id: string, packName: string) => {
@@ -45,7 +51,11 @@ export const PacksListTable = () => {
         setActiveEditModalPack(false);
     }
     const learnHandler = (id: string, name: string) => {
-        alert("You press learn button  " + name)
+        // alert("You press learn button  " + name)
+
+        // dispatch(setLearnPackNameAC(name));
+        navigate(PATH.CARD_LEARNING + id);
+
     }
     return (
         isFetching ?
