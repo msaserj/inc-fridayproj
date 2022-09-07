@@ -5,6 +5,7 @@ import filterIco from "./resetFilter.svg"
 import editIco from "./edit.svg"
 import arrowUpIco from "./arrow-up.png"
 import arrowDownIco from "./arrow-down.png"
+import saveIco from "./save.png"
 import css from "./SmallButton.module.css"
 
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
@@ -15,6 +16,7 @@ type ButtonType = DefaultButtonPropsType & {
     filter?: boolean
     edit?: boolean
     arrowUp?: boolean
+    save?: boolean
 
 }
 export const SuperSmallButton: React.FC<ButtonType> = (
@@ -24,6 +26,7 @@ export const SuperSmallButton: React.FC<ButtonType> = (
         filter,
         edit,
         arrowUp,
+        save,
 
         ...restProps
     }
@@ -32,8 +35,9 @@ export const SuperSmallButton: React.FC<ButtonType> = (
     && learn ? learnIco : "?"
     && filter ? filterIco : "?"
     && edit ? editIco : "?"
+    && save ? saveIco : "?"
     && arrowUp ? arrowUpIco : arrowDownIco
 
 
-    return <button {...restProps} className={css.button}><img src={Buttontype} alt="del"/></button>
+    return <button {...restProps} className={css.button}><img style={{margin: "0"}} src={Buttontype} alt="del"/></button>
 }

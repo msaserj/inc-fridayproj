@@ -49,12 +49,15 @@ export const PackList = () => {
                 <SearchPanel/>
                 <section className={s.packList}>
                     <PacksListTable/>
-                    <Paginator currentPage={currentPage}
-                               pageSize={pageSize}
-                               totalCount={totalCountPage}
-                               onPageChange={changePageHandler}
-                               siblingCount={2}
-                    />
+                    <div className={s.paginator}>
+                        <Paginator currentPage={currentPage}
+                                   pageSize={pageSize}
+                                   totalCount={totalCountPage}
+                                   onPageChange={changePageHandler}
+                                   siblingCount={2}
+                        />
+                    </div>
+
                 </section>
                 <AddNewPackModal open={activeModalPack} handleClose={modalCloseHandler}/>
             </div>

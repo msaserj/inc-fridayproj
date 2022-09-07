@@ -70,6 +70,9 @@ tr:nth-child(2n) {
 }
 
 .paginator {
+    position: sticky;
+    float: bottom;
+    bottom: 0;
     display: flex;
     justify-content: center;
 }

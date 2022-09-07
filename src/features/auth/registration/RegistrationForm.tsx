@@ -37,8 +37,8 @@ export const RegistrationForm = () => {
 
             if (!values.password) {
                 errors.password = 'required'
-            } else if (values.password.trim().length < 5) {
-                errors.password = "min 5 symbols"
+            } else if (values.password.trim().length < 7) {
+                errors.password = "min 7 symbols"
             }
             if (values.password !== values.confirmPassword) {
                 errors.password = "not equal passwords"
@@ -48,7 +48,6 @@ export const RegistrationForm = () => {
         onSubmit: values => {
             formik.resetForm();
             dispatch(registrationThunkTC(values.email, values.password));
-            navigate(PATH.LOGIN);
             onCancelButtonClick();
         },
     })
@@ -56,7 +55,6 @@ export const RegistrationForm = () => {
         formik.resetForm();
         formik.setTouched({});
         formik.setErrors({email: undefined, password: undefined});
-        navigate(PATH.LOGIN);
     };
     useEffect(()=>{
         if (registration) {
@@ -86,7 +84,7 @@ export const RegistrationForm = () => {
                         className={s.superInputText}
                         error={formik.errors.confirmPassword && formik.touched.confirmPassword ? formik.errors.confirmPassword : ''}
                         placeholder={"enter password"}/>
-                </div>z
+                </div>
                 <SuperButton type={'submit'} className={s.submit_button}
                              disabled={!(formik.isValid && formik.dirty)}>Register</SuperButton>
                 <div className={s.regQuestion}>

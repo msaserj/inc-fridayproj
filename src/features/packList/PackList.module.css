@@ -6,7 +6,7 @@
     flex-direction: column;
     min-height: 300px;
     overflow: hidden;
-    position: relative;
+
     max-width: 1280px;
     margin: auto;
     padding-bottom: 20px;
@@ -88,6 +88,7 @@
 }
 
 .packList {
+
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -96,4 +97,11 @@
 .spinnerSize {
     width: 50px;
     height: 50px;
+}
+.paginator {
+    position: sticky;
+    float: bottom;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
 }

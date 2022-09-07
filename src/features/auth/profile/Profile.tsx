@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import css from './Profile.module.css'
-import pencil from '../../../assets/img/pencil.svg'
 import photoIcon from '../../../assets/img/photoIcon.svg'
 import SuperButton from "../../../common/components/c2-Button/SuperButton";
 import SuperEditableSpan from "../../../common/components/c4-EditableSpan/SuperEditableSpan";
@@ -10,23 +9,22 @@ import {logoutThunkTC, updateUserDataTC} from "../auth-reducer";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";
 import {BackToPackList} from "../../../common/components/BackToPackList/BackToPackList";
+import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
 
 
 export const Profile = () => {
     const {avatar} = useAppSelector(state => state.auth.user)
     const {name} = useAppSelector(state => state.auth.user)
     const {email} = useAppSelector(state => state.auth.user)
+    const isFetching = useAppSelector(state => state.app.appIsLoading)
 
     const isLoggedIn = useAppSelector(state => state.auth.user._id)
     const randomAva = "https://thispersondoesnotexist.com/image"
 
     const dispatch = useAppDispatch();
 
-
     const [value, setValue] = useState<string>(name ? name : 'Somebody')
 
-    // console.log(`user in CardLearning`, user)
-    //console.log(`userName in CardLearning`, name)
     function LogoutHandler() {
         dispatch(logoutThunkTC())
         setValue('Somebody')
@@ -38,10 +36,19 @@ export const Profile = () => {
         }
     }
 
+    const [editModeUp, setEditModeUp] = useState<boolean>(false)
+
+    const switchEditMode = () => {
+        if (!editModeUp) {
+            setEditModeUp(true)
+        } else {
+            dispatch(updateUserDataTC(value))
+            setEditModeUp(false)
+        }
+    }
     if (!isLoggedIn) {
         return <Navigate to={PATH.LOGIN}/>
     }
-
     return (
         <div>
             <div className={css.mainBlock}>
@@ -58,21 +65,20 @@ export const Profile = () => {
                         <SuperEditableSpan
                             placeholder={"nickname"}
                             className={css.input}
+                            editModeUp={editModeUp}
                             // value={value}
                             value={value}
                             onChangeText={setValue}
                             onKeyPress={onKeyPressInputHandle}
                             // spanProps={{children: value ? undefined : 'Vasya Pupkina'}}
                             spanProps={{children: value}}
-                        /><img src={pencil} alt="pencil"/>
+                        />
+                        <SuperSmallButton disabled={isFetching} style={{padding: "2px", marginTop: "10px"}} edit={!editModeUp} save={editModeUp} onClick={switchEditMode}/>
                     </div>
-
-                    {/*<p className={css.email}>serg.ks@gmail.com</p>*/}
                     {email
                         ? (<p className={css.email}>{email}</p>)
                         : <><p className={css.email}>serg.ks@gmail.com</p></>
                     }
-                    {/*<SuperButton onClick={X => X}>Log out</SuperButton>*/}
                     <SuperButton onClick={LogoutHandler}>Log out</SuperButton>
                 </div>
             </div>

@@ -11,7 +11,7 @@ export const SnackbarTSX = () => {
 	useEffect(() => {
 		const timeout_ID = setTimeout(() => {
 			dispatch(setAppErrorAC(null));
-		}, 3000);
+		}, 4000);
 		return () => {
 			clearTimeout(timeout_ID);
 		}
@@ -43,7 +43,7 @@ export const SnackbarTSX = () => {
 		<>
 			{userName
 				? (<Stack spacing={2} sx={{width: '100%'}}>
-					<Snackbar open={openSuccessSnackbar} autoHideDuration={5000} onClose={handleClose}>
+					<Snackbar open={openSuccessSnackbar} autoHideDuration={4000} onClose={handleClose}>
 						<Alert onClose={handleClose} severity="success" sx={{width: '100%'}}>
 							{userName} is login successfully!
 						</Alert>
