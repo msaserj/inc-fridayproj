@@ -16,7 +16,6 @@ export const DebounceSearch: FC<DebounceSearchPropsType> = (
 		disabled,
 	}
 ) => {
-	console.log("Debounce", resetValue)
 	const [inputValue, setInputValue] = useState<string>(resetValue);
 	useEffect(() => {
 		const id: number = +setTimeout(() => {

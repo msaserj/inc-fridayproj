@@ -166,9 +166,9 @@ export const deleteCardsPackThunk = (id: string): AppThunkType => (dispatch => {
         .finally(() => dispatch(setAppIsLoadingAC(false)));
 });
 
-export const updateCardsPackThunk = (id: string, name: string): AppThunkType => (dispatch => {
+export const updateCardsPackThunk = (id: string, name: string, privatePack: boolean): AppThunkType => (dispatch => {
     dispatch(setAppIsLoadingAC(true));
-    packCardsApi.updateCardsPack(id, name)
+    packCardsApi.updateCardsPack(id, name, privatePack)
         .then(() => {
             dispatch(getCardsPackThunk());
         })

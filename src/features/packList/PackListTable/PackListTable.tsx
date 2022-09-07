@@ -22,18 +22,21 @@ export const PacksListTable = () => {
 
     const [id, setId] = useState<string>('');
     const [packName, setPackName] = useState<string>('')
+    const [privatePack, setPrivatePack] = useState<boolean>(false)
 
-    const setIdAndPackName = (id: string, name: string) => {
+    const setIdAndPackName = (id: string, name: string, privatePack: boolean) => {
         setId(id)
         setPackName(name);
+        setPrivatePack(privatePack)
     }
-    const editPackCardsHandler = (id: string, packName: string) => {
+    const editPackCardsHandler = (id: string, packName: string, privatePack: boolean) => {
         setActiveEditModalPack(true)
-        setIdAndPackName(id, packName);
+        setIdAndPackName(id, packName, privatePack);
+
     }
     const deletePackCardsHandler = (id: string, packName: string) => {
         setActiveDeleteModalPack(true)
-        setIdAndPackName(id, packName);
+        setIdAndPackName(id, packName, privatePack);
     }
 
 
@@ -65,13 +68,13 @@ export const PacksListTable = () => {
                                 <td className={s.actions}>
                                     <div className={s.buttonBlock}>
                                         <SuperSmallButton learn disabled={isFetching}
-                                                     onClick={() => learnHandler(el._id, el.name)}/>
+                                                          onClick={() => learnHandler(el._id, el.name)}/>
                                         {el.user_id === userId &&
                                             <SuperSmallButton edit disabled={isFetching || activeDeleteModalPack}
-                                                         onClick={() => editPackCardsHandler(el._id, el.name)}/>}
+                                                              onClick={() => editPackCardsHandler(el._id, el.name, el.private)}/>}
                                         {el.user_id === userId &&
                                             <SuperSmallButton delet disabled={isFetching}
-                                                         onClick={() => deletePackCardsHandler(el._id, el.name)}/>}
+                                                              onClick={() => deletePackCardsHandler(el._id, el.name)}/>}
                                     </div>
                                 </td>
                             </tr>
@@ -88,9 +91,10 @@ export const PacksListTable = () => {
                 />
                 <EditPackName
                     open={activeEditModalPack}
-                              handleClose={modalCloseHandler}
-                              idCard={id}
-                              packNameFromPackListTable={packName}
+                    handleClose={modalCloseHandler}
+                    idCard={id}
+                    packNameFromPackListTable={packName}
+                    privatePackFromPackListTable={privatePack}
                 />
 
             </div>
