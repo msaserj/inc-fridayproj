@@ -33,7 +33,6 @@ export const SearchPanel = () => {
     }
     function searchCardsByPackName(value: string)  {
         dispatch(setSearchResultAC(value));
-        console.log(value)
     }
 
     function resetFilterHandler() {
@@ -45,8 +44,6 @@ export const SearchPanel = () => {
             dispatch(searchCardsPackThunk(searchValue));
         }
     }, [dispatch, searchValue]);
-    console.log('')
-    console.log("Search Panel", searchValue)
     return (
         <div>
             <div className={s.searchHeader}>

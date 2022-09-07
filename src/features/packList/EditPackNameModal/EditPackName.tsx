@@ -6,15 +6,18 @@ import {ModalMUI} from "../../../common/components/ModalMUI/ModalMUI";
 import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
 import css from "../AddNewPackModal/AddNewPackModal.module.css";
 import SuperButton from "../../../common/components/c2-Button/SuperButton";
+import SuperCheckbox from "../../../common/components/c3-Checkbox/SuperCheckbox";
 
 type AddNewPackPropsType = {
 	open: boolean
 	handleClose: () => void
 	idCard: string
 	packNameFromPackListTable: string
+	privatePackFromPackListTable: boolean
 }
 type FormikPackType = {
 	packName?: string
+	privatePack?: boolean
 }
 
 export const EditPackName: React.FC<AddNewPackPropsType> = (
@@ -22,13 +25,15 @@ export const EditPackName: React.FC<AddNewPackPropsType> = (
 		open,
 		handleClose,
 		idCard,
-		packNameFromPackListTable
+		packNameFromPackListTable,
+		privatePackFromPackListTable
 	}
 ) => {
 	const dispatch = useAppDispatch();
 	const formik = useFormik({
 		initialValues: {
 			packName: '',
+			privatePack: false
 		},
 		validate: (values) => {
 			const errors: FormikPackType = {};
@@ -36,30 +41,36 @@ export const EditPackName: React.FC<AddNewPackPropsType> = (
 			return errors;
 		},
 		onSubmit: values => {
-			dispatch(updateCardsPackThunk(idCard, values.packName))
+			dispatch(updateCardsPackThunk(idCard, values.packName, values.privatePack))
 			formik.resetForm();
 			formik.setTouched({});
-			formik.setErrors({packName: undefined});
+			formik.setErrors({packName: undefined, privatePack: undefined});
 			handleClose()
 		},
 	});
 	useEffect(()=>{
 		formik.setFieldValue("packName", packNameFromPackListTable)
+		formik.setFieldValue("privatePack", privatePackFromPackListTable)
+		console.log("eseEffect modal", privatePackFromPackListTable)
+		// formik.setValues({packName: packNameFromPackListTable})
 
-	},[packNameFromPackListTable])
+	},[packNameFromPackListTable, privatePackFromPackListTable])
 	const cancelHandler = () => {
 		formik.resetForm();
 		handleClose();
 	}
+
 	const krestikHandler = () => cancelHandler()
 	return (
 		<div>
 			<ModalMUI title={"Edit Pack Name"} opens={open} handleClose={krestikHandler}>
 				<form onSubmit={formik.handleSubmit}>
 					<SuperInputText
-						type="text" {...formik.getFieldProps('packName')}
+						 {...formik.getFieldProps('packName')}
 						error={formik.errors.packName && formik.touched.packName ? formik.errors.packName : ''}
 					/>
+					<SuperCheckbox
+						{...formik.getFieldProps('privatePack')} >Private pack</SuperCheckbox>
 					<div className={css.buttons}>
 						<SuperButton onClick={cancelHandler} type='reset'>Cancel</SuperButton>
 						<SuperButton disabled={!(formik.isValid && formik.dirty)} type={'submit'}>Save</SuperButton>
