@@ -53,7 +53,7 @@ export const RoutesComponent = () => {
                 <Route path="/" element={<Navigate to={PATH.PROFILE}/>}/>
                 <Route path={PATH.PACK_LIST} element={<PackList/>} />
                 <Route path={PATH.CARDS_LIST + ":cardPackID"} element={<CardsList/>}/>
-                <Route path={PATH.CARD_LEARNING} element={<CardLearning/>}/>
+                <Route path={PATH.CARD_LEARNING + ":cardPackID"} element={<CardLearning/>}/>
                 <Route path={PATH.ERROR404} element={<PageNotFound/>} />
                 <Route path="*" element={<Navigate to={PATH.ERROR404}/>}/>
             </Routes>

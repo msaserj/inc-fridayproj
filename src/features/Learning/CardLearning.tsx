@@ -2,9 +2,13 @@ import React from "react";
 import css from "./CardLearning.module.css"
 import {BackToPackList} from "../../common/components/BackToPackList/BackToPackList";
 import {useAppSelector} from "../../common/hooks/hooks";
+import {useParams} from "react-router-dom";
 
 
 export const CardLearning = () => {
+    const urlParams = useParams<"cardPackID">();
+    const cardPack_ID = urlParams.cardPackID;
+
     const packName = useAppSelector<string>(state => state.cardsList.packName)
 
     return (
