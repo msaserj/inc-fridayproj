@@ -1,6 +1,6 @@
 import {CardType} from "../../cards-api";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
-import {deleteCardTC, updateCardGradeTC} from "../../cardList-reducer";
+import {deleteCardTC} from "../../cardList-reducer";
 import React, {FC} from "react";
 import {BeautyDate} from "../../../../common/components/BeautyDate/BeautyDate";
 import {SuperSmallButton} from "../../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
@@ -16,38 +16,23 @@ export const CardsListItem: FC<CardsListItemPropsType> = ({card, editCardHandler
 	const userId = useAppSelector<string>(state => state.auth.user._id);
 	const dispatch = useAppDispatch();
 
-
-	// const question = "6*6"
-	// const answer = "36"
-
-	// const editCardHandler = () => {
-	//
-	// 	// const cardUpdateModel: UpdateCardModelType = {
-	// 	// 	// _id: card._id,
-	// 	// 	// question: question,
-	// 	// 	// answer: answer,
-	// 	// };
-	//
-	// };
-
 	const deleteButtonHandler = () => {
 		dispatch(deleteCardTC(card.cardsPack_id, card._id));
 	};
 
-	const setStars = (stars: any) => {
-		dispatch(updateCardGradeTC(card.cardsPack_id, card._id, stars))
-	}
+	// const setStars = (stars: any) => {
+	// 	dispatch(updateCardGradeTC(card.cardsPack_id, card._id, stars))
+	// }
 
 	return (
 		<>
-
-
 			<tr>
 				<td>{card.question}</td>
 				<td>{card.answer}</td>
 				<td><BeautyDate date={card.updated}/></td>
 
-				<td><SuperStarRating initialRating={Math.round(card.grade * 10) / 10} onRate={setStars}/></td>
+				{/*<td><SuperStarRating initialRating={Math.round(card.grade * 10) / 10} onRate={setStars}/></td>*/}
+				<td><SuperStarRating initialRating={Math.round(card.grade * 10) / 10}/></td>
 
 				{card.user_id === userId &&
                     <td>
@@ -56,11 +41,7 @@ export const CardsListItem: FC<CardsListItemPropsType> = ({card, editCardHandler
                         <SuperSmallButton delet onClick={deleteButtonHandler} disabled={isFetchingCards}/>
                     </td>
 				}
-
-
 			</tr>
-
-
 		</>
 	);
 };

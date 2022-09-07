@@ -51,9 +51,6 @@ export const EditPackName: React.FC<AddNewPackPropsType> = (
 	useEffect(()=>{
 		formik.setFieldValue("packName", packNameFromPackListTable)
 		formik.setFieldValue("privatePack", privatePackFromPackListTable)
-		console.log("eseEffect modal", privatePackFromPackListTable)
-		// formik.setValues({packName: packNameFromPackListTable})
-
 	},[packNameFromPackListTable, privatePackFromPackListTable])
 	const cancelHandler = () => {
 		formik.resetForm();
@@ -69,8 +66,12 @@ export const EditPackName: React.FC<AddNewPackPropsType> = (
 						 {...formik.getFieldProps('packName')}
 						error={formik.errors.packName && formik.touched.packName ? formik.errors.packName : ''}
 					/>
+
 					<SuperCheckbox
+						//checked={privatePackFromPackListTable} - вместо нужно помог Антон Хильманович:
+						checked={formik.values.privatePack}
 						{...formik.getFieldProps('privatePack')} >Private pack</SuperCheckbox>
+
 					<div className={css.buttons}>
 						<SuperButton onClick={cancelHandler} type='reset'>Cancel</SuperButton>
 						<SuperButton disabled={!(formik.isValid && formik.dirty)} type={'submit'}>Save</SuperButton>

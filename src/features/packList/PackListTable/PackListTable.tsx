@@ -1,5 +1,5 @@
 import {NavLink, useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
+import {useAppSelector} from "../../../common/hooks/hooks";
 import {PacksType} from "../packCards-api";
 import s from './PackListTable.module.css'
 import {TableHeaders} from "./TableHeaders/TableHeaders";
@@ -13,8 +13,6 @@ import {DeletePackModal} from "../DeletePackModal/DeletePackModal";
 
 
 export const PacksListTable = () => {
-
-    const dispatch = useAppDispatch();
 
     const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
     const userId = useAppSelector<string>(state => state.auth.user._id);
@@ -77,7 +75,7 @@ export const PacksListTable = () => {
                                 <td>{el.user_name}</td>
                                 <td className={s.actions}>
                                     <div className={s.buttonBlock}>
-                                        <SuperSmallButton learn disabled={isFetching}
+                                        <SuperSmallButton learn disabled={isFetching || (el.cardsCount === 0)}
                                                           onClick={() => learnHandler(el._id, el.name)}/>
                                         {el.user_id === userId &&
                                             <SuperSmallButton edit disabled={isFetching || activeDeleteModalPack}

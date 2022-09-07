@@ -13,6 +13,7 @@ export type AuthActionsType =
     | ReturnType<typeof setUserNameAC>
     | ReturnType<typeof recoveryPswdAC>
     | ReturnType<typeof newPswdAC>
+    | ReturnType<typeof isLoggedIn>
 
 type ThunkDispatchType = Dispatch<AuthActionsType | AppActionsType>
 
@@ -24,8 +25,8 @@ export const setUserNameAC = (payload: UserType) => ({type: "AUTH/SET-USER-DATA"
 export const registrationAC = (condition: boolean) => ({type: "AUTH/SET-REGISTRATION", condition} as const);
 export const recoveryPswdAC = (payload: RecoveryPswdType) => ({type: "AUTH/RECOVERY-PSWD", payload} as const);
 export const newPswdAC = (payload: NewPswdType) => ({type: "AUTH/NEW-PSWD", payload} as const);
+export const isLoggedIn = (payload: boolean) => ({type: "app/SET-IS-LOGGEDiN",  payload} as const)
 
-// types
 
 
 
@@ -44,6 +45,7 @@ type InitStateType = {
     user: UserType
     RecoveryPswd: RecoveryPswdType
     newPswd: NewPswdType
+    isLoggedIn:boolean
 };
 const InitialState: InitStateType = {
     successfulRegistration: false,
@@ -69,7 +71,8 @@ const InitialState: InitStateType = {
         rememberMe: false,
         error: '',  //ошибки от сервера
 
-    }
+    },
+    isLoggedIn: false
 }
 // reducers
 export const authReducer = (state: InitStateType = InitialState, action: AuthActionsType): InitStateType => {
@@ -88,6 +91,8 @@ export const authReducer = (state: InitStateType = InitialState, action: AuthAct
             return {...state, RecoveryPswd: action.payload}
          case "AUTH/NEW-PSWD":
             return {...state, newPswd: action.payload}
+        case "app/SET-IS-LOGGEDiN":
+            return {...state, isLoggedIn: action.payload}
         default:
             return state;
     }

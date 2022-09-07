@@ -44,8 +44,8 @@ export const SuperStarRating: React.FC<StarRatingPropsType> = (
                                 Math.round(numSelectedStars),
                                 numHoveringStars
                             )}
-                            handleSelect={() => {setNumSelectedStars(i + 1); onRate(i+1)}}
-                            handleHover={() => setNumHoveringStars(i + 1)}
+                            // handleSelect={() => {setNumSelectedStars(i + 1); onRate(i+1)}}
+                            // handleHover={() => setNumHoveringStars(i + 1)}
                         />
                     ))}
                 </div>

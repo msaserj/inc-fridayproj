@@ -108,6 +108,7 @@ export const CardListTable = () => {
                     })}
                     </tbody>
                 </table>
+
                 <div className={s.paginator}>
                     <Paginator
                         siblingCount={3}

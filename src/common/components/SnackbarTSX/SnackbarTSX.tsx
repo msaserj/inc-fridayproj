@@ -24,6 +24,11 @@ export const SnackbarTSX = () => {
 		}
 		setOpenSuccessSnackbar(false);
 	};
+
+	if(error === 'you are not authorized /ᐠ-ꞈ-ᐟ\\') {
+		return null
+	}
+
 	if (error) {
 		return <>
 			<Snackbar open={true}>
@@ -33,6 +38,7 @@ export const SnackbarTSX = () => {
 			</Snackbar>
 		</>
 	}
+
 	return (
 		<>
 			{userName
