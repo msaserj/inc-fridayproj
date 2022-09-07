@@ -27,7 +27,7 @@ const initState = {
 	maxGrade: undefined as undefined | number,
 	minGrade: undefined as undefined | number,
 	page: 1,
-	pageCount: 5,
+	pageCount: 10,
 	cardAnswer: "",
 	cardQuestion: "",
 	sortCards: '0updated',
@@ -76,7 +76,6 @@ export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispat
 		sortCards,
 		page,
 		pageCount,
-		packName
 	} = getState().cardsList;
 
 	const queryParams: GetCardsQueryParams = {

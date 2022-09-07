@@ -13,6 +13,8 @@ import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSma
 
 
 export const Profile = () => {
+    const dispatch = useAppDispatch();
+
     const {avatar} = useAppSelector(state => state.auth.user)
     const {name} = useAppSelector(state => state.auth.user)
     const {email} = useAppSelector(state => state.auth.user)
@@ -21,8 +23,7 @@ export const Profile = () => {
     const isLoggedIn = useAppSelector(state => state.auth.user._id)
     const randomAva = "https://thispersondoesnotexist.com/image"
 
-    const dispatch = useAppDispatch();
-
+    const [editModeUp, setEditModeUp] = useState<boolean>(false)
     const [value, setValue] = useState<string>(name ? name : 'Somebody')
 
     function LogoutHandler() {
@@ -33,10 +34,9 @@ export const Profile = () => {
     function onKeyPressInputHandle(e: React.KeyboardEvent<HTMLInputElement>) {
         if (e.key === `Enter`) {
             dispatch(updateUserDataTC(value))
+            setEditModeUp(false)
         }
     }
-
-    const [editModeUp, setEditModeUp] = useState<boolean>(false)
 
     const switchEditMode = () => {
         if (!editModeUp) {
