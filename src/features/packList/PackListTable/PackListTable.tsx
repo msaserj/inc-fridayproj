@@ -1,5 +1,5 @@
 import {NavLink, useNavigate} from "react-router-dom";
-import {useAppSelector} from "../../../common/hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {PacksType} from "../packCards-api";
 import s from './PackListTable.module.css'
 import {TableHeaders} from "./TableHeaders/TableHeaders";
@@ -10,10 +10,12 @@ import React, {useState} from "react";
 import {DotedLoader} from "../../../common/components/c8-Loaders/DotedLoader/DotedLoader";
 import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
 import {DeletePackModal} from "../DeletePackModal/DeletePackModal";
+import {getCardsTC, getRandomCardTC, setPackNameAC} from "../../cardList/cardList-reducer";
 
 
 export const PacksListTable = () => {
 
+    const dispatch = useAppDispatch();
     const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
     const userId = useAppSelector<string>(state => state.auth.user._id);
     const cardPacks = useAppSelector<PacksType[]>(store => store.packsList.cardPacks);
@@ -50,7 +52,8 @@ export const PacksListTable = () => {
     }
     const learnHandler = (id: string, name: string) => {
         // alert("You press learn button  " + name)
-
+       dispatch(setPackNameAC(name))
+        dispatch(getRandomCardTC({cardsPack_id: id}));
         // dispatch(setLearnPackNameAC(name));
         navigate(PATH.CARD_LEARNING + id);
 

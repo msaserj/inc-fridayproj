@@ -31,6 +31,8 @@ export type CardType = {
 	answerVideo?: string
 	questionImg?: string
 	questionVideo?: string
+	name:string
+	cardsCount:number
 }
 
 export type NewCardDataType = {
@@ -57,6 +59,15 @@ export type GetCardsResponseDataType = {
 	pageCount: number
 };
 
+export type UpdatedGradeType = {
+	_id: string
+	cardsPack_id: string
+	card_id: string
+	user_id: string
+	grade: number
+	shots: number
+}
+
 export const cardsAPI = {
 	getCards(params: GetCardsQueryParams) {
 		return instance.get<GetCardsResponseDataType>("cards/card", {params})
@@ -75,7 +86,7 @@ export const cardsAPI = {
 			.then(response => response.data);
 	},
 	updateGrade(card_id: string, grade: number) {
-		return instance.put("cards/grade", {card_id, grade})
+		return instance.put("cards/grade", { card_id,grade})
 			.then(response => response.data);
 	},
 };
