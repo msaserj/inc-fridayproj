@@ -10,7 +10,6 @@ import {addNewCardTC} from "../cardList-reducer";
 import {useParams} from "react-router-dom";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
-
 type AddNewPackPropsType = {
     open: boolean
     handleClose: () => void
@@ -18,19 +17,16 @@ type AddNewPackPropsType = {
     answer?:string
     id?:string
 }
-
 type FormikPackType = {
     question?: string
     answer?: string
 }
-
 export const AddNewCardModal: React.FC<AddNewPackPropsType> = (
     {
         open,
         handleClose,
         question,
         answer,
-        id
     }
 ) => {
     const urlParams = useParams<'cardPackID'>();
@@ -62,10 +58,8 @@ export const AddNewCardModal: React.FC<AddNewPackPropsType> = (
     useEffect(()=>{
         formik.setFieldValue("question", question)
         formik.setFieldValue("answer", answer)
-        console.log("eseEffect modal", question, answer)
-        // formik.setValues({packName: packNameFromPackListTable})
-
     },[question, answer])
+
     const cancelHandler = () => {
         formik.resetForm();
         handleClose();

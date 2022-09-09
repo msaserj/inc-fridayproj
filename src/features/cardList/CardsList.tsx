@@ -67,7 +67,7 @@ export const CardsList = () => {
             </div>
             {isFetchingCards ? <DotedLoader/> : cards.length === 0 ?
                     <div>No cards found. Press "Add card" to create new card in this pack</div>
-                    : <CardListTable/>}
+                    : <CardListTable idPack={cardsPack_ID}/>}
             <AddNewCardModal handleClose={modalCloseHandler} open={activeModalPack}/>
 
         </div>

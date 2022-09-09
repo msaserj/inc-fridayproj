@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import s from "./PackList.module.css";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
-
 import {
     filterCardsCountAC,
     searchCardsPackThunk,
@@ -23,7 +22,6 @@ export const SearchPanel = () => {
     const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
     const servMaxValue = useAppSelector<any>(state => state.packsList.max)
     const servMinValue = useAppSelector<any>(state => state.packsList.min)
-    console.log(servMaxValue)
 
     const [value, setValue] = React.useState<number[]>([servMinValue, servMaxValue]);
 
@@ -43,11 +41,8 @@ export const SearchPanel = () => {
     function resetFilterHandler() {
         setValue([0, 110])
         dispatch(filterCardsCountAC(0, 110))
-        dispatch(setSearchResultAC(``));
-        // dispatch(getCardsPackThunk());
-        console.log("resetFilterHandler()")
+        dispatch(setSearchResultAC(``))
     }
-
 
     const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
@@ -69,7 +64,6 @@ export const SearchPanel = () => {
     useEffect(() => {
         if (searchValue || value) {
             dispatch(searchCardsPackThunk(searchValue, value[0], value[1]));
-            console.log("IF", searchValue, value[0], value[1])
         }
     }, [searchValue, dValue]);
     return (
@@ -109,7 +103,6 @@ export const SearchPanel = () => {
                             value={value[0].toFixed()}
                             size="small"
                             onChange={handleInputChangeMin}
-                            // onBlur={handleBlur}
                             inputProps={{
                                 step: 1,
                                 min: 0,
@@ -120,11 +113,9 @@ export const SearchPanel = () => {
                         <Slider
                             style={{width: "600px"}}
                             disableSwap
-                            //getAriaLabel={() => 'Temperature range'}
                             value={value}
                             onChange={handleChange}
                             valueLabelDisplay="auto"
-                            // getAriaValueText={valuetext}
                         />
                         <MuiInput
                             className={s.muiInput}
@@ -132,7 +123,6 @@ export const SearchPanel = () => {
                             value={(value[1]).toFixed()}
                             size="small"
                             onChange={handleInputChangeMax}
-                            // onBlur={handleBlur}
                             inputProps={{
                                 step: 1,
                                 min: value[0],
@@ -140,7 +130,6 @@ export const SearchPanel = () => {
                                 type: 'number',
                                 'aria-labelledby': 'input-slider',
                             }}/>
-
                     </div>
                 </div>
                 <div className={s.reset_filter}>
