@@ -8,17 +8,15 @@ import {SearchPanel} from "./SearchPanel";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../common/constants/Path";
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {AddNewPackModal} from "./AddNewPackModal/AddNewPackModal";
 
 
 export const PackList = () => {
     const dispatch = useAppDispatch();
-    useEffect(()=>
-            dispatch(getCardsPackThunk()),
-        [dispatch])
-
-
+    // useEffect(()=>
+    //         dispatch(getCardsPackThunk()),
+    //     [])
 
     const currentPage = useAppSelector<number>(store => store.packsList.page);
     const pageSize = useAppSelector<number>(store => store.packsList.pageCount);
