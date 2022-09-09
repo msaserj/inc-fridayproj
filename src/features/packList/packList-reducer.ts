@@ -38,8 +38,8 @@ const initState = {
     cardPacks: [] as PacksType[],
     pageCount: 10,
     cardPacksTotalCount: 0,
-    min: undefined as number | undefined,
-    max: undefined as number | undefined,
+    min: 0,
+    max: 10,
     cardsCount: {
         maxCardsCount: 0,
         minCardsCount: 0,
@@ -114,13 +114,13 @@ export const getCardsPackThunk = (): AppThunkType => (dispatch, getState) => {
 //         .finally(() => dispatch(setAppIsLoadingAC(false)));
 // };
 
-export const searchCardsPackThunk = (packName: string): AppThunkType => (
+export const searchCardsPackThunk = (packName: string, min: any, max: any): AppThunkType => (
     dispatch, getState) => {
     const {pageCount, isMyPacks} = getState().packsList;
     const {_id} = getState().auth.user;
     const user_id = isMyPacks ? _id : '';
     dispatch(setAppIsLoadingAC(true))
-    packCardsApi.getCardsPack({pageCount, packName, user_id})
+    packCardsApi.getCardsPack({pageCount, packName, user_id, min, max})
         .then(res => {
             dispatch(getCardsPackAC(res.cardPacks));
             dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount));
