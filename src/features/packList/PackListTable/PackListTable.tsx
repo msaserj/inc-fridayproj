@@ -10,8 +10,7 @@ import React, {useState} from "react";
 import {DotedLoader} from "../../../common/components/c8-Loaders/DotedLoader/DotedLoader";
 import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
 import {DeletePackModal} from "../DeletePackModal/DeletePackModal";
-import {getCardsTC, getRandomCardTC, setPackNameAC} from "../../cardList/cardList-reducer";
-
+import {getRandomCardTC, setPackNameAC} from "../../cardList/cardList-reducer";
 
 export const PacksListTable = () => {
 

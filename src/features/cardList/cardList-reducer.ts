@@ -1,6 +1,5 @@
 import {
     cardsAPI,
-
     GetCardsQueryParams,
     GetCardsResponseDataType,
     NewCardDataType,
@@ -11,10 +10,6 @@ import {setAppIsLoadingAC} from "../../App/app-reducer";
 import {handleAppRequestError} from "../../common/utils/error-utils";
 import {getCard} from "../../common/constants/random";
 
-export const stringInit = null as unknown as string
-export const numberInit = null as unknown as number
-
-type InitStateType = typeof initState;
 export type CardsListActionsType =
     | ReturnType<typeof setCardsDataAC>
     | ReturnType<typeof setCurrentPageCardsListAC>
@@ -28,6 +23,9 @@ export type CardsListActionsType =
     | ReturnType<typeof setChangeGradeCards>;
 
 // Initial state
+type InitStateType = typeof initState;
+export const stringInit = null as unknown as string
+export const numberInit = null as unknown as number
 const initState = {
     cards: [] as Array<any>,
     packUserId: undefined as undefined | string,
@@ -117,22 +115,9 @@ const setChangeGradeCards = (card: UpdatedGradeType) =>
 
 // Thunk creators
 export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispatch, getState: () => AppStateType) => {
-    const {
-        cardAnswer,
-        cardQuestion,
-        sortCards,
-        page,
-        pageCount,
-    } = getState().cardsList;
 
-    const queryParams: GetCardsQueryParams = {
-        cardAnswer,
-        cardQuestion,
-        sortCards,
-        page,
-        pageCount,
-        ...params,
-    };
+    const {cardAnswer, cardQuestion, sortCards, page, pageCount} = getState().cardsList;
+    const queryParams: GetCardsQueryParams = {cardAnswer, cardQuestion, sortCards, page, pageCount, ...params,};
 
     dispatch(setAppIsLoadingAC(true));
     dispatch(setIsFetchingCards(true));

@@ -11,6 +11,7 @@ function SelectRadio() {
         <div>
             <hr/>
             <h3>Select and Radio</h3>
+            {/*should work (должно работать)*/}
             <div>
                 <SuperSelect
                     options={arr}

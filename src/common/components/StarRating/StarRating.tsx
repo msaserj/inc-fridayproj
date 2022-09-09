@@ -9,7 +9,15 @@ type StarRatingPropsType = {
     size?: number
     edit?: boolean
 }
-export const StarRating: React.FC<StarRatingPropsType> = ({count = 5, value, onClick, edit, size = 20}) => {
+export const StarRating: React.FC<StarRatingPropsType> = (
+    {
+        count = 5,
+        value,
+        onClick,
+        edit,
+        size = 20
+    }
+    ) => {
     const [hover, setHover] = useState(0)
     return (
         <div>

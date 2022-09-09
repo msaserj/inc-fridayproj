@@ -2,6 +2,7 @@ import React, {ChangeEvent, InputHTMLAttributes, DetailedHTMLProps} from 'react'
 import css from './SuperRadio.module.css'
 
 type DefaultRadioPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+
 type SuperRadioPropsType = DefaultRadioPropsType & {
     options?: any[]
     onChangeOption?: (option: any) => void
@@ -16,6 +17,7 @@ const SuperRadio: React.FC<SuperRadioPropsType> = (
     }
 ) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
+        // onChange, onChangeOption
         onChange && onChange(e)
         onChangeOption && onChangeOption(e.currentTarget.value)
     }

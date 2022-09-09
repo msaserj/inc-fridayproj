@@ -20,8 +20,11 @@ export const SearchPanel = () => {
     const isMyPacks = useAppSelector<boolean>(state => state.packsList.isMyPacks)
     const searchValue = useAppSelector<string>(state => state.packsList.searchResult)
     const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
-    const servMaxValue = useAppSelector<any>(state => state.packsList.max)
-    const servMinValue = useAppSelector<any>(state => state.packsList.min)
+    const servMaxValue = useAppSelector<any>(state => state.packsList.maxCardsCount)
+    const servMinValue = useAppSelector<any>(state => state.packsList.minCardsCount)
+    const servMaxCardsCount = useAppSelector<any>(state => state.packsList.maxCardsCount)
+    console.log("dsdddd", servMaxCardsCount)
+
 
     const [value, setValue] = React.useState<number[]>([servMinValue, servMaxValue]);
 
@@ -39,8 +42,8 @@ export const SearchPanel = () => {
         dispatch(setSearchResultAC(value));
     }
     function resetFilterHandler() {
-        setValue([0, 110])
-        dispatch(filterCardsCountAC(0, 110))
+        setValue([0, servMaxValue])
+        dispatch(filterCardsCountAC(0, servMaxValue))
         dispatch(setSearchResultAC(``))
     }
 

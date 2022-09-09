@@ -1,6 +1,5 @@
 import React, {FC, useState} from 'react';
 import s from "./CardListTable.module.css";
-import {SortButton} from "../../../common/components/SortButton/SortButton";
 import {CardsListItem} from "./CardListItem/CardsListItem";
 import {Paginator} from "../../../common/components/Paginator/Paginator";
 import {setCardsSortDirectionAC, setCurrentPageCardsListAC} from "../cardList-reducer";
@@ -23,10 +22,12 @@ export const CardListTable: FC<CardListPropsType> = ( idPack) => {
     const currentPage = useAppSelector<number>(state => state.cardsList.page);
     const pageSize = useAppSelector<number>(store => store.cardsList.pageCount);
     const cardsTotalCount = useAppSelector<number>(state => state.cardsList.cardsTotalCount);
-    const isFetchingCards = useAppSelector<boolean>(state => state.cardsList.isFetchingCards);
     const user_ID = useAppSelector(state => state.auth.user._id);
     const cards = useAppSelector<Array<CardType>>(state => state.cardsList.cards);
     const packUser_ID = useAppSelector(state => state.cardsList.packUserId);
+    const card = cards.find((t)=>{
+        return t._id === idPack.idPack
+    })
 
     const [activeModalPack, setModalActivePack] = useState<boolean>(false)
     // const modalCloseHandler = () => setModalActivePack(false);
@@ -57,12 +58,9 @@ export const CardListTable: FC<CardListPropsType> = ( idPack) => {
         setId(id)
     }
 
-    //dispatch(updateCardTC(card.cardsPack_id, cardUpdateModel));
-
     const changePageHandler = (page: number) => {
         dispatch(setCurrentPageCardsListAC(page));
     };
-
     //	фильтрация карт по типу (тип передаем в виде строки)
     const changeCardsSortDirection = (sortType: string) => {
         if (sortCards === "0" + sortType) {
@@ -75,42 +73,23 @@ export const CardListTable: FC<CardListPropsType> = ( idPack) => {
         <div>
             <div className={s.tableMainBlock}>
                 <table>
-
                     <thead className={s.theadStyle}>
                     <tr className={s.trStyle}>
-                        <th className={s.sortBlock} >
+                        <th className={s.sortBlock} onClick={() =>changeCardsSortDirection("question")} >
                             <span>Question</span>
-                            <SuperSmallButton style={{padding: "2px 8px"}} onClick={() => changeCardsSortDirection("question")} arrowUp={sortCards === "1question"} />
-                            <SortButton
-                                onClick={() => changeCardsSortDirection("question")}
-                                isActive={sortCards.slice(1) === "question"}
-                                direction={sortCards && sortCards[0]}
-                                isFetching={isFetchingCards}
-                            />
+                            <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={sortCards === "1question"} />
                         </th>
                         <th className={s.sortBlock} onClick={() => changeCardsSortDirection("answer")}>
                             <span>Answer</span>
-                            <SortButton
-                                isActive={sortCards.slice(1) === "answer"}
-                                direction={sortCards && sortCards[0]}
-                                isFetching={isFetchingCards}
-                            />
+                            <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={sortCards === "1answer"} />
                         </th>
                         <th className={s.sortBlock} onClick={() => changeCardsSortDirection("updated")}>
                             <span>Last Updated</span>
-                            <SortButton
-                                isActive={sortCards.slice(1) === "updated"}
-                                direction={sortCards && sortCards[0]}
-                                isFetching={isFetchingCards}
-                            />
+                            <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={sortCards === "1updated"} />
                         </th>
                         <th className={s.sortBlock} onClick={() => changeCardsSortDirection("grade")}>
                             <span>Grade</span>
-                            <SortButton
-                                isActive={sortCards.slice(1) === "grade"}
-                                direction={sortCards && sortCards[0]}
-                                isFetching={isFetchingCards}
-                            />
+                            <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={sortCards === "1grade"} />
                         </th>
                         {user_ID === packUser_ID && <th>Actions</th>}
                     </tr>

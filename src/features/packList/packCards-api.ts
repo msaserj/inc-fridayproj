@@ -1,5 +1,35 @@
 import {instance} from "../../api/api-instance";
 
+export const packCardsApi = {
+	getCardsPack(requestData: requestDataType) {
+		return instance.get<PackListType>(`/cards/pack`,
+			{params: {...requestData}})
+			.then(res => res.data)
+	},
+	addNewPack(name: string, makePrivate: boolean) {
+		return instance.post<AddPackType>(`/cards/pack`,
+			{cardsPack: {name, private: makePrivate}})
+	},
+	deleteCardsPack(id: string) {
+		return instance.delete<PacksType>(`/cards/pack/?id=${id}`)
+	},
+	updateCardsPack(_id: string, name: string, privatePack: boolean) {
+		return instance.put<UpdatePackType>(`/cards/pack`, {cardsPack: {_id, name, private: privatePack}})
+	},
+}
+// Response PackListType
+type PackListType = {
+	cardPacks: PacksType[]
+	page: number
+	pageCount: number
+	cardPacksTotalCount: number
+	minCardsCount: number
+	maxCardsCount: number
+
+	filter: string
+	isMyPacks: false
+	searchResult: string
+};
 export type PacksType = {
 	_id: string
 	user_id: string
@@ -17,29 +47,7 @@ export type PacksType = {
 	updated: string
 	more_id: string
 }
-export type AddPackType = {
-	name: string
-	deckCover: string
-	private: boolean
-}
-export type UpdatePackType = {
-	_id: string
-	deckCover: string
-	private: boolean
-}
-export type cardPacksDataType = {
-	cardPacks: PacksType[]
-
-	// we need it types ?!
-	cardPacksTotalCount: number
-	maxCardsCount: number
-	minCardsCount: number
-	page: number
-	pageCount: number
-	token: string
-	tokenDeathTime: Date
-}
-
+// Request Data for get request
 export type requestDataType = {
 	pageCount?: number
 	page?: number
@@ -50,22 +58,15 @@ export type requestDataType = {
 	max?: number
 }
 
-export const packCardsApi = {
-	getCardsPack(requestData: requestDataType) {
-		return instance.get<cardPacksDataType>(`/cards/pack`,
-			{params: {...requestData}})
-			.then(res => {
-				return res.data
-			})
-	},
-	addNewPack(name: string, makePrivate: boolean) {
-		return instance.post<AddPackType>(`/cards/pack`,
-			{cardsPack: {name, private: makePrivate}})
-	},
-	deleteCardsPack(id: string) {
-		return instance.delete<cardPacksDataType>(`/cards/pack/?id=${id}`)
-	},
-	updateCardsPack(_id: string, name: string, privatePack: boolean) {
-		return instance.put<UpdatePackType>(`/cards/pack`, {cardsPack: {_id, name, private: privatePack}})
-	},
+export type AddPackType = {
+	name: string
+	deckCover: string
+	private: boolean
 }
+
+export type UpdatePackType = {
+	_id: string
+	deckCover: string
+	private: boolean
+}
+
