@@ -1,5 +1,5 @@
 import React, {ButtonHTMLAttributes, DetailedHTMLProps} from 'react'
-import s from './SuperButton.module.css'
+import css from './SuperButton.module.css'
 
 
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
@@ -13,7 +13,7 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
         ...restProps
     }
 ) => {
-    const finalClassName = `${red ? s.red : s.button} ${className}`
+    const finalClassName = `${red ? css.red : css.button} ${className}`
     return (
         <button
             className={finalClassName}

@@ -7,7 +7,7 @@ import {
     setSearchQueryByQuestionAC,
 } from "./cardList-reducer";
 import {PATH} from "../../common/constants/Path";
-import s from './CardsList.module.css';
+import css from './CardsList.module.css';
 import {DebounceSearch} from "../../common/components/DebounceSearch/DebounceSearch";
 import {DotedLoader} from "../../common/components/c8-Loaders/DotedLoader/DotedLoader";
 import {BackToPackList} from "../../common/components/BackToPackList/BackToPackList";
@@ -48,10 +48,10 @@ export const CardsList = () => {
         return <Navigate to={PATH.LOGIN}/>
     }
     return (
-        <div className={s.cardsPage}>
+        <div className={css.cardsPage}>
             <BackToPackList/>
-            <div className={s.headPackName}><h3>Name Pack: {packName}</h3></div>
-            <div className={s.searchBlock}>
+            <div className={css.headPackName}><h3>Name Pack: {packName}</h3></div>
+            <div className={css.searchBlock}>
                 <div>
                     <DebounceSearch
                         resetValue={cardQuestion}

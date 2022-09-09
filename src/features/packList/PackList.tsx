@@ -1,4 +1,4 @@
-import s from "./PackList.module.css"
+import css from "./PackList.module.css"
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {getCardsPackThunk, setCurrentPageCardPacksAC} from "./packList-reducer";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
@@ -39,15 +39,15 @@ export const PackList = () => {
 
     return (
         <>
-            <div className={s.mainBlock}>
-                <div className={s.head}>
+            <div className={css.mainBlock}>
+                <div className={css.head}>
                     <h2>Packs list</h2>
                     <SuperButton disabled={isFetching} onClick={addCardsPackHandler}>Add new pack</SuperButton>
                 </div>
                 <SearchPanel/>
-                <section className={s.packList}>
+                <section className={css.packList}>
                     <PacksListTable/>
-                    <div className={s.paginator}>
+                    <div className={css.paginator}>
                         <Paginator currentPage={currentPage}
                                    pageSize={pageSize}
                                    totalCount={totalCountPage}

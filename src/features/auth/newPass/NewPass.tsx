@@ -2,7 +2,7 @@ import React from "react";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {useFormik} from "formik";
 import {newPswdThunkTC} from "../auth-reducer";
-import s from "./NewPass.module.css";
+import css from "./NewPass.module.css";
 import {useNavigate, useParams} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";
 import SuperButton from "../../../common/components/c2-Button/SuperButton";
@@ -38,25 +38,25 @@ export const NewPass = () => {
             navigate(PATH.PROFILE);
         },
     });
-    return <div className={s.mainBlock}>
+    return <div className={css.mainBlock}>
 
-        <div className={s.recoveryBlock}>
+        <div className={css.recoveryBlock}>
             <h2>Create new password</h2>
-            <form onSubmit={formik.handleSubmit} className={s.form}>
-                <div className={s.password}>
+            <form onSubmit={formik.handleSubmit} className={css.form}>
+                <div className={css.password}>
                     <SuperPasswordInput
                         autoComplete={''}
                         id="standard-basic"
                         type="password" {...formik.getFieldProps('password')}
-                        className={s.superInputText}
+                        className={css.superInputText}
                         error={formik.errors.password && formik.touched.password ? formik.errors.password : ''}
                         placeholder={"enter new password"}/>
                 </div>
-                <div className={s.infoSpan}>
+                <div className={css.infoSpan}>
                     <span >Create new password and we will send you further instructions to email</span>
                 </div>
 
-                <SuperButton type={'submit'} className={s.submit_button}
+                <SuperButton type={'submit'} className={css.submit_button}
                              disabled={!(formik.isValid && formik.dirty)}>Create new password</SuperButton>
             </form>
         </div>

@@ -7,7 +7,7 @@ import {registrationThunkTC} from "../auth-reducer";
 import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
 import SuperPasswordInput from "../../../common/components/c1-InputText/PasswordInpit/SuperPasswordInput";
 import SuperButton from "../../../common/components/c2-Button/SuperButton";
-import s from "./Registration.module.css"
+import css from "./Registration.module.css"
 
 type ErrorFormikType = {
     password?: string
@@ -62,32 +62,32 @@ export const RegistrationForm = () => {
         }
     },[])
     return <div>
-            <form onSubmit={formik.handleSubmit} className={s.form}>
-                <div className={s.email}>
+            <form onSubmit={formik.handleSubmit} className={css.form}>
+                <div className={css.email}>
                     <SuperInputText
                         id="standard-basic"
                         type="email" {...formik.getFieldProps('email')}
-                        className={s.superInputText}
+                        className={css.superInputText}
                         error={formik.errors.email && formik.touched.email ? formik.errors.email : ''}
                         placeholder={"enter email"}/>
                 </div>
-                <div className={s.password}>
+                <div className={css.password}>
                     <SuperPasswordInput
                         id="standard-basic"
                         type="password" {...formik.getFieldProps('password')}
-                        className={s.superInputText}
+                        className={css.superInputText}
                         error={formik.errors.password && formik.touched.password ? formik.errors.password : ''}
                         placeholder={"enter password"}/>
                     <SuperPasswordInput
                         id="standard-basic"
                         type="password" {...formik.getFieldProps('confirmPassword')}
-                        className={s.superInputText}
+                        className={css.superInputText}
                         error={formik.errors.confirmPassword && formik.touched.confirmPassword ? formik.errors.confirmPassword : ''}
                         placeholder={"enter password"}/>
                 </div>
-                <SuperButton type={'submit'} className={s.submit_button}
+                <SuperButton type={'submit'} className={css.submit_button}
                              disabled={!(formik.isValid && formik.dirty)}>Register</SuperButton>
-                <div className={s.regQuestion}>
+                <div className={css.regQuestion}>
                     <NavLink to={PATH.LOGIN}>
                         Already have an account?
                     </NavLink>

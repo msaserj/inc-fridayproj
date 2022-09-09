@@ -1,5 +1,5 @@
 import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent, useState} from 'react'
-import s from './SuperPasswordInput.module.css'
+import css from './SuperPasswordInput.module.css'
 import eyeIcon from './eyeIcon.svg'
 import blind from "./blind.png";
 
@@ -39,10 +39,10 @@ const SuperPasswordInput: React.FC<SuperInputTextPropsType> = (
         && e.key === 'Enter'
         && onEnter()
     }
-    const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`
-    const finalInputClassName = `${s.input} ${error ? s.errorInput : s.Input} ${className}` // need to fix with (?:) and s.superInput
+    const finalSpanClassName = `${css.error} ${spanClassName ? spanClassName : ''}`
+    const finalInputClassName = `${css.input} ${error ? css.errorInput : css.Input} ${className}` // need to fix with (?:) and s.superInput
     return (
-        <div className={s.main}>
+        <div className={css.main}>
             <div>
                 <input
                     type={inputType}
@@ -52,14 +52,14 @@ const SuperPasswordInput: React.FC<SuperInputTextPropsType> = (
                     placeholder={placeholder}
                     {...restProps}
                 />
-                <div className={s.eyeButton} onClick={changeInputTypeHandler}>
+                <div className={css.eyeButton} onClick={changeInputTypeHandler}>
                 </div>
                 {error && <span className={finalSpanClassName}>{error}</span>}
             </div>
-            <div className={s.eyeButton} onClick={changeInputTypeHandler}>
+            <div className={css.eyeButton} onClick={changeInputTypeHandler}>
                 {passwordType
-                    ? <img className={s.eyeIcon} src={blind} alt={"closed eye icon"}/>
-                    : <img className={s.eyeIcon} src={eyeIcon} alt={"eye icon"}/>}
+                    ? <img className={css.eyeIcon} src={blind} alt={"closed eye icon"}/>
+                    : <img className={css.eyeIcon} src={eyeIcon} alt={"eye icon"}/>}
             </div>
         </div>
     )

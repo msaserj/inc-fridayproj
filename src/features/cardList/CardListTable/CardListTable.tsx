@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import s from "./CardListTable.module.css";
+import css from "./CardListTable.module.css";
 import {CardsListItem} from "./CardListItem/CardsListItem";
 import {Paginator} from "../../../common/components/Paginator/Paginator";
 import {setCardsSortDirectionAC, setCurrentPageCardsListAC} from "../cardList-reducer";
@@ -71,23 +71,23 @@ export const CardListTable: FC<CardListPropsType> = ( idPack) => {
     };
     return (
         <div>
-            <div className={s.tableMainBlock}>
+            <div className={css.tableMainBlock}>
                 <table>
-                    <thead className={s.theadStyle}>
-                    <tr className={s.trStyle}>
-                        <th className={s.sortBlock} onClick={() =>changeCardsSortDirection("question")} >
+                    <thead className={css.theadStyle}>
+                    <tr className={css.trStyle}>
+                        <th className={css.sortBlock} onClick={() =>changeCardsSortDirection("question")} >
                             <span>Question</span>
                             <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={sortCards === "1question"} />
                         </th>
-                        <th className={s.sortBlock} onClick={() => changeCardsSortDirection("answer")}>
+                        <th className={css.sortBlock} onClick={() => changeCardsSortDirection("answer")}>
                             <span>Answer</span>
                             <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={sortCards === "1answer"} />
                         </th>
-                        <th className={s.sortBlock} onClick={() => changeCardsSortDirection("updated")}>
+                        <th className={css.sortBlock} onClick={() => changeCardsSortDirection("updated")}>
                             <span>Last Updated</span>
                             <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={sortCards === "1updated"} />
                         </th>
-                        <th className={s.sortBlock} onClick={() => changeCardsSortDirection("grade")}>
+                        <th className={css.sortBlock} onClick={() => changeCardsSortDirection("grade")}>
                             <span>Grade</span>
                             <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={sortCards === "1grade"} />
                         </th>
@@ -95,7 +95,7 @@ export const CardListTable: FC<CardListPropsType> = ( idPack) => {
                     </tr>
                     </thead>
 
-                    <tbody className={s.tbodyStyle}>
+                    <tbody className={css.tbodyStyle}>
                     {cards.map(c => {
                         return (
                             <CardsListItem
@@ -108,7 +108,7 @@ export const CardListTable: FC<CardListPropsType> = ( idPack) => {
                     </tbody>
                 </table>
 
-                <div className={s.paginator}>
+                <div className={css.paginator}>
                     <Paginator
                         siblingCount={3}
                         totalCount={cardsTotalCount}

@@ -1,7 +1,7 @@
 import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {PacksType} from "../packCards-api";
-import s from './PackListTable.module.css'
+import css from './PackListTable.module.css'
 import {TableHeaders} from "./TableHeaders/TableHeaders";
 import {PATH} from "../../../common/constants/Path";
 import {BeautyDate} from "../../../common/components/BeautyDate/BeautyDate";
@@ -60,14 +60,14 @@ export const PacksListTable = () => {
     return (
         isFetching ?
             <div><DotedLoader large/></div> :
-            <div className={s.tableMainBlock}>
+            <div className={css.tableMainBlock}>
                 <table>
                     <TableHeaders/>
-                    <tbody className={s.tbodyStyle}>
+                    <tbody className={css.tbodyStyle}>
                     {cardPacks.map((el) => {
                         return (
                             <tr key={el._id}>
-                                <td className={s.nameStyle}>
+                                <td className={css.nameStyle}>
                                     <NavLink to={PATH.CARDS_LIST + el._id}>
                                         {el.name}
                                     </NavLink>
@@ -75,8 +75,8 @@ export const PacksListTable = () => {
                                 <td>{el.cardsCount}</td>
                                 <td><BeautyDate date={el.updated}/></td>
                                 <td>{el.user_name}</td>
-                                <td className={s.actions}>
-                                    <div className={s.buttonBlock}>
+                                <td className={css.actions}>
+                                    <div className={css.buttonBlock}>
                                         <SuperSmallButton learn disabled={isFetching || (el.cardsCount === 0)}
                                                           onClick={() => learnHandler(el._id, el.name)}/>
                                         {el.user_id === userId &&

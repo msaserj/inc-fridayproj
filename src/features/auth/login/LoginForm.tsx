@@ -3,7 +3,7 @@ import SuperButton from "../../../common/components/c2-Button/SuperButton";
 import {PATH} from "../../../common/constants/Path";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {NavLink} from "react-router-dom";
-import s from './Login.module.css';
+import css from './Login.module.css';
 import {useFormik} from "formik";
 import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
 import SuperCheckbox from "../../../common/components/c3-Checkbox/SuperCheckbox";
@@ -48,37 +48,37 @@ export const LoginForm = () => {
 	});
 	return (
 		<>
-			<form onSubmit={formik.handleSubmit} className={s.form}>
-				<div className={s.email}>
+			<form onSubmit={formik.handleSubmit} className={css.form}>
+				<div className={css.email}>
 					<SuperInputText
 						id="standard-basic"
 						type="email" {...formik.getFieldProps('email')}
-						className={s.superInputText}
+						className={css.superInputText}
 						error={formik.errors.email && formik.touched.email ? formik.errors.email : ''}
 						placeholder={"enter email"}/>
 				</div>
-				<div className={s.password}>
+				<div className={css.password}>
 					<SuperPasswordInput
 						id="standard-basic"
 						type="password" {...formik.getFieldProps('password')}
-						className={s.superInputText}
+						className={css.superInputText}
 						error={formik.errors.password && formik.touched.password ? formik.errors.password : ''}
 						placeholder={"enter password"}/>
 				</div>
-				<div className={s.superCheckbox}>
+				<div className={css.superCheckbox}>
 					<SuperCheckbox
 								   {...formik.getFieldProps('rememberMe')}>Remember me
 					</SuperCheckbox>
 				</div>
-					<NavLink className={s.forgot_password} to={PATH.RECOVERY_PASS}>
+					<NavLink className={css.forgot_password} to={PATH.RECOVERY_PASS}>
 						Forgot Password?
 					</NavLink>
 
-				<SuperButton type={'submit'} className={s.submit_button}
+				<SuperButton type={'submit'} className={css.submit_button}
 							 disabled={!(formik.isValid && formik.dirty)}>Login</SuperButton>
 			</form>
-			<span className={s.signUpLabel}>Don’t have an account?</span>
-			<div className={s.sign_up}>
+			<span className={css.signUpLabel}>Don’t have an account?</span>
+			<div className={css.sign_up}>
 				<NavLink
 					to={PATH.REGISTRATION}
 				>Sign Up</NavLink>

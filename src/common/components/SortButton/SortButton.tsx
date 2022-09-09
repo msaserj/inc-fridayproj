@@ -1,5 +1,5 @@
 import {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
-import s from './SortButton.module.css';
+import css from './SortButton.module.css';
 
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
@@ -18,7 +18,7 @@ export const SortButton: React.FC<SortButtonPropsType> = (
     }
 ) => {
 
-    const finalStyle = `${s.btnStyle} ${isActive ? s.active : ''}  ${className ? className : ""}`;
+    const finalStyle = `${css.btnStyle} ${isActive ? css.active : ''}  ${className ? className : ""}`;
     const indicator = !direction ? '▼' : direction === "0" ? '▼' : '▲';
     return (
         <button className={finalStyle} disabled={isFetching}>{indicator}</button>

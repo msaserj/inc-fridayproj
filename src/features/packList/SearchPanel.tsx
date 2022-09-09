@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import s from "./PackList.module.css";
+import css from "./PackList.module.css";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
 import {
     filterCardsCountAC,
@@ -71,7 +71,7 @@ export const SearchPanel = () => {
     }, [searchValue, dValue]);
     return (
         <div>
-            <div className={s.searchHeader}>
+            <div className={css.searchHeader}>
                 <div>
                     <h3>Search</h3>
                     <DebounceSearch
@@ -83,7 +83,7 @@ export const SearchPanel = () => {
                 </div>
                 <div>
                     <h3>Show packs cards</h3>
-                    <div className={s.userChooseButton}>
+                    <div className={css.userChooseButton}>
                         <SuperButton style={{minWidth: "120px"}}
                                      onClick={getMyPackHandler}
                                      red={isMyPacks && !isLoad}
@@ -98,11 +98,11 @@ export const SearchPanel = () => {
                         </SuperButton>
                     </div>
                 </div>
-                <div className={s.rangeBlock}>
+                <div className={css.rangeBlock}>
                     <h3>Number of cards</h3>
-                    <div className={s.sliderBlock}>
+                    <div className={css.sliderBlock}>
                         <MuiInput
-                            className={s.muiInput}
+                            className={css.muiInput}
                             value={value[0].toFixed()}
                             size="small"
                             onChange={handleInputChangeMin}
@@ -121,7 +121,7 @@ export const SearchPanel = () => {
                             valueLabelDisplay="auto"
                         />
                         <MuiInput
-                            className={s.muiInput}
+                            className={css.muiInput}
                             //style={{}}
                             value={(value[1]).toFixed()}
                             size="small"
@@ -135,7 +135,7 @@ export const SearchPanel = () => {
                             }}/>
                     </div>
                 </div>
-                <div className={s.reset_filter}>
+                <div className={css.reset_filter}>
                     <SuperSmallButton disabled={isLoad} filter onClick={resetFilterHandler}/>
                 </div>
             </div>

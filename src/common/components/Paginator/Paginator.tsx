@@ -1,5 +1,5 @@
 import {DOTS, usePagination} from "./UsePagination";
-import s from "./Paginator.module.css"
+import css from "./Paginator.module.css"
 
 
 type PaginationPropsType = {
@@ -42,21 +42,21 @@ export const Paginator: React.FC<PaginationPropsType> = (
     const lastPage = paginationRange[paginationRange.length - 1];
 
     return (
-        <div className={s.paginationContainer}>
-      <span className={s.paginationBlock}>
+        <div className={css.paginationContainer}>
+      <span className={css.paginationBlock}>
         <span onClick={onPrevious}
-              className={currentPage === 1 ? s.disabled : s.paginationItem}
+              className={currentPage === 1 ? css.disabled : css.paginationItem}
         >
-          <div className={`${s.arrow} ${s.left}`}/>
+          <div className={`${css.arrow} ${css.left}`}/>
         </span>
 
           {paginationRange.map((pageNumber, index) => {
               if (pageNumber === DOTS) {
-                  return <span key={`${index}-${pageNumber}`} className={s.dots}>&#8230;</span>;
+                  return <span key={`${index}-${pageNumber}`} className={css.dots}>&#8230;</span>;
               }
               return (
                   <span key={`${index}-${pageNumber}`}
-                        className={pageNumber === currentPage ? s.selected : s.paginationItem}
+                        className={pageNumber === currentPage ? css.selected : css.paginationItem}
                         onClick={() => onPageChange(pageNumber)}
                   >
               {pageNumber}
@@ -64,10 +64,10 @@ export const Paginator: React.FC<PaginationPropsType> = (
               );
           })}
           <span
-              className={currentPage === lastPage ? s.disabled : s.paginationItem}
+              className={currentPage === lastPage ? css.disabled : css.paginationItem}
               onClick={onNext}
           >
-          <div className={`${s.arrow} ${s.right}`}/>
+          <div className={`${css.arrow} ${css.right}`}/>
         </span>
       </span>
         </div>

@@ -3,7 +3,7 @@ import React from "react";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {useFormik} from "formik";
 import {recoveryPswdThunkTC} from "../../auth-reducer";
-import s from "./RecoveryPass.module.css";
+import css from "./RecoveryPass.module.css";
 import SuperInputText from "../../../../common/components/c1-InputText/SuperInputText";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../../../common/constants/Path";
@@ -43,27 +43,27 @@ export const RecoveryPass = () => {
     if (user_ID) {
         return <Navigate to={PATH.PACK_LIST}/>
     }
-    return <div className={s.mainBlock}>
-        <div className={s.recoveryBlock}>
+    return <div className={css.mainBlock}>
+        <div className={css.recoveryBlock}>
             <h2>Recovery Password</h2>
-            <form onSubmit={formik.handleSubmit} className={s.form}>
-                <div className={s.email}>
+            <form onSubmit={formik.handleSubmit} className={css.form}>
+                <div className={css.email}>
                     <SuperInputText
                         id="standard-basic"
                         type="email" {...formik.getFieldProps('email')}
-                        className={s.superInputText}
+                        className={css.superInputText}
                         error={formik.errors.email && formik.touched.email ? formik.errors.email : ''}
                         placeholder={"enter email"}/>
                 </div>
-                <div className={s.infoSpan}>
+                <div className={css.infoSpan}>
                     <span >Enter your email address and we will send you further instructions </span>
                 </div>
 
-                <SuperButton type={'submit'} className={s.submit_button}
+                <SuperButton type={'submit'} className={css.submit_button}
                              disabled={!(formik.isValid && formik.dirty)}>Send</SuperButton>
             </form>
-            <span className={s.passQuestion}>Did you remember your password?</span>
-            <div className={s.tryLoggin}>
+            <span className={css.passQuestion}>Did you remember your password?</span>
+            <div className={css.tryLoggin}>
                 <NavLink
                     to={PATH.LOGIN}
                 >Try logging in</NavLink>

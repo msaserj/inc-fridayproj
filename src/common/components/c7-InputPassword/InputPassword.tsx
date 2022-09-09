@@ -5,7 +5,7 @@ import React, {
 	KeyboardEvent,
 	useState
 } from "react";
-import s from "./InputPassword.module.css";
+import css from "./InputPassword.module.css";
 import eyeIcon from "../../../assets/img/eye.png";
 import blind from "../../../assets/img/blind.png";
 
@@ -46,11 +46,11 @@ const InputPassword: React.FC<SuperInputTextPropsType> = (
 		onEnter && e.key === 'Enter' && onEnter();
 	}
 
-	const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`;
-	const finalInputClassName = `${s.superInput} ${error ? s.errorInput : ""} ${className ? className : ""}`;
+	const finalSpanClassName = `${css.error} ${spanClassName ? spanClassName : ''}`;
+	const finalInputClassName = `${css.superInput} ${error ? css.errorInput : ""} ${className ? className : ""}`;
 
 	return (
-		<div className={s.inputPassword}>
+		<div className={css.inputPassword}>
 			<input
 				type={inputType}
 				onChange={onChangeCallback}
@@ -58,7 +58,7 @@ const InputPassword: React.FC<SuperInputTextPropsType> = (
 				className={finalInputClassName}
 				{...restProps}
 			/>
-			<div className={s.eyeButton} onClick={changeInputTypeHandler}>
+			<div className={css.eyeButton} onClick={changeInputTypeHandler}>
 				{passwordType
 					? <img src={eyeIcon} alt={"closed eye icon"}/>
 					: <img src={blind} alt={"eye icon"}/>}

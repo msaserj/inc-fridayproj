@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {sortCardsPackThunk} from "../../packList-reducer";
-import s from "./TableHeaders.module.css"
+import css from "./TableHeaders.module.css"
 import {SuperSmallButton} from "../../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
 import React from "react";
 
@@ -22,15 +22,15 @@ export const TableHeaders = () => {
 
     return (
         <thead>
-        <tr className={s.trStyle}>
+        <tr className={css.trStyle}>
             <th>
-                <div className={s.sortBlock}>
+                <div className={css.sortBlock}>
                     <span>Name</span>
                     <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={currentFilter === "1name"} />
                 </div>
             </th>
             <th>
-                <div className={s.sortBlock} onClick={() => !isLoading && sortCardsByTypeHandler('cardsCount')}>
+                <div className={css.sortBlock} onClick={() => !isLoading && sortCardsByTypeHandler('cardsCount')}>
                     <span>Cards</span>
                     <SuperSmallButton
                         style={{padding: "2px 8px"}}
@@ -38,7 +38,7 @@ export const TableHeaders = () => {
                 </div>
             </th>
             <th>
-                <div className={s.sortBlock} onClick={() => !isLoading && sortCardsByTypeHandler('updated')}>
+                <div className={css.sortBlock} onClick={() => !isLoading && sortCardsByTypeHandler('updated')}>
                     <span>Last Updated</span>
                     <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={currentFilter === "1updated"} />
                 </div>
