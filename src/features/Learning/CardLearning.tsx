@@ -43,8 +43,8 @@ export const CardLearning = () => {
                     {/*</div>*/}
 
                     <div className={css.personalInfo}>
-                        <h1> Question: {randomCard.question}</h1>
-                        <h2>Number of answers per question:{randomCard.shots}</h2>
+                        <h3> Question: {randomCard.question}</h3>
+                        <p>Number of answers per question:{randomCard.shots}</p>
                         {showAnswer && <div>
                             <p>{randomCard.answer}</p>
                             <StarRating edit={true} value={rate} size={20} onClick={(rate) => {
@@ -52,9 +52,12 @@ export const CardLearning = () => {
                                 dispatch(gradeCardTC(rate))
                             }}/>
                         </div>}
-                        <SuperButton disabled={loadingModal || showAnswer} onClick={() => setShowAnswer(true)}>Show answer</SuperButton>
-                        <SuperButton disabled={loadingModal} onClick={onNext}>Next
-                            question</SuperButton>
+                        <div style={{ position: "absolute", bottom: "50px"}}>
+                            <SuperButton disabled={loadingModal || showAnswer} onClick={() => setShowAnswer(true)}>Show answer</SuperButton>
+                            <SuperButton disabled={loadingModal} onClick={onNext}>Next
+                                question</SuperButton>
+                        </div>
+
                     </div>
                 </div>
             </div>
