@@ -11,10 +11,8 @@ type GetCardsPackActionType =
     ReturnType<typeof setCurrentFilterAC> |
     ReturnType<typeof setViewPacksAC> |
     ReturnType<typeof setSearchResultAC> |
-    ReturnType<typeof filterCardsCountAC>
-
-type InitStateType = typeof initState;
-export type PacksListActionsType = GetCardsPackActionType
+    ReturnType<typeof filterCardsCountAC> |
+    ReturnType<typeof setMaxCardsCountAC>
 
 // Action creators
 export const getCardsPackAC = (cardPacks: PacksType[]) =>
@@ -26,14 +24,17 @@ export const setCurrentPageCardPacksAC = (page: number) =>
 export const setCurrentFilterAC = (filter: string) =>
     ({type: 'packsList/SET-CURRENT-FILTER', filter} as const);
 export const setViewPacksAC = (isMyPacks: boolean) =>
-    ({type: 'packsList/SET-VIEW-PACKS', isMyPacks} as const);
+    ({type: 'packsList/SET-IS-MY-PACKS', isMyPacks} as const);
 export const setSearchResultAC = (searchResult: string) =>
     ({type: 'packsList/SET-SEARCH-RESULT', searchResult} as const);
 export const filterCardsCountAC = (min: number, max: number) =>
     ({type: 'packsList/FILTER-CARDS-COUNT', cardsCount: {min, max}} as const);
-
+export const setMaxCardsCountAC = (maxCardsCount: number) =>
+    ({type: 'packsList/SET-MAX-CARDCOUNT', maxCardsCount} as const);
 
 // Initial state
+type InitStateType = typeof initState;
+export type PacksListActionsType = GetCardsPackActionType
 const initState = {
     cardPacks: [] as PacksType[],
     page: 1,
@@ -58,12 +59,14 @@ export const packsListReducer = (state: InitStateType = initState, action: Packs
             return {...state, page: action.page}
         case 'packsList/SET-CURRENT-FILTER':
             return {...state, filter: action.filter}
-        case 'packsList/SET-VIEW-PACKS':
+        case 'packsList/SET-IS-MY-PACKS':
             return {...state, isMyPacks: action.isMyPacks}
         case 'packsList/SET-SEARCH-RESULT':
             return {...state, searchResult: action.searchResult}
         case 'packsList/FILTER-CARDS-COUNT':
             return {...state, ...action.cardsCount};
+        case 'packsList/SET-MAX-CARDCOUNT':
+            return {...state, maxCardsCount: action.maxCardsCount};
         default:
             return state;
     }
@@ -87,6 +90,8 @@ export const getCardsPackThunk = (): AppThunkType => (dispatch, getState) => {
         max: maxCardsCount,
     })
         .then(res => {
+            dispatch(setMaxCardsCountAC(res.maxCardsCount))
+            console.log(res.maxCardsCount)
             dispatch(getCardsPackAC(res.cardPacks));
             dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount));
         })
@@ -110,7 +115,7 @@ export const getCardsPackThunk = (): AppThunkType => (dispatch, getState) => {
 //         .catch(error => handleAppRequestError(error, dispatch))
 //         .finally(() => dispatch(setAppIsLoadingAC(false)));
 // };
-
+// async await variant
 export const searchCardsPackThunk = (packName: string, minCardsCount: any, maxCardsCount: any): AppThunkType => (
     dispatch, getState) => {
     const {pageCount, isMyPacks} = getState().packsList;
@@ -119,6 +124,8 @@ export const searchCardsPackThunk = (packName: string, minCardsCount: any, maxCa
     dispatch(setAppIsLoadingAC(true))
     packCardsApi.getCardsPack({pageCount, packName, user_id, min: minCardsCount, max: maxCardsCount})
         .then(res => {
+            dispatch(setMaxCardsCountAC(res.maxCardsCount))
+            console.log("TC", res.maxCardsCount)
             dispatch(getCardsPackAC(res.cardPacks));
             dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount));
         })
@@ -128,13 +135,11 @@ export const searchCardsPackThunk = (packName: string, minCardsCount: any, maxCa
 
 export const sortCardsPackThunk = (sortPacks: string): AppThunkType => (
     dispatch, getState) => {
-    const {pageCount, isMyPacks, searchResult} = getState().packsList;
-    const packName = searchResult ? searchResult : '';
+    const {pageCount, searchResult} = getState().packsList;
     const {_id} = getState().auth.user;
-    const user_id = isMyPacks ? _id : '';
     dispatch(setAppIsLoadingAC(true));
     dispatch(setCurrentFilterAC(sortPacks));
-    packCardsApi.getCardsPack({pageCount, sortPacks, user_id, packName})
+    packCardsApi.getCardsPack({pageCount, sortPacks, user_id: _id, packName: searchResult})
         .then(res => {
             dispatch(getCardsPackAC(res.cardPacks));
             dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount));

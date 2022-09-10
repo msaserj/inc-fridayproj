@@ -121,6 +121,7 @@ export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispat
 
     dispatch(setAppIsLoadingAC(true));
     dispatch(setIsFetchingCards(true));
+
     cardsAPI.getCards(queryParams)
         .then(data => {
             dispatch(setCardsDataAC(data));

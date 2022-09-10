@@ -22,11 +22,18 @@ export const SearchPanel = () => {
     const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
     const servMaxValue = useAppSelector<any>(state => state.packsList.maxCardsCount)
     const servMinValue = useAppSelector<any>(state => state.packsList.minCardsCount)
-    const servMaxCardsCount = useAppSelector<any>(state => state.packsList.maxCardsCount)
-    console.log("dsdddd", servMaxCardsCount)
 
+    console.log("dsdddd", servMaxValue)
 
     const [value, setValue] = React.useState<number[]>([servMinValue, servMaxValue]);
+    const dValue = useDebounce(value, 1000)
+    useEffect(() => {
+        if (searchValue || value) {
+            dispatch(searchCardsPackThunk(searchValue, value[0], value[1]));
+        }
+    }, [searchValue, dValue]);
+
+
 
     // The order of the dispatches important!!!
     function getMyPackHandler() {
@@ -63,12 +70,8 @@ export const SearchPanel = () => {
             setValue([value[0], Number(event.target.value)])
         }
     }
-    const dValue = useDebounce(value, 1000)
-    useEffect(() => {
-        if (searchValue || value) {
-            dispatch(searchCardsPackThunk(searchValue, value[0], value[1]));
-        }
-    }, [searchValue, dValue]);
+
+
     return (
         <div>
             <div className={css.searchHeader}>
