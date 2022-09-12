@@ -23,7 +23,7 @@ export const setCurrentPageCardPacksAC = (page: number) =>
     ({type: 'packsList/SET-CURRENT-PAGE', page} as const);
 export const setCurrentFilterAC = (filter: string) =>
     ({type: 'packsList/SET-CURRENT-FILTER', filter} as const);
-export const setViewPacksAC = (isMyPacks: boolean) =>
+export const setViewPacksAC = (isMyPacks?: string) =>
     ({type: 'packsList/SET-IS-MY-PACKS', isMyPacks} as const);
 export const setSearchResultAC = (searchResult: string) =>
     ({type: 'packsList/SET-SEARCH-RESULT', searchResult} as const);
@@ -41,10 +41,10 @@ const initState = {
     pageCount: 10,
     cardPacksTotalCount: 0,
     minCardsCount: 0,
-    maxCardsCount: 10,
+    maxCardsCount: 0,
 
     filter: '0updated' as string,
-    isMyPacks: false,
+    isMyPacks: undefined as string | undefined, // string если мой паки, undefined если All packs
     searchResult: '',
 };
 
@@ -101,31 +101,13 @@ export const getCardsPackThunk = (): AppThunkType => (dispatch, getState) => {
         })
 };
 
-// export const getMyCardsPackThunk = (): AppThunkType => (dispatch, getState) => {
-//     const {_id} = getState().auth.user;
-//     const {pageCount} = getState().packsList;
-//     dispatch(setAppIsLoadingAC(true));
-//     dispatch(setSearchResultAC(''));
-//     dispatch(setCurrentFilterAC('0updated'));
-//     packCardsApi.getCardsPack({user_id: _id, pageCount})
-//         .then(res => {
-//             dispatch(getCardsPackAC(res.cardPacks));
-//             dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount));
-//         })
-//         .catch(error => handleAppRequestError(error, dispatch))
-//         .finally(() => dispatch(setAppIsLoadingAC(false)));
-// };
-// async await variant
-export const searchCardsPackThunk = (packName: string, minCardsCount: any, maxCardsCount: any): AppThunkType => (
-    dispatch, getState) => {
-    const {pageCount, isMyPacks} = getState().packsList;
-    const {_id} = getState().auth.user;
-    const user_id = isMyPacks ? _id : '';
+export const searchCardsPackThunk = (packName: string, minCardsCount: any, maxCardsCount: any, pageCount: number, useId?: string): AppThunkType => (
+    dispatch) => {
     dispatch(setAppIsLoadingAC(true))
-    packCardsApi.getCardsPack({pageCount, packName, user_id, min: minCardsCount, max: maxCardsCount})
+    packCardsApi.getCardsPack({pageCount, packName, user_id: useId, min: minCardsCount, max: maxCardsCount})
         .then(res => {
             dispatch(setMaxCardsCountAC(res.maxCardsCount))
-            console.log("TC", res.maxCardsCount)
+            // console.log("TC", res.maxCardsCount)
             dispatch(getCardsPackAC(res.cardPacks));
             dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount));
         })

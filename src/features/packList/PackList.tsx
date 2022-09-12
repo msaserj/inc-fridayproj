@@ -14,15 +14,14 @@ import {AddNewPackModal} from "./AddNewPackModal/AddNewPackModal";
 
 export const PackList = () => {
     const dispatch = useAppDispatch();
-    // useEffect(()=>
-    //         dispatch(getCardsPackThunk()),
-    //     [])
+
 
     const currentPage = useAppSelector<number>(store => store.packsList.page);
     const pageSize = useAppSelector<number>(store => store.packsList.pageCount);
     const totalCountPage = useAppSelector<number>(store => store.packsList.cardPacksTotalCount);
     const isFetching = useAppSelector<boolean>(store => store.app.appIsLoading);
     const isLoggedIn = useAppSelector<string>(state => state.auth.user._id)
+
 
     const [activeModalPack, setModalActivePack] = useState<boolean>(false)
 
@@ -31,6 +30,7 @@ export const PackList = () => {
         dispatch(setCurrentPageCardPacksAC(page))
         dispatch(getCardsPackThunk());
     }
+
     if (!isLoggedIn) {
         return <Navigate to={PATH.LOGIN}/>
     }
