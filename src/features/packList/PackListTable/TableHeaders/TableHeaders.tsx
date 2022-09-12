@@ -24,7 +24,7 @@ export const TableHeaders = () => {
         <thead>
         <tr className={css.trStyle}>
             <th>
-                <div className={css.sortBlock}>
+                <div className={css.sortBlock} onClick={() => !isLoading && sortCardsByTypeHandler('name')}>
                     <span>Name</span>
                     <SuperSmallButton style={{padding: "2px 8px"}} arrowUp={currentFilter === "1name"} />
                 </div>
