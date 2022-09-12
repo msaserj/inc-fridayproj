@@ -50,6 +50,7 @@ export const SearchPanel = () => {
 		setServMinValue(0)
 		setServMaxValue(servMaxValue)
 		// setValue([0, servMaxValue])
+		setFirst(true) // борьба с двойной отрисовкой
 		dispatch(filterCardsCountAC(0, servMaxValue))
 		dispatch(setSearchResultAC(``))
 	}
