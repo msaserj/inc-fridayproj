@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/inc-fridayproj/static/css/main.703ccc52.css",
-    "main.js": "/inc-fridayproj/static/js/main.d3e0fd96.js",
+    "main.js": "/inc-fridayproj/static/js/main.6a804c2d.js",
     "static/js/787.b0bed33b.chunk.js": "/inc-fridayproj/static/js/787.b0bed33b.chunk.js",
     "static/media/error404.jpg": "/inc-fridayproj/static/media/error404.8c8042467bcb07d7180e.jpg",
     "static/media/emailIcon.svg": "/inc-fridayproj/static/media/emailIcon.836e246556dd50d082cf05d8309583a6.svg",
@@ -15,11 +15,11 @@
     "static/media/eyeIcon.svg": "/inc-fridayproj/static/media/eyeIcon.042432cb7b893187894b53b3d2b7c9bc.svg",
     "static/media/arrow.svg": "/inc-fridayproj/static/media/arrow.519110c32786a43bcb3957820cd9c116.svg",
     "main.703ccc52.css.map": "/inc-fridayproj/static/css/main.703ccc52.css.map",
-    "main.d3e0fd96.js.map": "/inc-fridayproj/static/js/main.d3e0fd96.js.map",
+    "main.6a804c2d.js.map": "/inc-fridayproj/static/js/main.6a804c2d.js.map",
     "787.b0bed33b.chunk.js.map": "/inc-fridayproj/static/js/787.b0bed33b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.703ccc52.css",
-    "static/js/main.d3e0fd96.js"
+    "static/js/main.6a804c2d.js"
   ]
 }
