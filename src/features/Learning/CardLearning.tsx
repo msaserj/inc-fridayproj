@@ -6,8 +6,8 @@ import {Navigate, useParams} from "react-router-dom";
 import {DotedLoader} from "../../common/components/c8-Loaders/DotedLoader/DotedLoader";
 import SuperButton from "../../common/components/c2-Button/SuperButton";
 import {PATH} from "../../common/constants/Path";
-import {StarRating} from "../../common/components/StarRating/StarRating";
 import {getRandomCardTC, gradeCardTC} from "../cardList/cardList-reducer";
+import SuperRadio from "../../common/components/c6-Radio/SuperRadio";
 
 
 export const CardLearning = () => {
@@ -30,6 +30,13 @@ export const CardLearning = () => {
     if (!packName) {
         return <Navigate to={PATH.PACK_LIST}/>
     }
+    const arr = [
+        { id: 1, value: 'не знаю' },
+        { id: 2, value: 'что-то помню' },
+        { id: 3, value: 'вроде помню' },
+        { id: 4, value: 'хорошо помню' },
+        { id: 5, value: 'знаю' },
+    ]
 
 
     return (isFetching ?
@@ -43,15 +50,25 @@ export const CardLearning = () => {
                     {/*</div>*/}
 
                     <div className={css.personalInfo}>
-                        <h3> Question: {randomCard.question}</h3>
-                        <p>Number of answers per question:{randomCard.shots}</p>
+                        <h3> Question: </h3>
+                        <span>{randomCard.question}</span>
                         {showAnswer && <div>
                             <p>{randomCard.answer}</p>
-                            <StarRating edit={true} value={rate} size={20} onClick={(rate) => {
-                                setRate(rate)
-                                dispatch(gradeCardTC(rate))
-                            }}/>
+
+                            <SuperRadio
+                                disabled={loadingModal}
+                                id={'hw7-super-radio'}
+                                name={'hw7-radio'}
+                                options={arr}
+                                value={rate}
+                                onChangeOption={(rate) => {
+                                    setRate(rate)
+                                    dispatch(gradeCardTC(rate))
+
+                                }}
+                            />
                         </div>}
+                        <p>Number of answers per question:{randomCard.shots}</p>
                         <div style={{ position: "absolute", bottom: "50px"}}>
                             <SuperButton disabled={loadingModal || showAnswer} onClick={() => setShowAnswer(true)}>Show answer</SuperButton>
                             <SuperButton disabled={loadingModal} onClick={onNext}>Next

@@ -1,18 +1,28 @@
 .radio {
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    border-radius:  50%;
-    border:  2px solid #fb8332;
+
 }
 
-.radio:hover {
-    border:  2px solid #fbd332;
+.radio::before {
 }
 
-.radio:checked {
-    background: #335eff;
+.span {
+    margin-left: 5px;
 }
-.radio:focus {
-    border: 2px solid #fb8332;
+
+.radio:checked::before {
+}
+
+.label {
+    margin: 5px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-left: 20px;
+
 }
