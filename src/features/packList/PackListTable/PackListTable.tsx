@@ -4,11 +4,11 @@ import {PacksType} from "../packCards-api";
 import css from './PackListTable.module.css'
 import {TableHeaders} from "./TableHeaders/TableHeaders";
 import {PATH} from "../../../common/constants/Path";
-import {BeautyDate} from "../../../common/components/BeautyDate/BeautyDate";
+import {BeautyDate} from "../../../common/utils/BeautyDate/BeautyDate";
 import {EditPackName} from "../EditPackNameModal/EditPackName";
 import React, {useState} from "react";
-import {DotedLoader} from "../../../common/components/c8-Loaders/DotedLoader/DotedLoader";
-import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {DotedLoader} from "../../../common/components/Primitive/c8-Loaders/DotedLoader/DotedLoader";
+import {SuperSmallButton} from "../../../common/components/Primitive/SmallButtons/SuperSmallButton/SuperSmallButton";
 import {DeletePackModal} from "../DeletePackModal/DeletePackModal";
 import {getRandomCardTC, setPackNameAC} from "../../cardList/cardList-reducer";
 

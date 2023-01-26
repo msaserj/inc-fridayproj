@@ -4,10 +4,10 @@ import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {useFormik} from "formik";
 import {recoveryPswdThunkTC} from "../../auth-reducer";
 import css from "./RecoveryPass.module.css";
-import SuperInputText from "../../../../common/components/c1-InputText/SuperInputText";
+import SuperInputText from "../../../../common/components/Primitive/c1-InputText/SuperInputText";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../../../common/constants/Path";
-import SuperButton from "../../../../common/components/c2-Button/SuperButton";
+import SuperButton from "../../../../common/components/Primitive/c2-Button/SuperButton";
 import {useNavigate} from "react-router-dom";
 
 type FormikErrorType = {

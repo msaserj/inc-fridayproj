@@ -4,9 +4,9 @@ import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {NavLink, useNavigate} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";
 import {registrationThunkTC} from "../auth-reducer";
-import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
-import SuperPasswordInput from "../../../common/components/c1-InputText/PasswordInpit/SuperPasswordInput";
-import SuperButton from "../../../common/components/c2-Button/SuperButton";
+import SuperInputText from "../../../common/components/Primitive/c1-InputText/SuperInputText";
+import SuperPasswordInput from "../../../common/components/Primitive/c1-InputText/PasswordInpit/SuperPasswordInput";
+import SuperButton from "../../../common/components/Primitive/c2-Button/SuperButton";
 import css from "./Registration.module.css"
 
 type ErrorFormikType = {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {ReactNode} from "react";
-import SuperButton from "../c2-Button/SuperButton";
+import SuperButton from "../Primitive/c2-Button/SuperButton";
 import css from "./ModalMui.module.css"
 
 const style = {

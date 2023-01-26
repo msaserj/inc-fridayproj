@@ -5,8 +5,8 @@ import {newPswdThunkTC} from "../auth-reducer";
 import css from "./NewPass.module.css";
 import {useNavigate, useParams} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";
-import SuperButton from "../../../common/components/c2-Button/SuperButton";
-import SuperPasswordInput from "../../../common/components/c1-InputText/PasswordInpit/SuperPasswordInput";
+import SuperButton from "../../../common/components/Primitive/c2-Button/SuperButton";
+import SuperPasswordInput from "../../../common/components/Primitive/c1-InputText/PasswordInpit/SuperPasswordInput";
 
 type FormikErrorType = {
     password?: string

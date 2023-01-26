@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import css from "./PackList.module.css";
-import SuperButton from "../../common/components/c2-Button/SuperButton";
+import SuperButton from "../../common/components/Primitive/c2-Button/SuperButton";
 import {
 	filterCardsCountAC,
 	searchCardsPackThunk,
@@ -9,8 +9,8 @@ import {
 	setViewPacksAC
 } from "./packList-reducer";
 import {useAppDispatch, useAppSelector, useDebounce} from "../../common/hooks/hooks";
-import {DebounceSearch} from "../../common/components/DebounceSearch/DebounceSearch";
-import {SuperSmallButton} from "../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {DebounceSearch} from "../../common/utils/DebounceSearch/DebounceSearch";
+import {SuperSmallButton} from "../../common/components/Primitive/SmallButtons/SuperSmallButton/SuperSmallButton";
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 

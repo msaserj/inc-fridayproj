@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {sortCardsPackThunk} from "../../packList-reducer";
 import css from "./TableHeaders.module.css"
-import {SuperSmallButton} from "../../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {SuperSmallButton} from "../../../../common/components/Primitive/SmallButtons/SuperSmallButton/SuperSmallButton";
 import React from "react";
 
 export const TableHeaders = () => {

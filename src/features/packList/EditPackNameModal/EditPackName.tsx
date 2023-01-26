@@ -3,10 +3,10 @@ import {useAppDispatch} from "../../../common/hooks/hooks";
 import {useFormik} from "formik";
 import {updateCardsPackThunk} from "../packList-reducer";
 import {ModalMUI} from "../../../common/components/ModalMUI/ModalMUI";
-import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
+import SuperInputText from "../../../common/components/Primitive/c1-InputText/SuperInputText";
 import css from "../AddNewPackModal/AddNewPackModal.module.css";
-import SuperButton from "../../../common/components/c2-Button/SuperButton";
-import SuperCheckbox from "../../../common/components/c3-Checkbox/SuperCheckbox";
+import SuperButton from "../../../common/components/Primitive/c2-Button/SuperButton";
+import SuperCheckbox from "../../../common/components/Primitive/c3-Checkbox/SuperCheckbox";
 
 type AddNewPackPropsType = {
 	open: boolean

@@ -3,11 +3,11 @@ import css from "./CardLearning.module.css"
 import {BackToPackList} from "../../common/components/BackToPackList/BackToPackList";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {Navigate, useParams} from "react-router-dom";
-import {DotedLoader} from "../../common/components/c8-Loaders/DotedLoader/DotedLoader";
-import SuperButton from "../../common/components/c2-Button/SuperButton";
+import {DotedLoader} from "../../common/components/Primitive/c8-Loaders/DotedLoader/DotedLoader";
+import SuperButton from "../../common/components/Primitive/c2-Button/SuperButton";
 import {PATH} from "../../common/constants/Path";
 import {getRandomCardTC, gradeCardTC} from "../cardList/cardList-reducer";
-import SuperRadio from "../../common/components/c6-Radio/SuperRadio";
+import SuperRadio from "../../common/components/Primitive/c6-Radio/SuperRadio";
 
 
 export const CardLearning = () => {

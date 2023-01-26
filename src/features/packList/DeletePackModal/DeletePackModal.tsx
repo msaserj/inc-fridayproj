@@ -3,7 +3,7 @@ import {useAppDispatch} from "../../../common/hooks/hooks";
 import {deleteCardsPackThunk,} from "../packList-reducer";
 import {ModalMUI} from "../../../common/components/ModalMUI/ModalMUI";
 import css from "../AddNewPackModal/AddNewPackModal.module.css";
-import SuperButton from "../../../common/components/c2-Button/SuperButton";
+import SuperButton from "../../../common/components/Primitive/c2-Button/SuperButton";
 
 
 type AddNewPackPropsType = {

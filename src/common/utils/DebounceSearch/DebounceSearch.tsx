@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from "react";
-import SuperInputText from "../c1-InputText/SuperInputText";
+import SuperInputText from "../../components/Primitive/c1-InputText/SuperInputText";
 
 type DebounceSearchPropsType = {
 	resetValue: string

@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import css from './Profile.module.css'
 import photoIcon from '../../../assets/img/photoIcon.svg'
-import SuperButton from "../../../common/components/c2-Button/SuperButton";
-import SuperEditableSpan from "../../../common/components/c4-EditableSpan/SuperEditableSpan";
+import SuperButton from "../../../common/components/Primitive/c2-Button/SuperButton";
+import SuperEditableSpan from "../../../common/components/Primitive/c4-EditableSpan/SuperEditableSpan";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {logoutThunkTC, updateUserDataTC} from "../auth-reducer";
 
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";
 import {BackToPackList} from "../../../common/components/BackToPackList/BackToPackList";
-import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {SuperSmallButton} from "../../../common/components/Primitive/SmallButtons/SuperSmallButton/SuperSmallButton";
 
 
 export const Profile = () => {

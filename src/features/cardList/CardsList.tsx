@@ -8,10 +8,10 @@ import {
 } from "./cardList-reducer";
 import {PATH} from "../../common/constants/Path";
 import css from './CardsList.module.css';
-import {DebounceSearch} from "../../common/components/DebounceSearch/DebounceSearch";
-import {DotedLoader} from "../../common/components/c8-Loaders/DotedLoader/DotedLoader";
+import {DebounceSearch} from "../../common/utils/DebounceSearch/DebounceSearch";
+import {DotedLoader} from "../../common/components/Primitive/c8-Loaders/DotedLoader/DotedLoader";
 import {BackToPackList} from "../../common/components/BackToPackList/BackToPackList";
-import SuperButton from "../../common/components/c2-Button/SuperButton";
+import SuperButton from "../../common/components/Primitive/c2-Button/SuperButton";
 import {AddNewCardModal} from "./AddNewCardModal/AddNewCardModal";
 import {CardListTable} from "./CardListTable/CardListTable";
 

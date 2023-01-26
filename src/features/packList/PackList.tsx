@@ -1,7 +1,7 @@
 import css from "./PackList.module.css"
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {getCardsPackThunk, setCurrentPageCardPacksAC} from "./packList-reducer";
-import SuperButton from "../../common/components/c2-Button/SuperButton";
+import SuperButton from "../../common/components/Primitive/c2-Button/SuperButton";
 import {PacksListTable} from "./PackListTable/PackListTable";
 import {Paginator} from "../../common/components/Paginator/Paginator";
 import {SearchPanel} from "./SearchPanel";

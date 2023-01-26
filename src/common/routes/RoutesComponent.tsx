@@ -9,7 +9,7 @@ import {PageNotFound} from "../components/error404/Error404";
 import {AllComponents} from "../components/AllComponents";
 import React from "react";
 import {useAppSelector} from "../hooks/hooks";
-import {DotedLoader} from "../components/c8-Loaders/DotedLoader/DotedLoader";
+import {DotedLoader} from "../components/Primitive/c8-Loaders/DotedLoader/DotedLoader";
 import {Navigate} from "react-router-dom";
 import {PackList} from "../../features/packList/PackList";
 import {CardsList} from "../../features/cardList/CardsList";

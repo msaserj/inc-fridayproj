@@ -1,9 +1,9 @@
 import {CardType} from "../../cards-api";
 import {useAppSelector} from "../../../../common/hooks/hooks";
 import React, {FC} from "react";
-import {BeautyDate} from "../../../../common/components/BeautyDate/BeautyDate";
-import {SuperSmallButton} from "../../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
-import {SuperStarRating} from "../../../../common/components/StarRating/SuperStarsRating";
+import {BeautyDate} from "../../../../common/utils/BeautyDate/BeautyDate";
+import {SuperSmallButton} from "../../../../common/components/Primitive/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {SuperStarRating} from "../../../../common/components/Primitive/StarRating/SuperStarsRating";
 
 type CardsListItemPropsType = {
 	card: CardType

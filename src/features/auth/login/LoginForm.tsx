@@ -1,14 +1,14 @@
 import React from 'react';
-import SuperButton from "../../../common/components/c2-Button/SuperButton";
+import SuperButton from "../../../common/components/Primitive/c2-Button/SuperButton";
 import {PATH} from "../../../common/constants/Path";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {NavLink} from "react-router-dom";
 import css from './Login.module.css';
 import {useFormik} from "formik";
-import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
-import SuperCheckbox from "../../../common/components/c3-Checkbox/SuperCheckbox";
+import SuperInputText from "../../../common/components/Primitive/c1-InputText/SuperInputText";
+import SuperCheckbox from "../../../common/components/Primitive/c3-Checkbox/SuperCheckbox";
 import {loginThunkTC} from "../auth-reducer";
-import SuperPasswordInput from "../../../common/components/c1-InputText/PasswordInpit/SuperPasswordInput";
+import SuperPasswordInput from "../../../common/components/Primitive/c1-InputText/PasswordInpit/SuperPasswordInput";
 
 
 type FormikErrorType = {

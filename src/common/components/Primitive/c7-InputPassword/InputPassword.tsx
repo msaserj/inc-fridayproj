@@ -6,8 +6,8 @@ import React, {
 	useState
 } from "react";
 import css from "./InputPassword.module.css";
-import eyeIcon from "../../../assets/img/eye.png";
-import blind from "../../../assets/img/blind.png";
+import eyeIcon from "../../../../assets/img/eye.png";
+import blind from "../../../../assets/img/blind.png";
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 

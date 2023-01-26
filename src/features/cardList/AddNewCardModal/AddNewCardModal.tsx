@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {ModalMUI} from "../../../common/components/ModalMUI/ModalMUI";
-import SuperInputText from "../../../common/components/c1-InputText/SuperInputText";
-import SuperButton from "../../../common/components/c2-Button/SuperButton";
+import SuperInputText from "../../../common/components/Primitive/c1-InputText/SuperInputText";
+import SuperButton from "../../../common/components/Primitive/c2-Button/SuperButton";
 import css from "./AddNewCardModal.module.css"
 
 import {useAppDispatch} from "../../../common/hooks/hooks";

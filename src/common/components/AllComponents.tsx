@@ -1,11 +1,11 @@
-import SuperRadio from "./c6-Radio/SuperRadio";
-import InputButtonCheckbox from "./c1-InputText/InputButtonCheckbox";
-import EditableSpan from "./c4-EditableSpan/EditableSpan";
-import SelectRadio from "./c5-Select/SelectRadio";
-import {Loaders} from "./c8-Loaders/Loaders";
-import {SuperDoubleRange} from "./DoubleRange/DoubleRangeTwo";
-import {SmallButtonsDemo} from "./SmallButtons/SmallButtonsDemo";
-import {SuperStarRating} from "./StarRating/SuperStarsRating";
+import SuperRadio from "./Primitive/c6-Radio/SuperRadio";
+import InputButtonCheckbox from "./Primitive/c1-InputText/InputButtonCheckbox";
+import EditableSpan from "./Primitive/c4-EditableSpan/EditableSpan";
+import SelectRadio from "./Primitive/c5-Select/SelectRadio";
+import {Loaders} from "./Primitive/c8-Loaders/Loaders";
+import {SuperDoubleRange} from "./Primitive/DoubleRange/DoubleRangeTwo";
+import {SmallButtonsDemo} from "./Primitive/SmallButtons/SmallButtonsDemo";
+import {SuperStarRating} from "./Primitive/StarRating/SuperStarsRating";
 
 export const AllComponents = () => {
     return<>

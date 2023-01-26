@@ -6,7 +6,7 @@ import {setCardsSortDirectionAC, setCurrentPageCardsListAC} from "../cardList-re
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 
 import {CardType} from "../cards-api";
-import {SuperSmallButton} from "../../../common/components/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {SuperSmallButton} from "../../../common/components/Primitive/SmallButtons/SuperSmallButton/SuperSmallButton";
 import {AddNewCardModal} from "../AddNewCardModal/AddNewCardModal";
 import {DeleteCardModal} from "../DeleteCardModal/DeleteCardModal";
 
