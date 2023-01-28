@@ -8,7 +8,6 @@ import {useAppSelector} from "../../common/hooks/hooks";
 type HeaderType = {
     titleForHeader: string
 }
-
 const setActive = ({isActive}: { isActive: boolean }) => isActive ? css.activeLink : css.inactiveLink;
 
 export const Header = (props: HeaderType) => {
