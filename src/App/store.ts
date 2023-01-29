@@ -2,6 +2,7 @@ import {combineReducers, compose} from 'redux';
 import {ThunkDispatch, ThunkAction} from "redux-thunk";
 import {AppActionsType, appReducer} from "./app-reducer";
 import {configureStore} from "@reduxjs/toolkit";
+import thunkMiddleware from 'redux-thunk'
 import {AuthActionsType, authReducer} from "../features/auth/auth-reducer";
 import {PacksListActionsType, packsListReducer} from "../features/packList/packList-reducer";
 import {CardsListActionsType, cardsListReducer} from "../features/cardList/cardList-reducer";
@@ -14,10 +15,15 @@ export const rootReducer = combineReducers({
 	cardsList: cardsListReducer,
 });
 
+
+
 // export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 //export const store = legacy_createStore(rootReducer, loadState(), composeEnhancers(applyMiddleware(thunk)));
 //на поддержке посоветовали переписать store на новый метод store
-export const store = configureStore({reducer: rootReducer})
+export const store = configureStore({
+	reducer: rootReducer,
+	middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunkMiddleware)
+})
 
 export type RootActionsType =
 	| AppActionsType
