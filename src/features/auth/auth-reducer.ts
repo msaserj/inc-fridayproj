@@ -3,6 +3,7 @@ import {AppThunkType} from "../../App/store";
 import {AppActionsType, setAppIsLoadingAC} from "../../App/app-reducer";
 import {authApi, UserType} from "./auth-api";
 import {handleAppRequestError} from "../../common/utils/error-utils";
+import {createSlice} from "@reduxjs/toolkit";
 
 // types AC
 export type AuthActionsType =
@@ -74,6 +75,20 @@ const InitialState: InitStateType = {
     },
     isLoggedIn: false
 }
+export  const slice = createSlice({
+    name: 'auth',
+    initialState: InitialState,
+    reducers: {
+        setLoginAC(state, action) {
+            state = action.payload
+        }
+    }
+})
+
+export const authReducer2 = slice.reducer
+export const {setLoginAC} = slice.actions
+
+
 // reducers
 export const authReducer = (state: InitStateType = InitialState, action: AuthActionsType): InitStateType => {
     switch (action.type) {
