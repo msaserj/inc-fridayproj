@@ -134,7 +134,6 @@ export const logoutThunkTC = (): AppThunkType => (dispatch: ThunkDispatchType) =
         .catch(error => handleAppRequestError(error, dispatch))
         .finally(() => {dispatch(setAppIsLoadingAC(false))})
 };
-
 export const updateUserDataTC = (name: string): AppThunkType => (dispatch: ThunkDispatchType) => {
     dispatch(setAppIsLoadingAC(true))
     authApi.updateUserName(name)
