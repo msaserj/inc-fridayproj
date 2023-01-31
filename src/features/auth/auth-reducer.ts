@@ -3,7 +3,7 @@ import {AppThunkType} from "../../App/store";
 import {AppActionsType, setAppIsLoadingAC} from "../../App/app-reducer";
 import {authApi, UserType} from "./auth-api";
 import {handleAppRequestError} from "../../common/utils/error-utils";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 // types AC
 export type AuthActionsType =
@@ -19,7 +19,7 @@ export type AuthActionsType =
 type ThunkDispatchType = Dispatch<AuthActionsType | AppActionsType>
 
 // ActionCreators
-export const loginAC = (payload: InitStateType) => ({type: "AUTH/LOGIN", payload} as const);
+export const loginAC = (payload: UserType) => ({type: "AUTH/LOGIN", payload} as const);
 export const logoutAC = () => ({type: "AUTH/LOGOUT"} as const);
 export const authMeAC = (payload: InitStateType) => ({type: "AUTH/AUTH_ME", payload} as const);
 export const setUserNameAC = (payload: UserType) => ({type: "AUTH/SET-USER-DATA", payload} as const);
@@ -75,16 +75,15 @@ const InitialState: InitStateType = {
     },
     isLoggedIn: false
 }
-export  const slice = createSlice({
+export const slice = createSlice({
     name: 'auth',
     initialState: InitialState,
     reducers: {
-        setLoginAC(state, action) {
-            state = action.payload
+        setLoginAC(state, action: PayloadAction<UserType>) {
+            state.user = action.payload
         }
     }
 })
-
 export const authReducer2 = slice.reducer
 export const {setLoginAC} = slice.actions
 
@@ -95,7 +94,7 @@ export const authReducer = (state: InitStateType = InitialState, action: AuthAct
         case "AUTH/AUTH_ME":
             return {...action.payload}
         case "AUTH/LOGIN":
-            return {...action.payload}
+            return {...state, user: action.payload}
         case "AUTH/LOGOUT":
             return {...state}
         case "AUTH/SET-USER-DATA":
