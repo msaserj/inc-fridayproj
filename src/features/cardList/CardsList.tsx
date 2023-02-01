@@ -23,16 +23,16 @@ export const CardsList = () => {
     const dispatch = useAppDispatch();
 
     const user_ID = useAppSelector(state => state.auth.user._id);
-    const cards = useAppSelector<Array<CardType>>(state => state.cardsList.cards);
+    const cards = useAppSelector<Array<CardType>>(state => state.cardsList.cardsData.cards);
     const isFetchingCards = useAppSelector<boolean>(state => state.cardsList.isFetchingCards);
     const packName = useAppSelector(state => state.cardsList.packName)
-    const packUser_ID = useAppSelector(state => state.cardsList.packUserId);
+    const packUser_ID = useAppSelector(state => state.cardsList.cardsData.packUserId);
     const [activeModalPack, setModalActivePack] = useState<boolean>(false)
     const modalCloseHandler = () => setModalActivePack(false);
     const addCardsPackHandler = () => setModalActivePack(true)
     const cardQuestion = useAppSelector<string>(state => state.cardsList.cardQuestion);
     const currentFilter = useAppSelector<string>(state => state.cardsList.sortCards);
-    const currentPage = useAppSelector<number>(state => state.cardsList.page);
+    const currentPage = useAppSelector<number>(state => state.cardsList.cardsData.page);
 
     useEffect(() => {
         // cardsPack_ID достаем из useParams, что бы знать в каком паке ищутся карточки
@@ -42,7 +42,7 @@ export const CardsList = () => {
     }, [dispatch, cardsPack_ID, currentFilter, cardQuestion, currentPage]);
 
     const searchCardsByQuestion = (value: string) => {
-        dispatch(setSearchQueryByQuestionAC(value));
+        dispatch(setSearchQueryByQuestionAC({value}));
     };
     if (!user_ID) {
         return <Navigate to={PATH.LOGIN}/>

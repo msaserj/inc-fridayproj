@@ -1,39 +1,29 @@
 import {
-    cardsAPI,
+    cardsAPI, CardType,
     GetCardsQueryParams,
     GetCardsResponseDataType,
     NewCardDataType,
     UpdateCardModelType, UpdatedGradeType
 } from "./cards-api";
-import {AppStateType, AppThunkType} from "../../App/store";
+import {AppStateType, AppThunkType, RootState} from "../../App/store";
 import {setAppIsLoadingAC} from "../../App/app-reducer";
 import {handleAppRequestError} from "../../common/utils/error-utils";
 import {getCard} from "../../common/constants/random";
-
-export type CardsListActionsType =
-    | ReturnType<typeof setCardsDataAC>
-    | ReturnType<typeof setCurrentPageCardsListAC>
-    | ReturnType<typeof setPageCountAC>
-    | ReturnType<typeof setIsFetchingCards>
-    | ReturnType<typeof setSearchQueryByQuestionAC>
-    | ReturnType<typeof setCardsSortDirectionAC>
-    | ReturnType<typeof setPackNameAC>
-    | ReturnType<typeof setRandomCard>
-    | ReturnType<typeof setLoadingModal>
-    | ReturnType<typeof setChangeGradeCards>;
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 // Initial state
-type InitStateType = typeof initState;
 export const stringInit = null as unknown as string
 export const numberInit = null as unknown as number
 const initState = {
-    cards: [] as Array<any>,
-    packUserId: undefined as undefined | string,
-    cardsTotalCount: 0,
-    maxGrade: undefined as undefined | number,
-    minGrade: undefined as undefined | number,
-    page: 1,
-    pageCount: 10,
+    cardsData: {
+        cards: [] as Array<CardType>,
+        packUserId: undefined as undefined | string,
+        cardsTotalCount: 0,
+        maxGrade: undefined as undefined | number,
+        minGrade: undefined as undefined | number,
+        page: 1,
+        pageCount: 10
+    },
     cardAnswer: "",
     cardQuestion: "",
     sortCards: '0updated',
@@ -57,81 +47,76 @@ const initState = {
     },
     loadingModal: false
 };
+
 // reducer
-export const cardsListReducer = (state: InitStateType = initState, action: CardsListActionsType): InitStateType => {
-    switch (action.type) {
-        case "cardsList/SET_CARDS_DATA":
-            return {...state, ...action.payload};
-        case"cardsList/SET_CURRENT_PAGE":
-            return {...state, page: action.page};
-        case "cardsList/SET_PAGE_COUNT":
-            return {...state, pageCount: action.pageCount};
-        case "cardsList/SET_IS_FETCHING":
-            return {...state, isFetchingCards: action.value};
-        case "cardsList/SET_SEARCH_QUERY_BY_QUESTION":
-            return {...state, cardQuestion: action.value};
-        case "cardsList/SET_CARDS_SORT_DIRECTION":
-            return {...state, sortCards: action.value};
-        case "cardsList/SET_PACK_NAME":
-            return {...state, packName: action.name};
-        case "cardsList/SET-RANDOM-CARD":
-            return {...state, randomCard: action.randomCard}
-        case "cardsList/SET-LOADING-MODAL":
-            return {...state, loadingModal: action.loadingModal}
-        case "cardsList/SET-CHANGE-GRADE-CARDS":
-            return {
-                ...state, ...state.cards.map(el => el._id === action.card._id ? {
-                    ...el,
-                    grade: action.card.grade
-                } : el)
-            }
-        default:
-            return state;
+export const slice = createSlice({
+    name: 'cards',
+    initialState: initState,
+    reducers: {
+        setCardsDataAC: (state, action: PayloadAction<{ cardsData: GetCardsResponseDataType }>) => {
+            state.cardsData = action.payload.cardsData
+        },
+        setCurrentPageCardsListAC: (state, action: PayloadAction<{ page: number }>) => {
+            state.cardsData.page = action.payload.page
+        },
+        setPageCountAC: (state, action: PayloadAction<{ pageCount: number }>) => {
+            state.cardsData.pageCount = action.payload.pageCount
+        },
+        setIsFetchingCards: (state, action: PayloadAction<{ value: boolean }>) => {
+            state.isFetchingCards = action.payload.value
+        },
+        setSearchQueryByQuestionAC: (state, action: PayloadAction<{ value: string }>) => {
+            state.cardQuestion = action.payload.value
+        },
+        setCardsSortDirectionAC: (state, action: PayloadAction<{ value: string }>) => {
+            state.sortCards = action.payload.value
+        },
+        setPackNameAC: (state, action: PayloadAction<{ name: string }>) => {
+            state.packName = action.payload.name
+        },
+        setRandomCard: (state, action: PayloadAction<{ randomCard: any }>) => {
+            state.randomCard = action.payload.randomCard
+        },
+        setLoadingModal: (state, action: PayloadAction<{ loadingModal: boolean }>) => {
+            state.loadingModal = action.payload.loadingModal
+        },
+        setChangeGradeCards: (state, action: PayloadAction<{ card: UpdatedGradeType }>) => {
+            state.cardsData.cards = state.cardsData.cards = state.cardsData.cards.map(card =>
+                card._id === action.payload.card.card_id
+                    ? {...card, grade: action.payload.card.grade, shots: action.payload.card.shots}
+                    : card);
+        },
     }
-};
+})
 
-// Action creators
-export const setCardsDataAC = (data: GetCardsResponseDataType) =>
-    ({type: "cardsList/SET_CARDS_DATA", payload: data} as const);
-export const setCurrentPageCardsListAC = (page: number) =>
-    ({type: "cardsList/SET_CURRENT_PAGE", page} as const);
-export const setPageCountAC = (pageCount: number) =>
-    ({type: "cardsList/SET_PAGE_COUNT", pageCount} as const);
-export const setSearchQueryByQuestionAC = (value: string) =>
-    ({type: "cardsList/SET_SEARCH_QUERY_BY_QUESTION", value} as const);
-export const setCardsSortDirectionAC = (value: string) =>
-    ({type: "cardsList/SET_CARDS_SORT_DIRECTION", value} as const);
-export const setIsFetchingCards = (value: boolean) =>
-    ({type: "cardsList/SET_IS_FETCHING", value} as const);
-export const setPackNameAC = (name: string) =>
-    ({type: "cardsList/SET_PACK_NAME", name} as const);
-export const setRandomCard = (randomCard: any) =>
-    ({type: "cardsList/SET-RANDOM-CARD", randomCard} as const)
-const setLoadingModal = (loadingModal: boolean) =>
-    ({type: "cardsList/SET-LOADING-MODAL", loadingModal} as const)
-const setChangeGradeCards = (card: UpdatedGradeType) =>
-    ({type: "cardsList/SET-CHANGE-GRADE-CARDS", card} as const)
+export const cardsListReducer = slice.reducer
 
+// Action Creators
+export const {
+    setChangeGradeCards, setIsFetchingCards, setCardsSortDirectionAC, setRandomCard, setCardsDataAC,
+    setLoadingModal, setPageCountAC, setCurrentPageCardsListAC, setSearchQueryByQuestionAC, setPackNameAC
+} = slice.actions
 
 // Thunk creators
-export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispatch, getState: () => AppStateType) => {
+export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispatch, getState: () => RootState) => {
 
-    const {cardAnswer, cardQuestion, sortCards, page, pageCount} = getState().cardsList;
+    const {cardAnswer, cardQuestion, sortCards} = getState().cardsList;
+    const {page, pageCount} = getState().cardsList.cardsData
     const queryParams: GetCardsQueryParams = {cardAnswer, cardQuestion, sortCards, page, pageCount, ...params,};
 
     dispatch(setAppIsLoadingAC(true));
-    dispatch(setIsFetchingCards(true));
+    dispatch(setIsFetchingCards({value: true}));
 
     cardsAPI.getCards(queryParams)
         .then(data => {
-            dispatch(setCardsDataAC(data));
+            dispatch(setCardsDataAC({cardsData: data}));
         })
         .catch(error => {
             handleAppRequestError(error, dispatch);
         })
         .finally(() => {
             dispatch(setAppIsLoadingAC(false));
-            dispatch(setIsFetchingCards(false));
+            dispatch(setIsFetchingCards({value: false}));
         });
 };
 export const addNewCardTC = (newCard: NewCardDataType): AppThunkType => (dispatch) => {
@@ -147,9 +132,9 @@ export const addNewCardTC = (newCard: NewCardDataType): AppThunkType => (dispatc
             dispatch(setAppIsLoadingAC(false));
         });
 };
-export const deleteCardTC = (cardsPack_ID: string, card_ID: string): AppThunkType => (dispatch, getState: () => AppStateType) => {
-    const cardsArrLength = getState().cardsList.cards.length;
-    let currentPage = getState().cardsList.page;
+export const deleteCardTC = (cardsPack_ID: string, card_ID: string): AppThunkType => (dispatch, getState: () => RootState) => {
+    const cardsArrLength = getState().cardsList.cardsData.cards.length;
+    let currentPage = getState().cardsList.cardsData.page;
 
     if (cardsArrLength === 1 && currentPage !== 1) {
         currentPage -= 1;
@@ -195,119 +180,34 @@ export const updateCardGradeTC = (cardsPack_ID: string, card_id: string, grade: 
         });
 };
 
-export const getRandomCardTC = (params: GetCardsQueryParams): AppThunkType => (dispatch, getState: () => AppStateType) => {
+export const getRandomCardTC = (params: GetCardsQueryParams): AppThunkType => (dispatch, getState: () => RootState) => {
 
-    const {
-        cardAnswer,
-        cardQuestion,
-        sortCards,
-        page,
-        pageCount,
-    } = getState().cardsList;
-
-    const queryParams: GetCardsQueryParams = {
-        cardAnswer,
-        cardQuestion,
-        sortCards,
-        page,
-        pageCount,
-        ...params,
-    };
+    const {cardAnswer, cardQuestion, sortCards} = getState().cardsList;
+    const {page, pageCount} = getState().cardsList.cardsData
+    const queryParams: GetCardsQueryParams = {cardAnswer, cardQuestion, sortCards, page, pageCount, ...params};
 
     dispatch(setAppIsLoadingAC(true));
-    dispatch(setIsFetchingCards(true));
+    dispatch(setIsFetchingCards({value: true}));
 
     cardsAPI.getCards(queryParams).then((response) => {
         const randomCard = getCard(response.cards)
-        dispatch(setRandomCard(randomCard))
+        dispatch(setRandomCard({randomCard: randomCard}))
     }).catch(error => {
         handleAppRequestError(error, dispatch);
     }).finally(() => {
         dispatch(setAppIsLoadingAC(false));
-        dispatch(setIsFetchingCards(false));
+        dispatch(setIsFetchingCards({value: false}));
     })
 };
 
 export const gradeCardTC = (grade: number): AppThunkType => (dispatch, getState: () => AppStateType) => {
     const _id = getState().cardsList.randomCard._id
-    dispatch(setLoadingModal(true))
+    dispatch(setLoadingModal({loadingModal: true}))
     cardsAPI.updateGrade(_id, grade).then((response) => {
         setChangeGradeCards(response.updatedGrade)
     }).catch(error => {
         handleAppRequestError(error, dispatch);
     }).finally(() => {
-        dispatch(setLoadingModal(false))
+        dispatch(setLoadingModal({loadingModal: false}))
     })
-
 }
-
-
-// export const sortCardsThunk = (sortCards: string): AppThunkType => (dispatch, getState: () => AppStateType) => {
-// 	const {
-// 		cardAnswer,
-// 		cardQuestion,
-// 		sortCards,
-// 		page,
-// 		pageCount,
-// 		packName
-// 	} = getState().cardsList;
-//
-//
-//
-// 	// const queryParams: GetCardsQueryParams = {
-// 	// 	cardAnswer,
-// 	// 	cardQuestion,
-// 	// 	sortCards,
-// 	// 	page,
-// 	// 	pageCount,
-// 	// 	...params,
-// 	// };
-// 	console.log(packName)
-// 	dispatch(setAppIsLoadingAC(true));
-// 	dispatch(setIsFetchingCards(true));
-// 	// cardsAPI.getCards(queryParams)
-// 	 cardsAPI.getCards({ cardAnswer,
-// 		 	cardQuestion,
-// 		 	sortCards,
-// 		 	page,
-// 		 	pageCount
-// 		 	})
-// 		.then(data => {
-// 			dispatch(setCardsDataAC(data));
-// 		})
-// 		.catch(error => {
-// 			handleAppRequestError(error, dispatch);
-// 		})
-// 		.finally(() => {
-// 			dispatch(setAppIsLoadingAC(false));
-// 			dispatch(setIsFetchingCards(false));
-// 		});
-// };
-
-//
-// export const sortCardsThunk = (sortCards: string): AppThunkType => (
-// 	dispatch, getState) => {
-// 	const queryParams: GetCardsQueryParams = {
-// 		cardAnswer,
-// 		cardQuestion,
-// 		sortCards,
-// 		page,
-// 		pageCount,
-// 		...params,
-// 	};
-// 	const {pageCount, } = getState().cardsList;
-// 	const packName = searchResult ? searchResult : '';
-// 	const {_id} = getState().auth.user;
-// 	const user_id = isMyPacks ? _id : '';
-// 	dispatch(setAppIsLoadingAC(true));
-// 	dispatch(setCurrentFilterAC(sortPacks));
-//
-//
-// 	cardsAPI.getCards({pageCount, sortPacks, user_id, packName})
-// 		.then(res => {
-// 			dispatch(getCardsPackAC(res.cardPacks));
-// 			dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount));
-// 		})
-// 		.catch(error => handleAppRequestError(error, dispatch))
-// 		.finally(() => dispatch(setAppIsLoadingAC(false)));
-// };

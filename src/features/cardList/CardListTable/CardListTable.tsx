@@ -19,15 +19,12 @@ export const CardListTable: FC<CardListPropsType> = ( idPack) => {
     const dispatch = useAppDispatch();
 
     const sortCards = useAppSelector<string>(state => state.cardsList.sortCards);
-    const currentPage = useAppSelector<number>(state => state.cardsList.page);
-    const pageSize = useAppSelector<number>(store => store.cardsList.pageCount);
-    const cardsTotalCount = useAppSelector<number>(state => state.cardsList.cardsTotalCount);
+    const currentPage = useAppSelector<number>(state => state.cardsList.cardsData.page);
+    const pageSize = useAppSelector<number>(store => store.cardsList.cardsData.pageCount);
+    const cardsTotalCount = useAppSelector<number>(state => state.cardsList.cardsData.cardsTotalCount);
     const user_ID = useAppSelector(state => state.auth.user._id);
-    const cards = useAppSelector<Array<CardType>>(state => state.cardsList.cards);
-    const packUser_ID = useAppSelector(state => state.cardsList.packUserId);
-    const card = cards.find((t)=>{
-        return t._id === idPack.idPack
-    })
+    const cards = useAppSelector<Array<CardType>>(state => state.cardsList.cardsData.cards);
+    const packUser_ID = useAppSelector(state => state.cardsList.cardsData.packUserId);
 
     const [activeModalPack, setModalActivePack] = useState<boolean>(false)
     // const modalCloseHandler = () => setModalActivePack(false);
@@ -59,14 +56,14 @@ export const CardListTable: FC<CardListPropsType> = ( idPack) => {
     }
 
     const changePageHandler = (page: number) => {
-        dispatch(setCurrentPageCardsListAC(page));
+        dispatch(setCurrentPageCardsListAC({page}));
     };
     //	фильтрация карт по типу (тип передаем в виде строки)
     const changeCardsSortDirection = (sortType: string) => {
         if (sortCards === "0" + sortType) {
-            dispatch(setCardsSortDirectionAC(`1${sortType}`));
+            dispatch(setCardsSortDirectionAC({value: `1${sortType}`}));
         } else {
-            dispatch(setCardsSortDirectionAC(`0${sortType}`));
+            dispatch(setCardsSortDirectionAC({value: `0${sortType}`}));
         }
     };
     return (

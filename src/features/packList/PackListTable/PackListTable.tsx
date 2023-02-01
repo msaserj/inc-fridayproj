@@ -51,7 +51,7 @@ export const PacksListTable = () => {
 	}
 	const learnHandler = (id: string, name: string) => {
 		// alert("You press learn button  " + name)
-		dispatch(setPackNameAC(name))
+		dispatch(setPackNameAC({name}))
 		dispatch(getRandomCardTC({cardsPack_id: id}));
 		// dispatch(setLearnPackNameAC(name));
 		navigate(PATH.CARD_LEARNING + id);
