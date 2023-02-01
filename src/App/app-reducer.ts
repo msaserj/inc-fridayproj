@@ -1,6 +1,6 @@
 import {AppThunkType} from "./store";
 import {Dispatch} from "redux";
-import {AuthActionsType, isLoggedIn, setUserNameAC} from "../features/auth/auth-reducer";
+import {isLoggedIn, setUserDataAC} from "../features/auth/auth-reducer";
 import {authApi} from "../features/auth/auth-api";
 import {handleAppRequestError} from "../common/utils/error-utils";
 import {AxiosError} from "axios";
@@ -21,7 +21,7 @@ export type AppActionsType =
 	| SetAppInitializedActionType
 	| SetAppIsLoadingActionType
 	| SetAppErrorActionType;
-type ThunkDispatchType = Dispatch<AuthActionsType | AppActionsType>
+
 
 // Action Creators
 export const setAppIsInitializedAC = (value: boolean) =>
@@ -61,11 +61,11 @@ export const appReducer = (state: InitStateType = initState, action: AppActionsT
 // 		.finally(() => dispatch(setAppIsInitializedAC(true)))
 // };
 
-export const initializeAppTC = (): AppThunkType => async (dispatch:ThunkDispatchType) => {
+export const initializeAppTC = (): AppThunkType => async (dispatch:Dispatch) => {
 	try{
 		const res = await authApi.me()
-		dispatch(setUserNameAC(res));
-		dispatch(isLoggedIn(true))
+		dispatch(setUserDataAC({user: res}));
+		dispatch(isLoggedIn({isLoggedIn: true}))
 	}
 	catch(error){
 		handleAppRequestError(error as  Error | AxiosError, dispatch)
