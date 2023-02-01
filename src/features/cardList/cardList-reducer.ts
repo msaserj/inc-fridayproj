@@ -104,7 +104,7 @@ export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispat
     const {page, pageCount} = getState().cardsList.cardsData
     const queryParams: GetCardsQueryParams = {cardAnswer, cardQuestion, sortCards, page, pageCount, ...params,};
 
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     dispatch(setIsFetchingCards({value: true}));
 
     cardsAPI.getCards(queryParams)
@@ -115,12 +115,12 @@ export const getCardsTC = (params: GetCardsQueryParams): AppThunkType => (dispat
             handleAppRequestError(error, dispatch);
         })
         .finally(() => {
-            dispatch(setAppIsLoadingAC(false));
+            dispatch(setAppIsLoadingAC({value: false}));
             dispatch(setIsFetchingCards({value: false}));
         });
 };
 export const addNewCardTC = (newCard: NewCardDataType): AppThunkType => (dispatch) => {
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     cardsAPI.createCard(newCard)
         .then(() => {
             dispatch(getCardsTC({cardsPack_id: newCard.cardsPack_id}));
@@ -129,7 +129,7 @@ export const addNewCardTC = (newCard: NewCardDataType): AppThunkType => (dispatc
             handleAppRequestError(error, dispatch);
         })
         .finally(() => {
-            dispatch(setAppIsLoadingAC(false));
+            dispatch(setAppIsLoadingAC({value: false}));
         });
 };
 export const deleteCardTC = (cardsPack_ID: string, card_ID: string): AppThunkType => (dispatch, getState: () => RootState) => {
@@ -140,7 +140,7 @@ export const deleteCardTC = (cardsPack_ID: string, card_ID: string): AppThunkTyp
         currentPage -= 1;
     }
 
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     cardsAPI.deleteCard(card_ID)
         .then(() => {
             dispatch(getCardsTC({cardsPack_id: cardsPack_ID, page: currentPage}));
@@ -149,11 +149,11 @@ export const deleteCardTC = (cardsPack_ID: string, card_ID: string): AppThunkTyp
             handleAppRequestError(error, dispatch);
         })
         .finally(() => {
-            dispatch(setAppIsLoadingAC(false));
+            dispatch(setAppIsLoadingAC({value: false}));
         });
 };
 export const updateCardTC = (cardsPack_ID: string, cardModel: UpdateCardModelType): AppThunkType => (dispatch) => {
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     cardsAPI.updateCard(cardModel)
         .then(() => {
             dispatch(getCardsTC({cardsPack_id: cardsPack_ID}));
@@ -162,12 +162,12 @@ export const updateCardTC = (cardsPack_ID: string, cardModel: UpdateCardModelTyp
             handleAppRequestError(error, dispatch);
         })
         .finally(() => {
-            dispatch(setAppIsLoadingAC(false));
+            dispatch(setAppIsLoadingAC({value: false}));
         });
 };
 
 export const updateCardGradeTC = (cardsPack_ID: string, card_id: string, grade: number): AppThunkType => (dispatch) => {
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     cardsAPI.updateGrade(card_id, grade)
         .then(() => {
             dispatch(getCardsTC({cardsPack_id: cardsPack_ID}));
@@ -176,7 +176,7 @@ export const updateCardGradeTC = (cardsPack_ID: string, card_id: string, grade: 
             handleAppRequestError(error, dispatch);
         })
         .finally(() => {
-            dispatch(setAppIsLoadingAC(false));
+            dispatch(setAppIsLoadingAC({value: false}));
         });
 };
 
@@ -186,7 +186,7 @@ export const getRandomCardTC = (params: GetCardsQueryParams): AppThunkType => (d
     const {page, pageCount} = getState().cardsList.cardsData
     const queryParams: GetCardsQueryParams = {cardAnswer, cardQuestion, sortCards, page, pageCount, ...params};
 
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     dispatch(setIsFetchingCards({value: true}));
 
     cardsAPI.getCards(queryParams).then((response) => {
@@ -195,7 +195,7 @@ export const getRandomCardTC = (params: GetCardsQueryParams): AppThunkType => (d
     }).catch(error => {
         handleAppRequestError(error, dispatch);
     }).finally(() => {
-        dispatch(setAppIsLoadingAC(false));
+        dispatch(setAppIsLoadingAC({value: false}));
         dispatch(setIsFetchingCards({value: false}));
     })
 };

@@ -10,7 +10,7 @@ export const SnackbarTSX = () => {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		const timeout_ID = setTimeout(() => {
-			dispatch(setAppErrorAC(null));
+			dispatch(setAppErrorAC({value: null}));
 		}, 4000);
 		return () => {
 			clearTimeout(timeout_ID);

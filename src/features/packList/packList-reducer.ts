@@ -64,7 +64,7 @@ export const getCardsPackThunk = (): AppThunkType => (dispatch: Dispatch, getSta
     const {_id} = getState().auth.user;
     const user_id = isMyPacks ? _id : '';
     const packName = searchResult ? searchResult : '';
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     packCardsApi.getCardsPack({
         pageCount,
         page,
@@ -82,13 +82,13 @@ export const getCardsPackThunk = (): AppThunkType => (dispatch: Dispatch, getSta
         })
         .catch(error => handleAppRequestError(error, dispatch))
         .finally(() => {
-            dispatch(setAppIsLoadingAC(false));
+            dispatch(setAppIsLoadingAC({value: false}));
         })
 };
 
 export const searchCardsPackThunk = (packName: string, minCardsCount: any, maxCardsCount: any, pageCount: number, useId?: string): AppThunkType => (
     dispatch: Dispatch) => {
-    dispatch(setAppIsLoadingAC(true))
+    dispatch(setAppIsLoadingAC({value: true}))
     packCardsApi.getCardsPack({pageCount, packName, user_id: useId, min: minCardsCount, max: maxCardsCount})
         .then(res => {
             dispatch(setMaxCardsCountAC({maxCardsCount: res.maxCardsCount}))
@@ -97,14 +97,14 @@ export const searchCardsPackThunk = (packName: string, minCardsCount: any, maxCa
             dispatch(setCardPacksTotalCountAC({cardPacksTotalCount: res.cardPacksTotalCount}));
         })
         .catch(error => handleAppRequestError(error, dispatch))
-        .finally(() => dispatch(setAppIsLoadingAC(false)));
+        .finally(() => dispatch(setAppIsLoadingAC({value: false})));
 };
 
 export const sortCardsPackThunk = (sortPacks: string): AppThunkType => (
     dispatch: Dispatch, getState: ()=> RootState) => {
     const {pageCount, searchResult} = getState().packsList;
     const {_id} = getState().auth.user;
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     dispatch(setCurrentFilterAC({filter: sortPacks}));
     packCardsApi.getCardsPack({pageCount, sortPacks, user_id: _id, packName: searchResult})
         .then(res => {
@@ -112,36 +112,36 @@ export const sortCardsPackThunk = (sortPacks: string): AppThunkType => (
             dispatch(setCardPacksTotalCountAC({cardPacksTotalCount: res.cardPacksTotalCount}));
         })
         .catch(error => handleAppRequestError(error, dispatch))
-        .finally(() => dispatch(setAppIsLoadingAC(false)));
+        .finally(() => dispatch(setAppIsLoadingAC({value: false})));
 };
 
 export const addNewPackThunk = (name: string, makePrivate: boolean): AppThunkType => (dispatch) => {
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     packCardsApi.addNewPack(name, makePrivate)
         .then(() => {
             dispatch(getCardsPackThunk());
         })
         .catch(error => handleAppRequestError(error, dispatch))
-        .finally(() => dispatch(setAppIsLoadingAC(false)));
+        .finally(() => dispatch(setAppIsLoadingAC({value: false})));
 };
 
 export const deleteCardsPackThunk = (id: string): AppThunkType => (dispatch) => {
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     packCardsApi.deleteCardsPack(id)
         .then(() => {
             dispatch(getCardsPackThunk());
         })
         .catch(error => handleAppRequestError(error, dispatch))
-        .finally(() => dispatch(setAppIsLoadingAC(false)));
+        .finally(() => dispatch(setAppIsLoadingAC({value: false})));
 };
 
 export const updateCardsPackThunk = (id: string, name: string, privatePack: boolean): AppThunkType => (dispatch) => {
-    dispatch(setAppIsLoadingAC(true));
+    dispatch(setAppIsLoadingAC({value: true}));
     packCardsApi.updateCardsPack(id, name, privatePack)
         .then(() => {
             dispatch(getCardsPackThunk());
         })
         .catch(error => handleAppRequestError(error, dispatch))
-        .finally(() => dispatch(setAppIsLoadingAC(false)))
+        .finally(() => dispatch(setAppIsLoadingAC({value: false})))
 };
 

@@ -4,47 +4,49 @@ import {isLoggedIn, setUserDataAC} from "../features/auth/auth-reducer";
 import {authApi} from "../features/auth/auth-api";
 import {handleAppRequestError} from "../common/utils/error-utils";
 import {AxiosError} from "axios";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-
-type InitStateType = typeof initState;
+// Init state
 const initState = {
-	appIsInitialized: false,
-	appIsLoading: false,
-	appError: null as null | string,
-	isLoggedIn: false,
+    appIsInitialized: false,
+    appIsLoading: false,
+    appError: null as null | string,
+    isLoggedIn: false,
 };
-
-type SetAppInitializedActionType = ReturnType<typeof setAppIsInitializedAC>;
-type SetAppIsLoadingActionType = ReturnType<typeof setAppIsLoadingAC>;
-type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>;
-export type AppActionsType =
-	| SetAppInitializedActionType
-	| SetAppIsLoadingActionType
-	| SetAppErrorActionType;
-
-
-// Action Creators
-export const setAppIsInitializedAC = (value: boolean) =>
-	({type: "app/SET-INITIALIZED", payload: {appIsInitialized: value}} as const);
-export const setAppErrorAC = (value: null | string) =>
-	({type: "app/SET-ERROR", payload: {appError: value}} as const);
-export const setAppIsLoadingAC = (value: boolean) =>
-	({type: "app/SET-IS-LOADING-STATUS", payload: {appIsLoading: value}} as const);
 
 // reducer
-export const appReducer = (state: InitStateType = initState, action: AppActionsType): InitStateType => {
-	switch (action.type) {
-		case "app/SET-INITIALIZED":
-			return {...state, ...action.payload};
-		case "app/SET-IS-LOADING-STATUS":
-			return {...state, ...action.payload};
-		case "app/SET-ERROR":
-			return {...state, ...action.payload};
+export const slice = createSlice({
+    name: 'cards',
+    initialState: initState,
+    reducers: {
+        setAppIsInitializedAC: (state, action: PayloadAction<{ value: boolean }>) => {
+            state.appIsInitialized = action.payload.value
+        },
+        setAppErrorAC: (state, action: PayloadAction<{ value: null | string }>) => {
+            state.appError = action.payload.value
+        },
+        setAppIsLoadingAC: (state, action: PayloadAction<{ value: boolean }>) => {
+            state.appIsLoading = action.payload.value
+        }
+    }
+})
+export const appReducer = slice.reducer
 
-		default:
-			return state;
-	}
+// Action Creators
+export  const {setAppIsInitializedAC, setAppErrorAC, setAppIsLoadingAC} = slice.actions
+
+export const initializeAppTC = (): AppThunkType => async (dispatch: Dispatch) => {
+    try {
+        const res = await authApi.me()
+        dispatch(setUserDataAC({user: res}));
+        dispatch(isLoggedIn({isLoggedIn: true}))
+    } catch (error) {
+        handleAppRequestError(error as Error | AxiosError, dispatch)
+    } finally {
+        dispatch(setAppIsInitializedAC({value: true}))
+    }
 };
+
 
 // Thunk creators
 // export const initializeAppTC = (): AppThunkType => (dispatch:ThunkDispatchType) => {
@@ -60,17 +62,3 @@ export const appReducer = (state: InitStateType = initState, action: AppActionsT
 // 		})
 // 		.finally(() => dispatch(setAppIsInitializedAC(true)))
 // };
-
-export const initializeAppTC = (): AppThunkType => async (dispatch:Dispatch) => {
-	try{
-		const res = await authApi.me()
-		dispatch(setUserDataAC({user: res}));
-		dispatch(isLoggedIn({isLoggedIn: true}))
-	}
-	catch(error){
-		handleAppRequestError(error as  Error | AxiosError, dispatch)
-	}
-	finally {
-		dispatch(setAppIsInitializedAC(true))
-	}
-};

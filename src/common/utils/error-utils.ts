@@ -8,5 +8,5 @@ export const handleAppRequestError = (error: Error | AxiosError, dispatch: Dispa
 		: error.message + ', more details in the console';
 
 	console.log('Error: ', errorMessage);
-	dispatch(setAppErrorAC(errorMessage));
+	dispatch(setAppErrorAC({value: errorMessage}));
 };
