@@ -51,27 +51,27 @@ export const SearchPanel = () => {
 		setServMaxValue(servMaxValue)
 		// setValue([0, servMaxValue])
 		setFirst(true) // борьба с двойной отрисовкой
-		dispatch(filterCardsCountAC(0, servMaxValue))
-		dispatch(setSearchResultAC(``))
+		dispatch(filterCardsCountAC({min: 0, max: servMaxValue}))
+		dispatch(setSearchResultAC({searchResult: ''}))
 	}
 
 	// The order of the dispatches important!!!
 	function getMyPackHandler() {
 		console.log(66)
-		dispatch(setViewPacksAC(useId));
+		dispatch(setViewPacksAC({isMyPacks: useId}));
 		setFirst(true) // борьба с двойной отрисовкой
 		resetFilterHandler()
 	}
 
 	function getAllPackHandler() {
-		dispatch(setViewPacksAC(undefined));
-		dispatch(setCurrentFilterAC('0updated'));
+		dispatch(setViewPacksAC({isMyPacks: undefined}));
+		dispatch(setCurrentFilterAC({filter: '0updated'}));
 		resetFilterHandler()
 		setFirst(true) // борьба с двойной отрисовкой
 	}
 
 	function searchCardsByPackName(value: string) {
-		dispatch(setSearchResultAC(value));
+		dispatch(setSearchResultAC({searchResult: value}));
 		setFirst(true) // борьба с двойной отрисовкой
 	}
 

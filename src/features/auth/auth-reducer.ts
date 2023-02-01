@@ -5,24 +5,6 @@ import {authApi, UserType} from "./auth-api";
 import {handleAppRequestError} from "../../common/utils/error-utils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-
-type NewPswdType = {
-    password: string
-    token: string
-}
-type RecoveryPswdType = {
-    email: string
-    from: string
-    message: string
-}
-
-type InitStateType = {
-    successfulRegistration: boolean
-    user: UserType
-    RecoveryPswd: RecoveryPswdType
-    newPswd: NewPswdType
-    isLoggedIn:boolean
-};
 const InitialState: InitStateType = {
     successfulRegistration: false,
     RecoveryPswd: {
@@ -55,12 +37,6 @@ export  const slice = createSlice({
     name: 'auth',
     initialState: InitialState,
     reducers: {
-        authMeAC(state, action: PayloadAction<{user: UserType}>) {
-            state.user = action.payload.user
-        },
-        loginAC(state, action: PayloadAction<{user: UserType}>) {
-            state.user = action.payload.user
-        },
         setUserDataAC(state, action: PayloadAction<{user: UserType}>) {
             state.user = action.payload.user
         },
@@ -83,8 +59,9 @@ export  const slice = createSlice({
 })
 
 export const authReducer = slice.reducer
+
 // Action Creators
-export const {authMeAC, loginAC, logoutAC, registrationAC, setUserDataAC, recoveryPswdAC, newPswdAC, isLoggedIn} = slice.actions
+export const {logoutAC, registrationAC, setUserDataAC, recoveryPswdAC, newPswdAC, isLoggedIn} = slice.actions
 
 // sanki
 export const loginThunkTC = (email: string, password: string, remember: boolean): AppThunkType => (dispatch: Dispatch) => {
@@ -145,5 +122,25 @@ export const newPswdThunkTC = (password: string, token: string): AppThunkType =>
         })
         .catch(error => handleAppRequestError(error, dispatch))
         .finally(() => {dispatch(setAppIsLoadingAC(false))})
+};
+
+// Types
+
+type NewPswdType = {
+    password: string
+    token: string
+}
+type RecoveryPswdType = {
+    email: string
+    from: string
+    message: string
+}
+
+type InitStateType = {
+    successfulRegistration: boolean
+    user: UserType
+    RecoveryPswd: RecoveryPswdType
+    newPswd: NewPswdType
+    isLoggedIn:boolean
 };
 

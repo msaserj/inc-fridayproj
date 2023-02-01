@@ -27,7 +27,7 @@ export const PackList = () => {
 
     const addCardsPackHandler = () => setModalActivePack(true)
     const changePageHandler = (page: number) => {
-        dispatch(setCurrentPageCardPacksAC(page))
+        dispatch(setCurrentPageCardPacksAC({page: page}))
         dispatch(getCardsPackThunk());
     }
 
