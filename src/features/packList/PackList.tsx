@@ -10,18 +10,19 @@ import {PATH} from "../../common/constants/Path";
 import * as React from "react";
 import {useState} from "react";
 import {AddNewPackModal} from "./AddNewPackModal/AddNewPackModal";
+import {getCurrentPage, getIsFetchingCards, getPageSize, getTotalCountPage} from "./packsSelectors";
+import {getIsLoadingApp} from "../../App/appSelectors";
+import {getUserId} from "../auth/profile/profileSelectors";
 
 
 export const PackList = () => {
     const dispatch = useAppDispatch();
 
-
-    const currentPage = useAppSelector<number>(store => store.packsList.page);
-    const pageSize = useAppSelector<number>(store => store.packsList.pageCount);
-    const totalCountPage = useAppSelector<number>(store => store.packsList.cardPacksTotalCount);
-    const isFetching = useAppSelector<boolean>(store => store.app.appIsLoading);
-    const isLoggedIn = useAppSelector<string>(state => state.auth.user._id)
-
+    const currentPage = useAppSelector(getCurrentPage);
+    const pageSize = useAppSelector(getPageSize);
+    const totalCountPage = useAppSelector(getTotalCountPage);
+    const isFetching = useAppSelector(getIsFetchingCards);
+    const isLoggedIn = useAppSelector(getUserId)
 
     const [activeModalPack, setModalActivePack] = useState<boolean>(false)
 

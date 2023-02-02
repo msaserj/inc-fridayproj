@@ -16,10 +16,11 @@ import {CardsList} from "../../features/cardList/CardsList";
 import {SendMail} from "../../features/auth/recoveryPass/SendMail/SendMail";
 import css from "./RoutesComponents.module.css"
 import {CardLearning} from "../../features/Learning/CardLearning";
+import {getAppIsInitialized, getIsLoadingApp} from "../../App/appSelectors";
 
 export const RoutesComponent = () => {
-    const initialized = useAppSelector<boolean>(state => state.app.appIsInitialized)
-    const isLoading = useAppSelector<boolean>(state => state.app.appIsLoading)
+    const initialized = useAppSelector(getAppIsInitialized)
+    const isLoading = useAppSelector<boolean>(getIsLoadingApp)
 
     if (!initialized) {
         return(

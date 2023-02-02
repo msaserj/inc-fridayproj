@@ -7,8 +7,10 @@ import css from "./RecoveryPass.module.css";
 import SuperInputText from "../../../../common/components/Primitive/c1-InputText/SuperInputText";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../../../common/constants/Path";
+import {RECOVERY_LINK} from "../../../../common/constants/constants";
 import SuperButton from "../../../../common/components/Primitive/c2-Button/SuperButton";
 import {useNavigate} from "react-router-dom";
+import {getUserName} from "../../profile/profileSelectors";
 
 type FormikErrorType = {
     email?: string
@@ -16,8 +18,8 @@ type FormikErrorType = {
 
 export const RecoveryPass = () => {
     const dispatch = useAppDispatch();
-    const nickName = useAppSelector<string>(state => state.auth.user.name)
-    const message = "<p>Press <a href='https://msaserj.github.io/inc-fridayproj/#/set-new-password/$token$'>link</a> for recovery password</p>"
+    const nickName = useAppSelector(getUserName)
+    const message = "<p>Press <a href={RECOVERY_LINK}>link</a> for recovery password</p>"
     const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {

@@ -2,22 +2,20 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import css from "./Header.module.css"
 import {PATH} from "../../common/constants/Path";
-import logo from "../../assets/img/logo.svg";
+import logo from "../../assets/img/logo-no-background.png";
 import {useAppSelector} from "../../common/hooks/hooks";
+import {RANDOM_AVA} from "../../common/constants/constants";
+import {getAvatar, getUserName} from "../auth/profile/profileSelectors";
 
-type HeaderType = {
-    titleForHeader: string
-}
+
 const setActive = ({isActive}: { isActive: boolean }) => isActive ? css.activeLink : css.inactiveLink;
 
-export const Header = (props: HeaderType) => {
-    const randomAva = "https://thispersondoesnotexist.com/image"
-    //добавил для отрисовки юзера:
-    const {avatar, name} = useAppSelector(state => state.auth.user)
+export const Header = () => {
+    const name = useAppSelector(getUserName)
+    const avatar = useAppSelector(getAvatar)
 
     return (<div>
             <nav className={css.nav}>
-                {/*<h1>{props.titleForHeader}</h1>*/}
                 <NavLink to={PATH.LOGIN} className={setActive}>Login</NavLink>
                 <NavLink to={PATH.REGISTRATION} className={setActive}>Registration</NavLink>
                 <NavLink to={PATH.PROFILE} className={setActive}>Profile</NavLink>
@@ -31,19 +29,15 @@ export const Header = (props: HeaderType) => {
                 <NavLink to={PATH.TEST} className={setActive}>Components</NavLink>
             </nav>
 
-                <div className={css.header}>
-                    <a target="_blank" href="https://it-incubator.ru/"><img className={css.logo} src={logo} alt="logo"/></a>
-                    <NavLink to={PATH.PROFILE}>
-                        <div className={css.profileBlock}>
-                            {/*<p*/}
-                            {/*    data-tooltip="Всплывающая подсказка"*/}
-                            {/*>Vasya</p>*/}
-                            <p className={css.email}>{name ? name : "Somebody"}</p>
-                            <img className={css.profilePhoto} src={avatar ? avatar : randomAva} alt="avatar"/>
-                        </div>
-                    </NavLink>
-
-                </div>
+            <div className={css.header}>
+                <a target="_blank" href="https://github.com/msaserj/inc-fridayproj"><img className={css.logo} src={logo} alt="logo"/></a>
+                <NavLink to={PATH.PROFILE}>
+                    <div className={css.profileBlock}>
+                        <p className={css.email}>{name ? name : "Somebody"}</p>
+                        <img className={css.profilePhoto} src={avatar ? avatar : RANDOM_AVA} alt="avatar"/>
+                    </div>
+                </NavLink>
+            </div>
         </div>
     )
 }

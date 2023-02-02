@@ -44,7 +44,7 @@ const initState = {
         type: stringInit,
         name: stringInit,
         cardsCount: numberInit
-    },
+    } as randomCardType,
     loadingModal: false
 };
 
@@ -210,4 +210,25 @@ export const gradeCardTC = (grade: number): AppThunkType => (dispatch, getState:
     }).finally(() => {
         dispatch(setLoadingModal({loadingModal: false}))
     })
+}
+
+
+type stringInitType = string
+type numberInitType = number
+
+export type randomCardType = {
+    answer: stringInitType,
+    question: stringInitType,
+    cardsPack_id: stringInitType,
+    grade: numberInitType,
+    shots: numberInitType,
+    rating: numberInitType,
+    user_id: stringInitType,
+    created: stringInitType,
+    updated: stringInitType,
+    more_id: stringInitType,
+    _id: stringInitType,
+    type: stringInitType,
+    name: stringInitType,
+    cardsCount: numberInitType
 }

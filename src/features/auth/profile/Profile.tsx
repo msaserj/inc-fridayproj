@@ -5,30 +5,30 @@ import SuperButton from "../../../common/components/Primitive/c2-Button/SuperBut
 import SuperEditableSpan from "../../../common/components/Primitive/c4-EditableSpan/SuperEditableSpan";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {logoutThunkTC, updateUserDataTC} from "../auth-reducer";
-
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../../common/constants/Path";
 import {BackToPackList} from "../../../common/components/BackToPackList/BackToPackList";
 import {SuperSmallButton} from "../../../common/components/Primitive/SmallButtons/SuperSmallButton/SuperSmallButton";
+import {getAvatar, getUserEmail, getUserId, getUserName} from "./profileSelectors";
+import {RANDOM_AVA} from "../../../common/constants/constants";
+import {getIsLoadingApp} from "../../../App/appSelectors";
 
 
 export const Profile = () => {
     const dispatch = useAppDispatch();
 
-    const {avatar} = useAppSelector(state => state.auth.user)
-    const {name} = useAppSelector(state => state.auth.user)
-    const {email} = useAppSelector(state => state.auth.user)
-    const isFetching = useAppSelector(state => state.app.appIsLoading)
-
-    const isLoggedIn = useAppSelector(state => state.auth.user._id)
-    const randomAva = "https://thispersondoesnotexist.com/image"
+    const avatar = useAppSelector(getAvatar)
+    const name = useAppSelector(getUserName)
+    const email = useAppSelector(getUserEmail)
+    const isFetching = useAppSelector(getIsLoadingApp)
+    const isLoggedIn = useAppSelector(getUserId)
 
     const [editModeUp, setEditModeUp] = useState<boolean>(false)
-    const [value, setValue] = useState<string>(name ? name : 'Somebody')
+    const [value, setValue] = useState<string>(name ? name : 'Random Ava')
 
     function LogoutHandler() {
         dispatch(logoutThunkTC())
-        setValue('Somebody')
+        setValue('Random Ava')
     }
 
     function onKeyPressInputHandle(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -58,7 +58,7 @@ export const Profile = () => {
                 <div className={css.personalInfo}>
                     <h3>Personal Information</h3>
                     <div className={css.profilePhotoBlock}>
-                        <img className={css.profilePhoto} src={avatar ? avatar : randomAva} alt="avatar"/>
+                        <img className={css.profilePhoto} src={avatar ? avatar : RANDOM_AVA} alt="avatar"/>
                         <img className={css.photoIcon} src={photoIcon} alt="photoIcon"/>
                     </div>
                     <div className={css.profileName}>
@@ -66,11 +66,9 @@ export const Profile = () => {
                             placeholder={"nickname"}
                             className={css.input}
                             editModeUp={editModeUp}
-                            // value={value}
                             value={value}
                             onChangeText={setValue}
                             onKeyPress={onKeyPressInputHandle}
-                            // spanProps={{children: value ? undefined : 'Vasya Pupkina'}}
                             spanProps={{children: value}}
                         />
                         <SuperSmallButton disabled={isFetching} style={{padding: "2px", marginTop: "10px"}} edit={!editModeUp} save={editModeUp} onClick={switchEditMode}/>

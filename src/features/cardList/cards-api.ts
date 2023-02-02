@@ -1,7 +1,7 @@
 import {instance} from "../../api/api-instance";
 
 export type GetCardsQueryParams = {
-	cardsPack_id: string
+	cardsPack_id: string | undefined
 	cardAnswer?: string
 	cardQuestion?: string
 	min?: number

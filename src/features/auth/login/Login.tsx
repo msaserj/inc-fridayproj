@@ -3,11 +3,12 @@ import {PATH} from "../../../common/constants/Path";
 import {useAppSelector} from "../../../common/hooks/hooks";
 import {LoginForm} from "./LoginForm";
 import css from "./Login.module.css";
+import {getUserId} from "../profile/profileSelectors";
 
 
 export const Login = () => {
-	const user_ID = useAppSelector(state => state.auth.user._id);
-	if (user_ID) {
+	const userId = useAppSelector(getUserId);
+	if (userId) {
 		return <Navigate to={PATH.PACK_LIST}/>
 	}
 	return (

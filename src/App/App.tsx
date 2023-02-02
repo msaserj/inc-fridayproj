@@ -5,10 +5,11 @@ import {RoutesComponent} from "../common/routes/RoutesComponent";
 import {SnackbarTSX} from "../common/components/SnackbarTSX/SnackbarTSX";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {initializeAppTC} from "./app-reducer";
+import {getIsLoggedIn} from "./appSelectors";
 
 const App = () => {
     const dispatch = useAppDispatch()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const isLoggedIn = useAppSelector(getIsLoggedIn)
 
     useEffect(() => {
         if(!isLoggedIn) {
@@ -18,7 +19,7 @@ const App = () => {
 
     return (
         <div className="App">
-            <Header titleForHeader={"Header"}/>
+            <Header/>
             <div>
                 <RoutesComponent/>
                 {/*<Body titleForBody={"New Body"}/>*/}

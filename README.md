@@ -59,6 +59,7 @@ You can also register and test this project.
 
 **React**,
 **Redux**,
+**Redux-ToolKit**,
 **MaterialUI**,
 **TS**,
 **CSS**.
@@ -82,6 +83,7 @@ yarn start
 - Get rid of business logic errors.
 - Add unit test for reducers
 - Add some options for users.
+- redux -> redux-toolkit - **done!**
 
 ## My Home Page
 
