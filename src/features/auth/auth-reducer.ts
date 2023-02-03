@@ -40,9 +40,6 @@ export  const slice = createSlice({
         setUserDataAC(state, action: PayloadAction<{user: UserType}>) {
             state.user = action.payload.user
         },
-        logoutAC(state, action: PayloadAction<any>) {
-            state = action.payload
-        },
         registrationAC(state, action: PayloadAction<{successfulRegistration: boolean}>) {
             state.successfulRegistration = action.payload.successfulRegistration
         },
@@ -61,7 +58,7 @@ export  const slice = createSlice({
 export const authReducer = slice.reducer
 
 // Action Creators
-export const {logoutAC, registrationAC, setUserDataAC, recoveryPswdAC, newPswdAC, isLoggedIn} = slice.actions
+export const {registrationAC, setUserDataAC, recoveryPswdAC, newPswdAC, isLoggedIn} = slice.actions
 
 // sanki
 export const loginThunkTC = (email: string, password: string, remember: boolean): AppThunkType => (dispatch: Dispatch) => {
