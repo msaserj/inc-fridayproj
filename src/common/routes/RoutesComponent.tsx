@@ -6,7 +6,6 @@ import {Profile} from "../../features/auth/profile/Profile";
 import {RecoveryPass} from "../../features/auth/recoveryPass/Recovery/RecoveryPass";
 import {NewPass} from "../../features/auth/newPass/NewPass";
 import {PageNotFound} from "../components/error404/Error404";
-import {AllComponents} from "../components/AllComponents";
 import React from "react";
 import {useAppSelector} from "../hooks/hooks";
 import {DotedLoader} from "../components/Primitive/c8-Loaders/DotedLoader/DotedLoader";
@@ -16,11 +15,11 @@ import {CardsList} from "../../features/cardList/CardsList";
 import {SendMail} from "../../features/auth/recoveryPass/SendMail/SendMail";
 import css from "./RoutesComponents.module.css"
 import {CardLearning} from "../../features/Learning/CardLearning";
-import {getAppIsInitialized, getIsLoadingApp} from "../../App/appSelectors";
+import {getAppIsInitialized} from "../../App/appSelectors";
 
 export const RoutesComponent = () => {
     const initialized = useAppSelector(getAppIsInitialized)
-    const isLoading = useAppSelector<boolean>(getIsLoadingApp)
+    //const isLoading = useAppSelector<boolean>(getIsLoadingApp)
 
     if (!initialized) {
         return(
@@ -48,15 +47,14 @@ export const RoutesComponent = () => {
                 <Route path={PATH.RECOVERY_PASS} element={<RecoveryPass/>} />
                 <Route path={PATH.NEW_PASS + "/:token"} element={<NewPass/>} />
                 <Route path={PATH.SEND_MAIL} element={<SendMail/>} />
-
-                <Route path={PATH.TEST} element={<AllComponents/>} />
-
                 <Route path="/" element={<Navigate to={PATH.PROFILE}/>}/>
                 <Route path={PATH.PACK_LIST} element={<PackList/>} />
                 <Route path={PATH.CARDS_LIST + ":cardPackID"} element={<CardsList/>}/>
                 <Route path={PATH.CARD_LEARNING + ":cardPackID"} element={<CardLearning/>}/>
                 <Route path={PATH.ERROR404} element={<PageNotFound/>} />
                 <Route path="*" element={<Navigate to={PATH.ERROR404}/>}/>
+
+                {/*<Route path={PATH.TEST} element={<AllComponents/>} />*/}
             </Routes>
         </div>
     )

@@ -9,6 +9,7 @@ import {getUserId} from "../profile/profileSelectors";
 export const Login = () => {
 	const userId = useAppSelector(getUserId);
 	if (userId) {
+		console.log("aaa", userId)
 		return <Navigate to={PATH.PACK_LIST}/>
 	}
 	return (

@@ -15,19 +15,19 @@ export const Header = () => {
     const avatar = useAppSelector(getAvatar)
 
     return (<div>
-            <nav className={css.nav}>
-                <NavLink to={PATH.LOGIN} className={setActive}>Login</NavLink>
-                <NavLink to={PATH.REGISTRATION} className={setActive}>Registration</NavLink>
-                <NavLink to={PATH.PROFILE} className={setActive}>Profile</NavLink>
-                <NavLink to={PATH.RECOVERY_PASS} className={setActive}>RecoveryPass</NavLink>
-                <NavLink to={PATH.NEW_PASS} className={setActive}>NewPass</NavLink>
-                <NavLink to={PATH.SEND_MAIL} className={setActive}>Mail Sanded</NavLink>
-                <NavLink to={PATH.ERROR404} className={setActive}>Error404</NavLink>
-                <NavLink to={PATH.PACK_LIST} className={setActive}>Packs</NavLink>
-                <NavLink to={PATH.CARDS_LIST} className={setActive}>Cards</NavLink>
-                <NavLink to={PATH.CARD_LEARNING} className={setActive}>Learning</NavLink>
-                <NavLink to={PATH.TEST} className={setActive}>Components</NavLink>
-            </nav>
+            {/*<nav className={css.nav}>*/}
+            {/*    <NavLink to={PATH.LOGIN} className={setActive}>Login</NavLink>*/}
+            {/*    <NavLink to={PATH.REGISTRATION} className={setActive}>Registration</NavLink>*/}
+            {/*    <NavLink to={PATH.PROFILE} className={setActive}>Profile</NavLink>*/}
+            {/*    <NavLink to={PATH.RECOVERY_PASS} className={setActive}>RecoveryPass</NavLink>*/}
+            {/*    <NavLink to={PATH.NEW_PASS} className={setActive}>NewPass</NavLink>*/}
+            {/*    <NavLink to={PATH.SEND_MAIL} className={setActive}>Mail Sanded</NavLink>*/}
+            {/*    <NavLink to={PATH.ERROR404} className={setActive}>Error404</NavLink>*/}
+            {/*    <NavLink to={PATH.PACK_LIST} className={setActive}>Packs</NavLink>*/}
+            {/*    <NavLink to={PATH.CARDS_LIST} className={setActive}>Cards</NavLink>*/}
+            {/*    <NavLink to={PATH.CARD_LEARNING} className={setActive}>Learning</NavLink>*/}
+            {/*    <NavLink to={PATH.TEST} className={setActive}>Components</NavLink>*/}
+            {/*</nav>*/}
 
             <div className={css.header}>
                 <a target="_blank" href="https://github.com/msaserj/inc-fridayproj"><img className={css.logo} src={logo} alt="logo"/></a>

@@ -1,6 +1,5 @@
 import SuperRadio from "./Primitive/c6-Radio/SuperRadio";
 import InputButtonCheckbox from "./Primitive/c1-InputText/InputButtonCheckbox";
-import EditableSpan from "./Primitive/c4-EditableSpan/EditableSpan";
 import SelectRadio from "./Primitive/c5-Select/SelectRadio";
 import {Loaders} from "./Primitive/c8-Loaders/Loaders";
 import {SuperDoubleRange} from "./Primitive/DoubleRange/DoubleRangeTwo";
@@ -11,7 +10,6 @@ export const AllComponents = () => {
     return<>
         <h1>All Components</h1>
         <InputButtonCheckbox/>
-        <EditableSpan/>
         <SelectRadio/>
         <SuperRadio/>
         <Loaders/>
