@@ -68,7 +68,7 @@ export const loginThunkTC = (email: string, password: string, remember: boolean)
     dispatch(setAppIsLoadingAC({value: true}))
     authApi.login(email, password, remember)
         .then(res => {
-            dispatch(setUserDataAC(res));
+            dispatch(setUserDataAC({user: res}));
         })
         .catch(error => handleAppRequestError(error, dispatch))
         .finally(() => {
@@ -80,7 +80,7 @@ export const logoutThunkTC = (): AppThunkType => (dispatch: Dispatch) => {
     dispatch(setAppIsLoadingAC({value: true}))
     authApi.logout()
         .then(res => {
-            dispatch(setUserDataAC(res));
+            dispatch(setUserDataAC({user: res}));
         })
         .catch(error => handleAppRequestError(error, dispatch))
         .finally(() => {dispatch(setAppIsLoadingAC({value: false}))})
