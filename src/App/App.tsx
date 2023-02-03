@@ -21,8 +21,8 @@ const App = () => {
         <div className="App">
             <Header/>
             <div>
-                <RoutesComponent/>
                 {/*<Body titleForBody={"New Body"}/>*/}
+                <RoutesComponent/>
             </div>
             <SnackbarTSX/>
         </div>
