@@ -4,7 +4,7 @@ import css from "./Header.module.css"
 import {PATH} from "../../common/constants/Path";
 import logo from "../../assets/img/logo-no-background.png";
 import {useAppSelector} from "../../common/hooks/hooks";
-import {RANDOM_AVA} from "../../common/constants/constants";
+import {PROJECT_LINK, RANDOM_AVA} from "../../common/constants/constants";
 import {getAvatar, getUserName} from "../auth/profile/profileSelectors";
 
 
@@ -30,10 +30,10 @@ export const Header = () => {
             {/*</nav>*/}
 
             <div className={css.header}>
-                <a target="_blank" href="https://github.com/msaserj/inc-fridayproj"><img className={css.logo} src={logo} alt="logo"/></a>
+                <a target="_blank" href={PROJECT_LINK}><img className={css.logo} src={logo} alt="logo"/></a>
                 <NavLink to={PATH.PROFILE}>
                     <div className={css.profileBlock}>
-                        <p className={css.email}>{name ? name : "Somebody"}</p>
+                        <p className={css.email}>{name ? name : "thispersondoesnotexist"}</p>
                         <img className={css.profilePhoto} src={avatar ? avatar : RANDOM_AVA} alt="avatar"/>
                     </div>
                 </NavLink>

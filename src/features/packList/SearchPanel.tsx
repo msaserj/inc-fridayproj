@@ -13,17 +13,20 @@ import {DebounceSearch} from "../../common/utils/DebounceSearch/DebounceSearch";
 import {SuperSmallButton} from "../../common/components/Primitive/SmallButtons/SuperSmallButton/SuperSmallButton";
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
+import {getIsLoadingApp} from "../../App/appSelectors";
+import {getIsMyPack, getMaxCardsCount, getMinCardsCount, getPageSize, getSearchResult} from "./packsSelectors";
+import {getUserId} from "../auth/profile/profileSelectors";
 
 export const SearchPanel = () => {
 	const dispatch = useAppDispatch();
-	const isLoad = useAppSelector<boolean>(state => state.app.appIsLoading)
-	const isMyPacks = useAppSelector(state => state.packsList.isMyPacks)
-	const searchValue = useAppSelector<string>(state => state.packsList.searchResult)
-	const isFetching = useAppSelector<boolean>(state => state.app.appIsLoading)
-	const servMaxValue = useAppSelector<any>(state => state.packsList.maxCardsCount)
-	const servMinValue = useAppSelector<any>(state => state.packsList.minCardsCount)
-	const pageCount = useAppSelector<number>(state => state.packsList.pageCount)
-	const useId = useAppSelector(state => state.auth.user._id)
+	const isLoad = useAppSelector(getIsLoadingApp)
+	const isMyPacks = useAppSelector(getIsMyPack)
+	const searchValue = useAppSelector(getSearchResult)
+	const isFetching = useAppSelector(getIsLoadingApp)
+	const servMaxValue = useAppSelector(getMaxCardsCount)
+	const servMinValue = useAppSelector(getMinCardsCount)
+	const pageCount = useAppSelector(getPageSize)
+	const useId = useAppSelector(getUserId)
 	const [first, setFirst] = useState(true) // борьба с двойной отрисовкой
 	// console.log(isMyPacks, `-isMyPacks`)
 	// console.log(useId, `-useId`)
@@ -32,69 +35,76 @@ export const SearchPanel = () => {
 	const [servMaxValueState, setServMaxValue] = React.useState<number>(servMaxValue);
 	const dValueMin = useDebounce(servMinValueState, 1000)
 	const dValueMax = useDebounce(servMaxValueState, 1000)
+	console.log('search')
 
-	useEffect(() => {
-		if (first) {
-			dispatch(searchCardsPackThunk(searchValue, servMinValueState, servMaxValueState, pageCount, isMyPacks));
-			setFirst(false) // борьба с двойной отрисовкой
-		}
-	}, [searchValue, dValueMin, dValueMax, isMyPacks]);
+// 	function searchCardsByPackName(value: string) {
+// 	dispatch(setSearchResultAC({searchResult: value}));
+// 	setFirst(true) // борьба с двойной отрисовкой
+// }
 
-	useEffect(() => {
-		// console.log(servMaxValue, "servMaxValue")
-		setServMinValue(servMinValue)
-		setServMaxValue(servMaxValue)
-	}, [servMaxValue, servMinValue])
+useEffect(() => {
+	if (first) {
 
-	function resetFilterHandler() {
-		setServMinValue(0)
-		setServMaxValue(servMaxValue)
-		// setValue([0, servMaxValue])
-		setFirst(true) // борьба с двойной отрисовкой
-		dispatch(filterCardsCountAC({min: 0, max: servMaxValue}))
-		dispatch(setSearchResultAC({searchResult: ''}))
+		dispatch(searchCardsPackThunk(searchValue, servMinValueState, servMaxValueState, pageCount, isMyPacks));
+		setFirst(false) // борьба с двойной отрисовкой
 	}
+}, [searchValue, dValueMin, dValueMax, isMyPacks]);
 
-	// The order of the dispatches important!!!
-	function getMyPackHandler() {
-		console.log(66)
-		dispatch(setViewPacksAC({isMyPacks: useId}));
-		setFirst(true) // борьба с двойной отрисовкой
-		resetFilterHandler()
+useEffect(() => {
+
+	setServMinValue(servMinValue)
+	setServMaxValue(servMaxValue)
+}, [servMaxValue, servMinValue])
+
+function resetFilterHandler() {
+	setServMinValue(0)
+	setServMaxValue(servMaxValue)
+	setFirst(true) // борьба с двойной отрисовкой
+	dispatch(filterCardsCountAC({min: 0, max: servMaxValue}))
+	dispatch(setSearchResultAC({searchResult: ''}))
+}
+
+// The order of the dispatches important!!!
+function getMyPackHandler() {
+	console.log(66)
+	dispatch(setViewPacksAC({isMyPacks: useId}));
+	setFirst(true) // борьба с двойной отрисовкой
+	resetFilterHandler()
+}
+
+function getAllPackHandler() {
+	dispatch(setViewPacksAC({isMyPacks: undefined}));
+	dispatch(setCurrentFilterAC({filter: '0updated'}));
+	resetFilterHandler()
+	setFirst(true) // борьба с двойной отрисовкой
+}
+
+function searchCardsByPackName(value: string) {
+	dispatch(setSearchResultAC({searchResult: value}));
+	setFirst(true) // борьба с двойной отрисовкой
+}
+
+const handleChange = (event: Event, newValue: any) => {
+	//setValue(newValue as number[]);
+	console.log(newValue)
+	setServMinValue(newValue[0] as number)
+	setServMaxValue(newValue[1] as number)
+	setFirst(true) // борьба с двойной отрисовкой
+};
+
+const handleInputChangeMin = (event: React.ChangeEvent<HTMLInputElement>) => {
+	if(Number(event.target.value) < servMaxValueState) {
+		setServMinValue(Number(event.target.value))
 	}
+}
 
-	function getAllPackHandler() {
-		dispatch(setViewPacksAC({isMyPacks: undefined}));
-		dispatch(setCurrentFilterAC({filter: '0updated'}));
-		resetFilterHandler()
-		setFirst(true) // борьба с двойной отрисовкой
+const packsCount = 100
+const handleInputChangeMax = (event: React.ChangeEvent<HTMLInputElement>,) => {
+	if (Number(event.target.value) <= packsCount) {
+		setServMaxValue(Number(event.target.value))
 	}
+}
 
-	function searchCardsByPackName(value: string) {
-		dispatch(setSearchResultAC({searchResult: value}));
-		setFirst(true) // борьба с двойной отрисовкой
-	}
-
-	const handleChange = (event: Event, newValue: any) => {
-		//setValue(newValue as number[]);
-		console.log(newValue)
-		setServMinValue(newValue[0] as number)
-		setServMaxValue(newValue[1] as number)
-		setFirst(true) // борьба с двойной отрисовкой
-	};
-
-	const handleInputChangeMin = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if(Number(event.target.value) < servMaxValueState) {
-			setServMinValue(Number(event.target.value))
-		}
-	}
-
-	const packsCount = 100
-	const handleInputChangeMax = (event: React.ChangeEvent<HTMLInputElement>,) => {
-		if (Number(event.target.value) <= packsCount) {
-			setServMaxValue(Number(event.target.value))
-		}
-	}
 
 
 	return (
@@ -172,3 +182,65 @@ export const SearchPanel = () => {
 	);
 };
 
+// useEffect(() => {
+// 	if (first) {
+//
+// 		dispatch(searchCardsPackThunk(searchValue, servMinValueState, servMaxValueState, pageCount, isMyPacks));
+// 		setFirst(false) // борьба с двойной отрисовкой
+// 	}
+// }, [searchValue, dValueMin, dValueMax, isMyPacks]);
+//
+// useEffect(() => {
+//
+// 	setServMinValue(servMinValue)
+// 	setServMaxValue(servMaxValue)
+// }, [servMaxValue, servMinValue])
+//
+// function resetFilterHandler() {
+// 	setServMinValue(0)
+// 	setServMaxValue(servMaxValue)
+// 	setFirst(true) // борьба с двойной отрисовкой
+// 	dispatch(filterCardsCountAC({min: 0, max: servMaxValue}))
+// 	dispatch(setSearchResultAC({searchResult: ''}))
+// }
+//
+// // The order of the dispatches important!!!
+// function getMyPackHandler() {
+// 	console.log(66)
+// 	dispatch(setViewPacksAC({isMyPacks: useId}));
+// 	setFirst(true) // борьба с двойной отрисовкой
+// 	resetFilterHandler()
+// }
+//
+// function getAllPackHandler() {
+// 	dispatch(setViewPacksAC({isMyPacks: undefined}));
+// 	dispatch(setCurrentFilterAC({filter: '0updated'}));
+// 	resetFilterHandler()
+// 	setFirst(true) // борьба с двойной отрисовкой
+// }
+//
+// function searchCardsByPackName(value: string) {
+// 	dispatch(setSearchResultAC({searchResult: value}));
+// 	setFirst(true) // борьба с двойной отрисовкой
+// }
+//
+// const handleChange = (event: Event, newValue: any) => {
+// 	//setValue(newValue as number[]);
+// 	console.log(newValue)
+// 	setServMinValue(newValue[0] as number)
+// 	setServMaxValue(newValue[1] as number)
+// 	setFirst(true) // борьба с двойной отрисовкой
+// };
+//
+// const handleInputChangeMin = (event: React.ChangeEvent<HTMLInputElement>) => {
+// 	if(Number(event.target.value) < servMaxValueState) {
+// 		setServMinValue(Number(event.target.value))
+// 	}
+// }
+//
+// const packsCount = 100
+// const handleInputChangeMax = (event: React.ChangeEvent<HTMLInputElement>,) => {
+// 	if (Number(event.target.value) <= packsCount) {
+// 		setServMaxValue(Number(event.target.value))
+// 	}
+// }

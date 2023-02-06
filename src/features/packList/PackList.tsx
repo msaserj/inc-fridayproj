@@ -8,7 +8,7 @@ import {SearchPanel} from "./SearchPanel";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../common/constants/Path";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AddNewPackModal} from "./AddNewPackModal/AddNewPackModal";
 import {getCurrentPage, getIsFetchingCards, getPageSize, getTotalCountPage} from "./packsSelectors";
 import {getIsLoadingApp} from "../../App/appSelectors";
@@ -31,6 +31,10 @@ export const PackList = () => {
         dispatch(setCurrentPageCardPacksAC({page: page}))
         dispatch(getCardsPackThunk());
     }
+
+    useEffect(()=>{
+        dispatch(getCardsPackThunk());
+    },[])
 
     if (!isLoggedIn) {
         return <Navigate to={PATH.LOGIN}/>

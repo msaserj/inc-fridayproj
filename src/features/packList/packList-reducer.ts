@@ -60,6 +60,7 @@ export const {getCardsPackAC, setCardPacksTotalCountAC, setCurrentPageCardPacksA
 
 // sanki
 export const getCardsPackThunk = (): AppThunkType => (dispatch: Dispatch, getState: ()=> RootState) => {
+    console.log("getCardsPackThunk")
     const {pageCount, page, filter, isMyPacks, searchResult, minCardsCount, maxCardsCount} = getState().packsList;
     const {_id} = getState().auth.user;
     const user_id = isMyPacks ? _id : '';
@@ -88,6 +89,7 @@ export const getCardsPackThunk = (): AppThunkType => (dispatch: Dispatch, getSta
 
 export const searchCardsPackThunk = (packName: string, minCardsCount: any, maxCardsCount: any, pageCount: number, useId?: string): AppThunkType => (
     dispatch: Dispatch) => {
+
     dispatch(setAppIsLoadingAC({value: true}))
     packCardsApi.getCardsPack({pageCount, packName, user_id: useId, min: minCardsCount, max: maxCardsCount})
         .then(res => {
