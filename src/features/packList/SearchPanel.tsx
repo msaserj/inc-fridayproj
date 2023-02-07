@@ -56,6 +56,7 @@ useEffect(() => {
 	setServMaxValue(servMaxValue)
 }, [servMaxValue, servMinValue])
 
+
 function resetFilterHandler() {
 	setServMinValue(0)
 	setServMaxValue(servMaxValue)
@@ -119,61 +120,61 @@ const handleInputChangeMax = (event: React.ChangeEvent<HTMLInputElement>,) => {
 						disabled={isFetching}
 					/>
 				</div>
-				<div>
-					<h3>Show packs cards</h3>
-					<div className={css.userChooseButton}>
-						<SuperButton style={{minWidth: "120px"}}
-									 onClick={getMyPackHandler}
-									 red={!!isMyPacks && !isLoad}
-									 disabled={isLoad}>
-							My packs
-						</SuperButton>
-						<SuperButton style={{minWidth: "120px"}}
-									 onClick={getAllPackHandler}
-									 red={!isMyPacks && !isLoad}
-									 disabled={isLoad}>
-							All packs
-						</SuperButton>
-					</div>
-				</div>
-				<div className={css.rangeBlock}>
-					<h3>Number of cards</h3>
-					<div className={css.sliderBlock}>
-						<MuiInput
-							className={css.muiInput}
-							value={servMinValueState.toFixed()} //  toFixed чтобы при вводе 05 в инпуте было 5
-							size="small"
-							onChange={handleInputChangeMin}
-							inputProps={{
-								step: 1,
-								min: 0,
-								max: servMaxValueState,
-								type: 'number',
-								'aria-labelledby': 'input-slider',
-							}}/>
-						<Slider
-							style={{width: "600px"}}
-							disableSwap
-							max={servMaxValue}
-							value={[servMinValueState, servMaxValueState]}
-							onChange={handleChange}
-							valueLabelDisplay="auto"
-						/>
-						<MuiInput
-							className={css.muiInput}
-							//style={{}}
-							value={servMaxValueState.toFixed()}
-							size="small"
-							onChange={handleInputChangeMax}
-							inputProps={{
-								step: 1,
-								min: servMinValueState,
-								max: 100,
-								type: 'number',
-								'aria-labelledby': 'input-slider',
-							}}/>
-					</div>
-				</div>
+				{/*<div>*/}
+				{/*	<h3>Show packs cards</h3>*/}
+				{/*	<div className={css.userChooseButton}>*/}
+				{/*		<SuperButton style={{minWidth: "120px"}}*/}
+				{/*					 onClick={getMyPackHandler}*/}
+				{/*					 red={!!isMyPacks && !isLoad}*/}
+				{/*					 disabled={isLoad}>*/}
+				{/*			My packs*/}
+				{/*		</SuperButton>*/}
+				{/*		<SuperButton style={{minWidth: "120px"}}*/}
+				{/*					 onClick={getAllPackHandler}*/}
+				{/*					 red={!isMyPacks && !isLoad}*/}
+				{/*					 disabled={isLoad}>*/}
+				{/*			All packs*/}
+				{/*		</SuperButton>*/}
+				{/*	</div>*/}
+				{/*</div>*/}
+				{/*<div className={css.rangeBlock}>*/}
+				{/*	<h3>Number of cards</h3>*/}
+				{/*	<div className={css.sliderBlock}>*/}
+				{/*		<MuiInput*/}
+				{/*			className={css.muiInput}*/}
+				{/*			value={servMinValueState.toFixed()} //  toFixed чтобы при вводе 05 в инпуте было 5*/}
+				{/*			size="small"*/}
+				{/*			onChange={handleInputChangeMin}*/}
+				{/*			inputProps={{*/}
+				{/*				step: 1,*/}
+				{/*				min: 0,*/}
+				{/*				max: servMaxValueState,*/}
+				{/*				type: 'number',*/}
+				{/*				'aria-labelledby': 'input-slider',*/}
+				{/*			}}/>*/}
+				{/*		<Slider*/}
+				{/*			style={{width: "600px"}}*/}
+				{/*			disableSwap*/}
+				{/*			max={servMaxValue}*/}
+				{/*			value={[servMinValueState, servMaxValueState]}*/}
+				{/*			onChange={handleChange}*/}
+				{/*			valueLabelDisplay="auto"*/}
+				{/*		/>*/}
+				{/*		<MuiInput*/}
+				{/*			className={css.muiInput}*/}
+				{/*			//style={{}}*/}
+				{/*			value={servMaxValueState.toFixed()}*/}
+				{/*			size="small"*/}
+				{/*			onChange={handleInputChangeMax}*/}
+				{/*			inputProps={{*/}
+				{/*				step: 1,*/}
+				{/*				min: servMinValueState,*/}
+				{/*				max: 100,*/}
+				{/*				type: 'number',*/}
+				{/*				'aria-labelledby': 'input-slider',*/}
+				{/*			}}/>*/}
+				{/*	</div>*/}
+				{/*</div>*/}
 				<div className={css.reset_filter}>
 					<SuperSmallButton disabled={isLoad} filter onClick={resetFilterHandler}/>
 				</div>
